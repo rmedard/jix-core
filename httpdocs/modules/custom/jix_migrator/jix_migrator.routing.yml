@@ -1,0 +1,21 @@
+jix_migrator.migratorbatch:
+  path: '/admin/batch-import-employers'
+  defaults:
+    _title: 'Import employers'
+    _form: '\Drupal\jix_migrator\Form\MigratorForm'
+  requirements:
+    _permission: 'access content'
+jix_migrator.newsmigratorbatch:
+  path: '/admin/batch-import-news'
+  defaults:
+    _title: 'Import news'
+    _form: '\Drupal\jix_migrator\Form\NewsMigratorForm'
+  requirements:
+    _permission: 'access content'
+jix_migrator.jobsmigratorbatch:
+  path: '/admin/batch-import-jobs'
+  defaults:
+    _title: 'Import jobs'
+    _form: '\Drupal\jix_migrator\Form\JobsMigratorForm'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,53 @@
+<div class="card border-light shadow-sm bg-light">
+  <div class="row no-gutters">
+    <div class="col-md-4 text-center align-self-center pt-2 pb-2">
+      <img src="{{ employer.field_employer_logo.entity.uri.value | image_style('medium') }}"
+           alt="{{ employer.field_employer_logo.entity.alt }}" class="rounded">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body p-1">
+        {% if pageNodeBundle == 'job' %}
+          <h5 class="card-title">
+            <a href="{{ path('entity.node.canonical', {'node': employer.id}) }}">
+              {{ employer.title.value }}
+            </a>
+          </h5>
+        {% endif %}
+        {{ employer.field_employer_summary.value | truncate(300, true, true) | raw }}
+
+        {% if employer.field_employer_sector is not empty %}
+          <dl class="row">
+            <dt class="col-sm-3">Sector</dt>
+            <dd class="col-sm-9">
+              {% for sector in employer.field_employer_sector %}
+                {{ sector.entity.name.value }}{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            </dd>
+          </dl>
+        {% endif %}
+
+        <div class="card-footer border-0 p-1">
+          <div class="row">
+            <div class="col-8">
+              {% if employer.field_employer_website is not empty %}
+                <a href="{{ employer.field_employer_website.uri }}" target="_blank">
+                  <p class="card-text">
+                    <small class="text-muted">
+                      <i class="fas fa-globe"></i> {{ employer.field_employer_website.uri }}
+                    </small>
+                  </p>
+                </a>
+              {% endif %}
+            </div>
+            <div class="col-4 d-flex justify-content-around">
+              <a href="{{ employer.field_employer_facebook.uri }}" target="_blank" class="disabled"><i class="fab fa-facebook"></i></a>
+              <a href="{{ employer.field_employer_twitter.uri }}" target="_blank"><i
+                  class="fab fa-twitter"></i></a>
+              <a href="{{ employer.field_employer_linkedin.uri }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

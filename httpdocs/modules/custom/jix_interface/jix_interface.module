@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * A description of what your module does.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_theme().
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
+ */
+function jix_interface_theme($existing, $type, $theme, $path)
+{
+  return [
+    'jix_upload_cv' => [
+      'variables' => [
+        'label' => ''
+      ]
+    ],
+    'jix_job_summary' => [
+      'variables' => [
+        'job' => [],
+        'viewsCount' => 0
+      ]
+    ],
+    'jix_job_employer' => [
+      'variables' => [
+        'employer' => [],
+        'pageNodeBundle' => ''
+      ]
+    ],
+    'jix_posting_plans_page' => [
+      'variables' => [
+        'plans' => [],
+        'header_text' => '',
+        'footer_text' => ''
+      ]
+    ]
+  ];
+}

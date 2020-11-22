@@ -1,0 +1,14 @@
+jix_interface.posting_plans_page:
+  path: '/post-advert'
+  defaults:
+    _title: 'Posting Plans'
+    _controller: '\Drupal\jix_interface\Controller\PagesController::postingPlansPage'
+  requirements:
+    _permission: 'access content'
+jix_interface.posting_plans_page.settings:
+  path: '/admin/manage/settings/posting-plans'
+  defaults:
+    _form: '\Drupal\jix_interface\Form\PostingPlansPageSettingsForm'
+    _title: 'Posting Plans Page settings'
+  requirements:
+    _permission: 'administer site configuration'

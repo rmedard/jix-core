@@ -1,0 +1,6 @@
+jix_interface.admin:
+  title: 'Jix Posting Plans Page Settings'
+  description: 'Manage text that appears on "Posting Plan Page"'
+  parent: system.admin_config_system
+  route_name: jix_interface.posting_plans_page.settings
+  weight: 3

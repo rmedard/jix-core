@@ -1,0 +1,6 @@
+jix_settings.admin:
+  title: 'Jix Website General Settings'
+  description: 'Manage Jix general settings'
+  parent: system.admin_config_system
+  route_name: jix_settings.management.page
+  weight: 1

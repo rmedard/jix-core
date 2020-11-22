@@ -1,0 +1,22 @@
+<div class="card border-primary">
+  <h2 class="card-header p-2 text-center bg-primary text-white mb-0">Summary</h2>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item p-2 bg-light text-danger">This job has been viewed {{ viewsCount }} times</li>
+    <li class="list-group-item p-2"><b>Location:</b> {{ job.field_job_city.value }}, {{ job.field_job_country.value }}</li>
+    <li class="list-group-item p-2"><b>Sector:</b> {{ job.field_job_category.entity.name.value }}</li>
+    <li class="list-group-item p-2"><b>Education level:</b> {{ job.field_job_education_level.entity.name.value }}</li>
+    <li class="list-group-item p-2"><b>Desired experience:</b> {{ job.field_job_desired_experience.entity.name.value }}</li>
+    <li class="list-group-item p-2"><b>Contract:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}</li>
+    <li class="list-group-item p-2"><b>Deadline:</b> {{ job.field_job_application_deadline.value|date("l, d/m/Y H:i") }}</li>
+    <li class="list-group-item p-2"><b>Number of positions:</b> {{ job.field_job_number_of_positions.value }}</li>
+    {% if job.field_job_how_to_apply.value != 'no_online_app' %}
+      <li class="list-group-item  p-2 job-apply-btn">
+        {% if  job.field_job_how_to_apply.value == 'email' %}
+          <a href="/form/job-application-form?job_application_job={{ job.nid }}" class="btn btn-success btn-sm btn-block">Apply</a>
+        {% elseif job.field_job_how_to_apply.value == 'external_link' %}
+          <a href="{{ job.field_job_ext_application_link.uri }}" class="btn btn-success btn-sm btn-block" target="_blank">Apply</a>
+        {% endif %}
+      </li>
+    {% endif %}
+  </ul>
+</div>

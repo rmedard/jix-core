@@ -1,0 +1,40 @@
+{# @todo: add more control to images and positoning #}
+
+<div class="container" id="{{ id }}">
+  {% for key, row in rows -%}
+    {% if id == 'views-bootstrap-jobs-display-block-jobs-per-employer' %}
+      <div class="card mb-2 shadow-sm border-light">
+        <div class="card-body p-2">
+          {% if row.heading %}
+            {{ row.heading }}
+          {% endif %}
+
+          {% if row.body %}
+            {{ row.body }}
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      <div class="card mb-2 shadow-sm {{ id == 'views-bootstrap-jobs-display-attachment-super-featured' ? 'border-success' : 'border-light' }}">
+        <div class="row no-gutters">
+          <div class="col-2 text-center align-self-center border-">
+            {% if row.image %}
+              {{ row.image }}
+            {% endif %}
+          </div>
+          <div class="col-10">
+            <div class="card-body p-2">
+              {% if row.heading %}
+                {{ row.heading }}
+              {% endif %}
+
+              {% if row.body %}
+                {{ row.body }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {%- endfor %}
+</div>

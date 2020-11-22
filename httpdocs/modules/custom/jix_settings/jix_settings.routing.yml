@@ -1,0 +1,23 @@
+jix_settings.sites.services:
+  path: '/admin/manage/settings/sites-services'
+  defaults:
+    _form: '\Drupal\jix_settings\Form\SitesAndServicesForm'
+    _title: 'Our sites and services'
+  requirements:
+    _permission: 'administer site configuration'
+
+jix_settings.website.info:
+  path: '/admin/manage/settings/website'
+  defaults:
+    _form: '\Drupal\jix_settings\Form\WebsiteSettingsForm'
+    _title: 'Website Details'
+  requirements:
+    _permission: 'administer site configuration'
+
+jix_settings.management.page:
+  path: '/admin/manage/settings'
+  defaults:
+    _controller: '\Drupal\jix_settings\Controller\SettingsManagerPageController::content'
+    _title: 'Jix Settings Management'
+  requirements:
+    _permission: 'administer site configuration'

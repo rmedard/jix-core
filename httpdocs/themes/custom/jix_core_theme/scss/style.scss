@@ -1,0 +1,77 @@
+/*
+Theme Name: Bootstrap 4 Sass
+Description: Bootstrap 4 with Sass
+*/
+
+// import files
+@import "import";
+
+/* GENERAL STYLES
+-------------------------------------------------*/
+
+body {
+    background: $white;
+}
+
+
+/* COLORS
+--------------------------------------------------*/
+
+a {
+    color: $accent-shade;
+}
+
+.bg-inverse {
+    background: $primary-shade !important;
+}
+
+.site-footer {
+    background: $primary-shade !important;
+}
+
+.menu--main li a {
+    color: $primary-shade;
+}
+
+.menu--account li a {
+    color: $primary-shade;
+}
+
+.site-name-slogan a {
+    text-decoration: none;
+}
+
+.card-group img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+.card-group .field--type-image {
+    margin: 0
+}
+
+.slick {
+    width: 100%;
+}
+
+.slick>div {
+    margin: 0 15px;
+}
+
+form#views-exposed-form-jobs-display-page-search-result-page {
+  div.form-row > div, fieldset {
+    margin-bottom: 0;
+  }
+}
+
+nav#block-jobstabsmenu {
+  border-bottom: 2px solid $primary-shade;
+  ul > li > a {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+.jix-pricing-price {
+  font-variant: small-caps;
+}

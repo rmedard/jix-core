@@ -1,0 +1,49 @@
+{% if header_text is not empty %}
+  <blockquote class="blockquote">
+    <p class="mb-0">
+      {{ header_text }}
+    </p>
+  </blockquote>
+{% endif %}
+<div class="row">
+  {% for plan in plans %}
+    {% set column_size = 12 / loop.length %}
+    <div class="col-sm-12 col-md-{{ column_size }}">
+      <div class="card border-success shadow-sm">
+        <div class="card-header text-center bg-success">
+          <h4 class="card-title mb-0 text-white">{{ plan.title.value }}</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item p-3 bg-light text-center">
+            <p
+              class="h3 mb-0 font-weight-bolder text-dark jix-pricing-price">{{ plan.field_pricing_plan_pricing.value }}</p>
+          </li>
+          {% for adv in plan.field_pricing_plan_advantage %}
+            <li class="list-group-item p-2">{{ adv.value | raw }}</li>
+          {% endfor %}
+        </ul>
+        {% if plan.field_pricing_plan_button.value != 'none' %}
+          {% set buttonText = plan.field_pricing_plan_button.value == 'create_job' ? 'Choose' : 'Contact us' %}
+          {% set actionLink = '' %}
+          {% if plan.field_pricing_plan_button.value == 'contact' %}
+            {% set actionLink = 'contact' %}
+          {% else %}
+            {% set actionLink = 'node/add/job?posting_plan=' ~ plan.field_job_posting_plan.value %}
+          {% endif %}
+
+          <div class="card-footer p-2">
+            <a class="btn btn-primary btn-sm btn-block" href="{{ actionLink }}"
+               role="button">{{ buttonText }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% if footer_text is not empty %}
+  <div class="card w-100 mt-3 shadow-sm">
+    <div class="card-body p-2">
+      {{ footer_text.value | raw }}
+    </div>
+  </div>
+{% endif %}

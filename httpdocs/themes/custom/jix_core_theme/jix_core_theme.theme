@@ -1,0 +1,224 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ * @param $form
+ * @param FormStateInterface $form_state
+ */
+function jix_core_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state)
+{
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+
+  $form['layout']['sidebar_first']['bootstrap_barrio_sidebar_first_width']['#options'][5] = t('5 cols');
+  $form['layout']['sidebar_first']['bootstrap_barrio_sidebar_first_width']['#options'][6] = t('6 cols');
+
+  $form['layout']['sidebar_second']['bootstrap_barrio_sidebar_second_width']['#options'][5] = t('5 cols');
+  $form['layout']['sidebar_second']['bootstrap_barrio_sidebar_second_width']['#options'][6] = t('6 cols');
+
+  $form['layout']['jix_horizontal_sidebar'] = [
+    '#type' => 'details',
+    '#title' => t('Jix Horizontal Sidebar Layout'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  ];
+
+  $form['layout']['jix_horizontal_sidebar']['jix_both_sidebars_width'] = [
+    '#type' => 'select',
+    '#title' => t('Jix Both Sidebars width'),
+    '#default_value' => theme_get_setting('jix_both_sidebars_width'),
+    '#options' => [
+      2 => t('2 cols'),
+      3 => t('3 cols'),
+      4 => t('4 cols'),
+      5 => t('5 cols'),
+      6 => t('6 cols'),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_page(&$variables)
+{
+  $variables['navbar_top_attributes']['class']=['navbar', 'navbar-light', 'bg-white', 'shadow-sm'];
+  $fullSizePages = ['/post-advert'];
+  if (in_array(Drupal::request()->getRequestUri(), $fullSizePages)) {
+    unset($variables['page']['sidebar_first']);
+    unset($variables['page']['sidebar_second']);
+    unset($variables['page']['jix_horizontal_sidebar']);
+    $variables['content_attributes']['class'] = ['main-content', 'col-md-12'];
+  } else {
+    $jix_both_sidebars_width = 'col-md-' . theme_get_setting('jix_both_sidebars_width');
+    $jix_horizontal_sidebar_width = 'col-md-' . theme_get_setting('jix_horizontal_sidebar_width');
+    $variables['jix_both_sidebars_attributes'] = ['class' => [$jix_both_sidebars_width]];
+    $variables['jix_horizontal_sidebar_attributes'] = [
+      'class' => ['jix_horizontal_sidebar', 'sidebar', $jix_horizontal_sidebar_width],
+      'id' => ['jix_horizontal_sidebar'],
+    ];
+    $variables['content_attributes']['class'] = ['main-content', 'col-md-' . (12 - intval(theme_get_setting('jix_both_sidebars_width')))];
+    $variables['jix_both_sidebars_attributes'] = new Attribute($variables['jix_both_sidebars_attributes']);
+    $variables['jix_horizontal_sidebar_attributes'] = new Attribute($variables['jix_horizontal_sidebar_attributes']);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function jix_core_theme_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  $form['#attributes']['class'][] = 'webform-client-form';
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_form_element(&$variables)
+{
+  if ($variables['element']['#name'] === 'filter_titles_field' or $variables['element']['#name'] === 'field_job_category_target_id') {
+    $variables['attributes']['class'][] = 'input-group-sm';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_block(&$variables)
+{
+  if ($variables['plugin_id'] == 'upload_cv_block') {
+    $variables['attributes']['class'][] = 'col-12';
+  }
+
+  if ($variables['plugin_id'] == 'system_menu_block:jobs-tabs-menu') {
+    $variables['attributes']['class'][] = 'mb-2';
+  }
+
+  if ($variables['plugin_id'] == 'job_summary_block') {
+    $variables['attributes']['class'][] = 'p-0';
+    $variables['attributes']['class'][] = 'border-0';
+  }
+
+  if ($variables['plugin_id'] == 'views_block:jobs_display-block_jobs_per_employer') {
+    $variables['isJobsPerEmployer'] = true;
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_menu(&$variables)
+{
+  if (isset($variables['menu_name']) and $variables['menu_name'] == 'jobs-tabs-menu') {
+    $variables['attributes']['class'][] = 'nav-pills';
+    $variables['attributes']['class'][] = 'nav-fill';
+
+    $featured = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_posting_plan', [
+        'featured',
+        'featured_custom',
+        'featured_shortlist',
+      ], 'IN')
+      ->count();
+    $featured_count = $featured->execute();
+
+    $jobs = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_offer_type', 'job')
+      ->count();
+    $jobs_count = $jobs->execute();
+
+    $tenders = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_offer_type', 'tender')
+      ->count();
+    $tenders_count = $tenders->execute();
+
+    $consultancy = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_offer_type', 'consultancy')
+      ->count();
+    $consultancy_count = $consultancy->execute();
+
+    $internship = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_offer_type', 'internship')
+      ->count();
+    $internship_count = $internship->execute();
+
+    $publics = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_employer.entity.field_employer_public_service', 1)
+      ->count();
+    $publics_count = $publics->execute();
+
+    $others = Drupal::entityQuery('node')
+      ->condition('type', 'job')
+      ->condition('status', 1)
+      ->condition('field_job_offer_type', 'other')
+      ->count();
+    $others_count = $others->execute();
+
+    $menu_values = [
+      'view.jobs_display.page_featured' => $featured_count,
+      'view.jobs_display.page_all_jobs' => $jobs_count,
+      'view.jobs_display.page_tenders' => $tenders_count,
+      'view.jobs_display.page_consultancies' => $consultancy_count,
+      'view.jobs_display.page_internships' => $internship_count,
+      'view.jobs_display.page_public_adverts' => $publics_count,
+      'view.jobs_display.page_other_adverts' => $others_count,
+    ];
+
+    $variables['menu_values'] = $menu_values;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function jix_core_theme_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  unset($form['meta']);
+  unset($form['menu']);
+}

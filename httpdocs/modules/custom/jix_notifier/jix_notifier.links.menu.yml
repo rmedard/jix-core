@@ -1,0 +1,6 @@
+jix_notifier.admin:
+  title: 'Jix Notifier General Settings'
+  description: 'Manage Jix general notification and event handling settings'
+  parent: system.admin_config_system
+  route_name: jix_notifier.general.settings
+  weight: 2

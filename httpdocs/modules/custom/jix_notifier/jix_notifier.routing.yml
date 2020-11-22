@@ -1,0 +1,7 @@
+jix_notifier.general.settings:
+  path: '/admin/manage/settings/notifier'
+  defaults:
+    _form: '\Drupal\jix_notifier\Form\NotifierGeneralSettingsForm'
+    _title: 'General notification and event handling settings'
+  requirements:
+    _permission: 'administer site configuration'
