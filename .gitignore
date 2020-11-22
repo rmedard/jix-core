@@ -44,3 +44,5 @@ httpdocs/sites/*/private
 httpdocs/sites/*/files-public
 httpdocs/sites/*/files-private
 
+httpdocs/sites/default/settings.php
+httpdocs/sites/default/services.yml
