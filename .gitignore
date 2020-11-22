@@ -32,6 +32,7 @@ docker.mk
 traefik.yml
 .docker-sync/
 httpdocs/themes/custom/
+httpdocs/modules/contrib
 
 # Ignore configuration files that may contain sensitive information
 httpdocs/sites/*/*settings*.php
