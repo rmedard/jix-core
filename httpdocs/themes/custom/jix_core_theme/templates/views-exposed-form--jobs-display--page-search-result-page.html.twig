@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-6">
+    {{ form.filter_titles_field }}
+  </div>
+  <div class="col-md-4">
+    {{ form.field_job_category_target_id }}
+  </div>
+  <div class="col-md-2">
+    {{ form.actions }}
+    {# Renders the rest of the form #}
+    {{ form|without('filter_titles_field', 'field_job_category_target_id', 'actions') }}
+  </div>
+</div>
