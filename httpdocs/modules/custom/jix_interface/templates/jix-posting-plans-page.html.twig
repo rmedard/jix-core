@@ -9,8 +9,8 @@
   {% for plan in plans %}
     {% set column_size = 12 / loop.length %}
     <div class="col-sm-12 col-md-{{ column_size }}">
-      <div class="card border-success shadow-sm">
-        <div class="card-header text-center bg-success">
+      <div class="card border-primary shadow-sm">
+        <div class="card-header text-center bg-primary">
           <h4 class="card-title mb-0 text-white">{{ plan.title.value }}</h4>
         </div>
         <ul class="list-group list-group-flush">
@@ -32,7 +32,7 @@
           {% endif %}
 
           <div class="card-footer p-2">
-            <a class="btn btn-primary btn-sm btn-block" href="{{ actionLink }}"
+            <a class="btn btn-success btn-sm btn-block" href="{{ actionLink }}"
                role="button">{{ buttonText }}</a>
           </div>
         {% endif %}
