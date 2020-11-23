@@ -4,6 +4,9 @@
 $primary-shade: rgb(12, 102, 40);
 $primary-light: lighten($primary-shade, 37%);
 $primary-dark: darken($primary-shade, 12%);
+$secondary-shade: rgb(34, 34, 34);
+$secondary-light: lighten($secondary-shade, 37%);
+$secondary-dark: darken($secondary-shade, 12%);
 $accent-shade: rgb(181, 0, 0);
 $accent-light: lighten($accent-shade, 37%);
 $accent-dark: darken($accent-shade, 12%);

@@ -83,10 +83,19 @@ form#views-exposed-form-jobs-display-page-search-result-page {
 }
 
 nav#block-jobstabsmenu {
-  border-bottom: 2px solid $primary-shade;
+  border-bottom: 2px solid $secondary-shade;
   ul > li > a {
     border-radius: 4px 4px 0 0;
   }
+
+  .nav-pills .nav-link.active {
+    background-color: $secondary-shade;
+  }
+}
+
+.badge-dark {
+  color: #fff;
+  background-color: $secondary-shade;
 }
 
 .jix-pricing-price {

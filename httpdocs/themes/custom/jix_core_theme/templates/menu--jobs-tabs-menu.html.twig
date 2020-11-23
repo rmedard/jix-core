@@ -54,7 +54,7 @@ We call a macro which calls itself to render the full tree.
           {% set custom_badge_attribute = create_attribute() %}
           {% set badge_classes = [
             'badge', 'badge-pill',
-            item.in_active_trail ? 'badge-light' : 'badge-primary'
+            item.in_active_trail ? 'badge-light' : 'badge-dark'
           ] %}
           <a{{ custom_link_attribute.addClass(link_classes) }} href="{{ item.url }}">{{ item.title }}
             <span{{ custom_badge_attribute.addClass(badge_classes) }}>{{ current_count }}</span></a>
