@@ -4,7 +4,9 @@
  * A description of what your module does.
  */
 
-use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\smart_ip\SmartIpLocation;
 
 /**
  * Implements hook_theme().
@@ -42,4 +44,20 @@ function jix_interface_theme($existing, $type, $theme, $path)
       ]
     ]
   ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ * @param EntityInterface $entity
+ */
+function jix_interface_node_presave(EntityInterface $entity)
+{
+  if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
+    if ($entity->isNew()) {
+      $locationObj = Drupal::service('smart_ip.smart_ip_location');
+      Drupal::messenger()->addWarning('Country: ' . $locationObj->get('countryCode'));
+      $location = $locationObj->get('city') . ', ' . $locationObj->get('country') . '(' . $locationObj->get('countryCode') . ')';
+      $entity->set('field_job_creator_location', $location);
+    }
+  }
 }
