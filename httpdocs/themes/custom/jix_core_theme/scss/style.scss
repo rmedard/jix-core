@@ -10,7 +10,7 @@ Description: Bootstrap 4 with Sass
 -------------------------------------------------*/
 
 body {
-    background: $white;
+  background: $white;
 }
 
 
@@ -18,60 +18,66 @@ body {
 --------------------------------------------------*/
 
 a {
-    color: $accent-shade;
+  color: $accent-shade;
 }
 
 .bg-inverse {
-    background: $primary-shade !important;
+  background: $primary-shade !important;
 }
 
 .site-footer {
-    background: $primary-shade !important;
+  background: $secondary-shade !important;
+  div.block {
+    width: 100%;
+  }
+  .jix-footer-bottom {
+    background-color: $secondary-dark;
+  }
 }
 
 .menu--main li a {
-    color: $primary-shade;
+  color: $primary-shade;
 }
 
 .menu--account li a {
-    color: $primary-shade;
+  color: $primary-shade;
 }
 
 .site-name-slogan a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .card-group img {
-    margin: 0;
-    width: 100%;
-    height: auto;
+  margin: 0;
+  width: 100%;
+  height: auto;
 }
 
 .card-group .field--type-image {
-    margin: 0
+  margin: 0
 }
 
 .slick {
-    width: 100%;
+  width: 100%;
 }
 
-.slick>div {
-    margin: 0 15px;
+.slick > div {
+  margin: 0 15px;
 }
 
-@media(min-width:768px) {  /* Modify this based on column def */
+@media(min-width: 768px) { /* Modify this based on column def */
 
   .custom-gutter > [class*='col-'] {
-    padding-right:4px;
-    padding-left:4px;
+    padding-right: 4px;
+    padding-left: 4px;
   }
 
   .custom-gutter > [class*="col-"]:first-child {
-    padding-left:15px;
+    padding-left: 15px;
   }
 
   .custom-gutter > [class*="col-"]:last-child {
-    padding-right:15px;
+    padding-right: 15px;
   }
 
 }
@@ -82,8 +88,13 @@ form#views-exposed-form-jobs-display-page-search-result-page {
   }
 }
 
+footer.site-footer {
+  background-color: #0a6eb4;
+}
+
 nav#block-jobstabsmenu {
   border-bottom: 2px solid $secondary-shade;
+
   ul > li > a {
     border-radius: 4px 4px 0 0;
   }

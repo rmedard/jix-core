@@ -1,0 +1,3 @@
+services:
+  jix_interface.statistics_service:
+    class: Drupal\jix_interface\Service\StatisticsService

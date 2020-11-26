@@ -196,20 +196,24 @@
         </aside>
       </div>
     {% endif %}
-    <footer class="site-footer mt-3">
+    <footer class="site-footer mt-3 pb-0">
       {% block footer %}
-        <div class="{{ container }}">
+        <div class="container-fluid p-0">
           {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-            <div class="site-footer__top clearfix">
-              {{ page.footer_first }}
-              {{ page.footer_second }}
-              {{ page.footer_third }}
-              {{ page.footer_fourth }}
+            <div class="container pb-2">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">{{ page.footer_first }}</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">{{ page.footer_second }}</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">{{ page.footer_third }}</div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">{{ page.footer_fourth }}</div>
+              </div>
             </div>
           {% endif %}
           {% if page.footer_fifth %}
-            <div class="site-footer__bottom">
-              {{ page.footer_fifth }}
+            <div class="site-footer__bottom jix-footer-bottom">
+              <div class="container">
+                {{ page.footer_fifth }}
+              </div>
             </div>
           {% endif %}
         </div>

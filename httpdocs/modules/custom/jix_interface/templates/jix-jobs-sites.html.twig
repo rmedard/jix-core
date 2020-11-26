@@ -1,0 +1,11 @@
+<div class="card border-primary">
+  <div class="card-header pl-3 bg-primary text-white">
+      <i class="fas fa-globe-africa"></i> {{ title }}
+    </div>
+    <div class="card-body p-3">
+        {% for site in sites %}
+            {% set site = site|split(':') %}
+            <i class="fa fa-check"></i><a href="http://{{ site[1]|lower|trim }}" target="_blank"> {{ site[0]|trim }}</a><br>
+        {% endfor %}
+    </div>
+</div>

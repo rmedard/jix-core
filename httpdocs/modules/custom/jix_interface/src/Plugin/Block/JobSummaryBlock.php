@@ -11,7 +11,7 @@ use Drupal\node\NodeInterface;
 
 /**
  * Class AddressBlock
- * @package Drupal\jir_blocks\Plugin\Block
+ * @package Drupal\jix_interface\Plugin\Block
  * @Block(
  *     id = "job_summary_block",
  *     admin_label = @Translation("Job Summary Block"),

@@ -5,8 +5,55 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
-use Drupal\smart_ip\SmartIpLocation;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * @param $form
+ * @param FormStateInterface $form_state
+ * @param $form_id
+ */
+function jix_interface_form_system_site_information_settings_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  $form['site_owner'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site owner'),
+    '#default_value' => Drupal::config('system.site')->get('owner'),
+  ];
+  $form['site_address_line_1'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site address line 1'),
+    '#default_value' => Drupal::config('system.site')->get('address_line_1'),
+  ];
+  $form['site_address_line_2'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site address line 2'),
+    '#default_value' => Drupal::config('system.site')->get('address_line_2'),
+  ];
+  $form['site_phone'] = [
+    '#type' => 'tel',
+    '#title' => t('Site phone'),
+    '#default_value' => Drupal::config('system.site')->get('phone'),
+  ];
+  $form['#submit'][] = 'jix_interface_site_information_phone_submit';
+}
+
+/**
+ * @param array $form
+ * @param FormStateInterface $formState
+ */
+function jix_interface_site_information_phone_submit(array &$form, FormStateInterface $formState)
+{
+  $config = Drupal::configFactory()->getEditable('system.site');
+  $config
+    ->set('owner', $formState->getValue('site_owner'))
+    ->set('address_line_1', $formState->getValue('site_address_line_1'))
+    ->set('address_line_2', $formState->getValue('site_address_line_2'))
+    ->set('phone', $formState->getValue('site_phone'))
+    ->save();
+}
 
 /**
  * Implements hook_theme().
@@ -42,6 +89,43 @@ function jix_interface_theme($existing, $type, $theme, $path)
         'header_text' => '',
         'footer_text' => ''
       ]
+    ],
+    'jix_copyright' => [
+      'variables' => [
+        'year' => date('Y'),
+        'terms' => Node::load(3090),
+        'privacy' => Node::load(3091),
+        'owner' => Drupal::config('system.site')->get('owner'),
+        'admin' => t('Site administration')
+      ]
+    ],
+    'jix_address' => [
+      'variables' => [
+        'title' => t('Get in touch'),
+        'owner' => Drupal::config('system.site')->get('owner'),
+        'address1' => Drupal::config('system.site')->get('address_line_1'),
+        'address2' => Drupal::config('system.site')->get('address_line_2'),
+        'phone' => Drupal::config('system.site')->get('phone'),
+      ]
+    ],
+    'jix_services' => [
+      'variables' => [
+        'title' => t('Our services'),
+        'services' => null
+      ]
+    ],
+    'jix_jobs_sites' => [
+      'variables' => [
+        'title' => t('Jobs elsewhere'),
+        'sites' => []
+      ]
+    ],
+    'jix_realtime_stats' => [
+      'variables' => [
+        'title' => t('Realtime figures'),
+        'jobs_count' => 0,
+        'employers_count' => 0
+      ]
     ]
   ];
 }
@@ -55,7 +139,6 @@ function jix_interface_node_presave(EntityInterface $entity)
   if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
     if ($entity->isNew()) {
       $locationObj = Drupal::service('smart_ip.smart_ip_location');
-      Drupal::messenger()->addWarning('Country: ' . $locationObj->get('countryCode'));
       $location = $locationObj->get('city') . ', ' . $locationObj->get('country') . '(' . $locationObj->get('countryCode') . ')';
       $entity->set('field_job_creator_location', $location);
     }
