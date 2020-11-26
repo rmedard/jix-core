@@ -93,8 +93,8 @@ function jix_interface_theme($existing, $type, $theme, $path)
     'jix_copyright' => [
       'variables' => [
         'year' => date('Y'),
-        'terms' => Node::load(3090),
-        'privacy' => Node::load(3091),
+        'terms' => Node::load(3081),
+        'privacy' => Node::load(3082),
         'owner' => Drupal::config('system.site')->get('owner'),
         'admin' => t('Site administration')
       ]
