@@ -78,7 +78,8 @@ function jix_interface_theme($existing, $type, $theme, $path)
       'variables' => [
         'title' => t('Realtime figures'),
         'jobs_count' => 0,
-        'employers_count' => 0
+        'employers_count' => 0,
+        'candidates_count' => 0
       ]
     ]
   ];

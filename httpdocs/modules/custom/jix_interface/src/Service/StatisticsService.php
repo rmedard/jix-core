@@ -24,4 +24,17 @@ class StatisticsService
     return 0;
   }
 
+  public function countJobSubmissions() {
+    try {
+      $storage = Drupal::entityTypeManager()->getStorage('webform_submission');
+      return $storage->getQuery()
+        ->condition('webform_id', 'default_job_application_form')
+        ->count()->execute();
+    } catch (InvalidPluginDefinitionException $e) {
+      Drupal::logger('jix_interface')->error('Invalid plugin: ' . $e->getMessage());
+    } catch (PluginNotFoundException $e) {
+      Drupal::logger('jix_interface')->error('Plugin not found: ' . $e->getMessage());
+    }
+    return 0;
+  }
 }

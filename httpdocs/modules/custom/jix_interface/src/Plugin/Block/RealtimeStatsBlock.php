@@ -28,7 +28,8 @@ class RealtimeStatsBlock extends BlockBase
     $output[] = [
       '#theme' => 'jix_realtime_stats',
       '#jobs_count' => $statsService->countContentEntities('job'),
-      '#employers_count' => $statsService->countContentEntities('employer')
+      '#employers_count' => $statsService->countContentEntities('employer'),
+      '#candidates_count' => $statsService->countJobSubmissions()
     ];
     return $output;
   }
