@@ -12,6 +12,7 @@
       const isMobile = Modernizr.mq('(max-width: 767.98px)');
       if (isMobile) {
         $(context).find('form#views-exposed-form-jobs-display-page-search-result-page > div.row > div').addClass('mb-2');
+        $(context).find('nav#block-jobstabsmenu > ul').addClass('border border-light rounded p-2');
       }
     }
   };
