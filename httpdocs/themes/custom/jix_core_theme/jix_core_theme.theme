@@ -68,9 +68,10 @@ function jix_core_theme_form_system_theme_settings_alter(&$form, FormStateInterf
  */
 function jix_core_theme_preprocess_page(&$variables)
 {
+  $requestUri = Drupal::request()->getRequestUri();
   $variables['navbar_top_attributes']['class'] = ['navbar', 'navbar-light', 'bg-white', 'shadow-sm'];
   $fullSizePages = ['/post-advert'];
-  if (in_array(Drupal::request()->getRequestUri(), $fullSizePages)) {
+  if (in_array($requestUri, $fullSizePages)) {
     unset($variables['page']['sidebar_first']);
     unset($variables['page']['sidebar_second']);
     unset($variables['page']['jix_horizontal_sidebar']);
@@ -86,6 +87,16 @@ function jix_core_theme_preprocess_page(&$variables)
     $variables['content_attributes']['class'] = ['main-content', 'col-md-' . (12 - intval(theme_get_setting('jix_both_sidebars_width')))];
     $variables['jix_both_sidebars_attributes'] = new Attribute($variables['jix_both_sidebars_attributes']);
     $variables['jix_horizontal_sidebar_attributes'] = new Attribute($variables['jix_horizontal_sidebar_attributes']);
+  }
+
+  /*
+     * This regex accepts paths like "/" only, or "/jobs/*" where *
+     * is a word from a-z, no special character.
+     */
+  $variables['show_search_bar'] = false;
+  $page_path = Drupal::request()->getPathInfo();
+  if (Drupal::service('path.matcher')->isFrontPage() or preg_match('(\/jobs\/.*)', $page_path)) {
+    $variables['show_search_bar'] = true;
   }
 }
 

@@ -117,7 +117,7 @@
         </nav>
       {% endblock %}
     </header>
-    {% if page.jix_search_bar %}
+    {% if page.jix_search_bar and show_search_bar %}
       <div id="search-bar" class="container-fluid pt-2 pb-2 bg-light mb-3">
         <div class="container">
           <div class="row">
@@ -128,7 +128,7 @@
       </div>
     {% endif %}
     {% if page.highlighted %}
-      <div class="highlighted">
+      <div class="highlighted mt-3">
         <aside class="{{ container }} section clearfix" role="complementary">
           {{ page.highlighted }}
         </aside>
