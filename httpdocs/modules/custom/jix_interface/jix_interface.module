@@ -5,7 +5,7 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\node\Entity\Node;
+use Drupal\jix_interface\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
 
 
@@ -56,10 +56,10 @@ function jix_interface_theme($existing, $type, $theme, $path)
     'jix_address' => [
       'variables' => [
         'title' => t('Get in touch'),
-        'owner' => Drupal::config('jix_interface.website_settings')->get('site_owner'),
-        'address1' => Drupal::config('jix_interface.website_settings')->get('site_address_line_1'),
-        'address2' => Drupal::config('jix_interface.website_settings')->get('site_address_line_2'),
-        'phone' => Drupal::config('jix_interface.website_settings')->get('site_phone'),
+        'owner' => Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_owner'),
+        'address1' => Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_address_line_1'),
+        'address2' => Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_address_line_2'),
+        'phone' => Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_phone'),
       ]
     ],
     'jix_services' => [
