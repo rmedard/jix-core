@@ -1,7 +1,7 @@
 <div class="text-center">
     <div class="text-white">Copyright <i class="far fa-copyright"></i> {{ year }} {{ drupal_token('site:name') }} - {{ owner }}. All Rights Reserved.</div>
     <div class="site-details">
-        <a href="{{ path('entity.node.canonical', {'node': terms.id}) }}">{{ terms.title.value }}</a> | <a
-                href="{{ path('entity.node.canonical', {'node': privacy.id}) }}">{{ privacy.title.value }}</a> | <a href="/user">{{ admin }}</a>
+        <a href="/page/terms-use">{{ terms }}</a> | <a
+                href="/page/privacy-policy">{{ privacy }}</a> | <a href="/user">{{ admin }}</a>
     </div>
 </div>

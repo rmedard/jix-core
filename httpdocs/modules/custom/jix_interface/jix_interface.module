@@ -47,8 +47,8 @@ function jix_interface_theme($existing, $type, $theme, $path)
     'jix_copyright' => [
       'variables' => [
         'year' => date('Y'),
-        'terms' => Node::load(3090),
-        'privacy' => Node::load(3091),
+        'terms' => t('Terms of Use'),
+        'privacy' => t('Privacy Policy'),
         'owner' => Drupal::config('system.site')->get('owner'),
         'admin' => t('Site administration')
       ]
