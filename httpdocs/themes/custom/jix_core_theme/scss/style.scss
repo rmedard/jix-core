@@ -85,13 +85,17 @@ a {
 @media(max-width: 767.98px) { /* Mobile style */
   nav#navbar-top {
     padding: 0;
-    img.jix-logo {
+    img {
       height: 2.25rem;
     }
   }
   img.image-style-jobs-list-logo {
     max-width: 60px;
     height: auto;
+  }
+
+  div#search-bar > div.container {
+    padding: 0;
   }
 }
 

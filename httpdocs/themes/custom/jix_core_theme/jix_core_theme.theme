@@ -5,8 +5,17 @@
  * Functions to support theming in the SASS Starterkit subtheme.
  */
 
+use Drupal\block_content\BlockContentInterface;
+use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\TypedData\Exception\MissingDataException;
+use Drupal\file\FileInterface;
+use Drupal\image\ImageStyleInterface;
+use Drupal\link\LinkItemInterface;
 use Drupal\node\NodeInterface;
 
 /**
@@ -287,8 +296,77 @@ function jix_core_theme_preprocess_file_link(&$variables)
  */
 function jix_core_theme_preprocess_region(&$variables)
 {
-  $footer_regions = ['footer_first', 'footer_second', 'footer_third', 'footer_fourth'];
+  $footer_regions = ['footer_first', 'footer_second', 'footer_third', 'footer_fourth', 'top_header_form'];
   if (in_array($variables['region'], $footer_regions)) {
     $variables['attributes']['class'] = [];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_field(&$variables)
+{
+  $banner_block = $variables['element']['#object'];
+  if ($banner_block instanceof BlockContentInterface and $banner_block->bundle() == 'banner_block') {
+    $imageClass = '';
+//    kint([
+//      $banner_block->get('field_banner_type')->value,
+//      $banner_block->get('field_banner_img'),
+//      $banner_block->get('field_banner_url')
+//    ]);
+
+    switch ($banner_block->get('field_banner_type')->value) {
+      case 'th':
+        $imageStyle = 'top_horizontal_banner_style';
+        $imageClass = 'pull-right';
+        break;
+      case 'scs':
+        $imageStyle = 'vertical_single_column_banner_style';
+        break;
+      case 'dcs':
+        $imageStyle = 'vertical_double_column_banner_style';
+        break;
+      default:
+        $imageStyle = 'vertical_single_column_banner_style';
+    }
+    $variables['image_class'] = $imageClass;
+    $banner_img = $banner_block->get('field_banner_img');
+    if ($banner_img instanceof EntityReferenceFieldItemListInterface) {
+      $banner_img_file = $banner_img->referencedEntities()[0];
+      if ($banner_img_file instanceof FileInterface) {
+        if (isset($imageStyle) && !empty($imageStyle)) {
+          try {
+            $imageStyleManager = Drupal::entityTypeManager()->getStorage('image_style')->load($imageStyle);
+            if ($imageStyleManager instanceof ImageStyleInterface) {
+              $variables['banner_image_url'] = file_create_url($imageStyleManager->buildUrl($banner_img_file->getFileUri()));
+            }
+          } catch (InvalidPluginDefinitionException $e) {
+            Drupal::logger('jix_core_theme')->error('Invalid plugin: ' . $e->getMessage());
+          } catch (PluginNotFoundException $e) {
+            Drupal::logger('jix_core_theme')->error('Plugin not found: ' . $e->getMessage());
+          }
+        } else {
+          $banner_img = $banner_block->get('field_banner_img');
+          if ($banner_img instanceof EntityReferenceFieldItemListInterface) {
+            $banner_img_file = $banner_img->referencedEntities()[0];
+            if ($banner_img_file instanceof FileInterface) {
+              $variables['banner_image_url'] = file_create_url($banner_img_file->getFileUri());
+            }
+          }
+        }
+      }
+    }
+
+    $banner_url_field = $banner_block->get('field_banner_url');
+    try {
+      $banner_url = $banner_url_field->first();
+      if ($banner_url instanceof LinkItemInterface) {
+        $variables['banner_url'] = $banner_url->getUrl()->getUri();
+      }
+    } catch (MissingDataException $e) {
+      Drupal::logger('jix_core_theme')->error('Missing Data: ' . $e->getMessage());
+    }
   }
 }
