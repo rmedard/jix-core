@@ -145,6 +145,7 @@ function jix_core_theme_preprocess_block(&$variables)
   }
 
   if ($variables['plugin_id'] == 'system_menu_block:jobs-tabs-menu') {
+    $variables['#cache']['max-age'] = 0;
     $variables['attributes']['class'][] = 'mb-2';
   }
 

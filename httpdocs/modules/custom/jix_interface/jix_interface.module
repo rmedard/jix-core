@@ -17,7 +17,7 @@ use Drupal\node\NodeInterface;
  * @param $path
  * @return array
  */
-function jix_interface_theme($existing, $type, $theme, $path)
+function jix_interface_theme($existing, $type, $theme, $path): array
 {
   return [
     'jix_upload_cv' => [

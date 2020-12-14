@@ -19,9 +19,17 @@ httpdocs/.eslintrc.json
 httpdocs/.gitattributes
 httpdocs/.ht.router.php
 
+/.csslintrc
+/.editorconfig
+/.eslintignore
+/.eslintrc.json
+/.gitattributes
+/.ht.router.php
+/.htaccess
 /error_docs
 /logs
 /subdomains
+/tmp
 
 /.env
 /mariadb-init
@@ -35,8 +43,9 @@ docker-sync.yml
 docker.mk
 traefik.yml
 .docker-sync/
-httpdocs/themes/custom/
-httpdocs/modules/contrib
+httpdocs/core/
+httpdocs/modules/contrib/
+httpdocs/themes/contrib/
 
 # Ignore configuration files that may contain sensitive information
 httpdocs/sites/*/*settings*.php

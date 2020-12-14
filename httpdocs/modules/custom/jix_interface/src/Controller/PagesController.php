@@ -13,7 +13,7 @@ use Drupal\node\Entity\Node;
 
 class PagesController extends ControllerBase
 {
-  public function postingPlansPage()
+  public function postingPlansPage(): array
   {
     $pricing_plans = [];
     try {
@@ -26,9 +26,7 @@ class PagesController extends ControllerBase
       if (!empty($planIds)) {
         $pricing_plans = $storage->loadMultiple(array_map('intval', array_values($planIds)));
       }
-    } catch (InvalidPluginDefinitionException $e) {
-      Drupal::logger('jix_interface')->error($e->getMessage());
-    } catch (PluginNotFoundException $e) {
+    } catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {
       Drupal::logger('jix_interface')->error($e->getMessage());
     }
 
