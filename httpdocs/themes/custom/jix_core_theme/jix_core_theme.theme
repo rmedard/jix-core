@@ -9,7 +9,6 @@ use Drupal\block_content\BlockContentInterface;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
-use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\Exception\MissingDataException;
@@ -256,7 +255,7 @@ function jix_core_theme_form_node_form_alter(&$form, FormStateInterface $form_st
  * @param $path
  * @return string[][]
  */
-function jix_core_theme_theme($existing, $type, $theme, $path)
+function jix_core_theme_theme($existing, $type, $theme, $path): array
 {
   return [
     'views_exposed_form__jobs_display__page_search_result_page' => [
@@ -368,6 +367,41 @@ function jix_core_theme_preprocess_field(&$variables)
       }
     } catch (MissingDataException $e) {
       Drupal::logger('jix_core_theme')->error('Missing Data: ' . $e->getMessage());
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ * @param $variables
+ */
+function jix_core_theme_preprocess_addtoany_standard(&$variables)
+{
+  $route_name = Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'entity.node.canonical') {
+    $job = Drupal::routeMatch()->getParameter('node');
+    if ($job instanceof NodeInterface && $job->bundle() == 'job') {
+      $how_to_apply = $job->get('field_job_how_to_apply')->value;
+      switch ($how_to_apply) {
+        case 'email':
+          $variables['apply_btn']['url'] = '/form/default-job-application-form?job_application_job=' . $job->id();
+          $variables['apply_btn']['target'] = '_parent';
+          break;
+        case 'external_link':
+          try {
+            $url = $job->get('field_job_ext_application_link')->first();
+            if ($url instanceof LinkItemInterface) {
+              $variables['apply_btn']['url'] = $url->getUrl()->getUri();
+              $variables['apply_btn']['target'] = '_blank';
+            }
+          } catch (MissingDataException $e) {
+            Drupal::logger('jix_core_theme')->error('Missing Data: ' . $e->getMessage());
+          }
+          break;
+        default:
+          $variables['apply_btn'] = [];
+          break;
+      }
     }
   }
 }

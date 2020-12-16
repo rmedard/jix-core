@@ -21,7 +21,7 @@
     <div class="card mt-3">
       <div class="card-body p-2 bg-light">
         <div class="row">
-          <div class="col-8">
+          <div class="{{ apply_btn is empty ? 'col' : 'col-8' }}">
             {% if button_setting != 'none' %}
               {% set universal_button %}
                 <a class="a2a_dd addtoany_share"
@@ -35,9 +35,9 @@
 
             <span class="a2a_kit a2a_kit_size_{{ buttons_size }} addtoany_list" data-a2a-url="{{ link_url }}"
                   data-a2a-title="{{ link_title }}">
-          {% if universal_button_placement == 'before' %}
-            {{ universal_button }}
-          {% endif %}
+              {% if universal_button_placement == 'before' %}
+                {{ universal_button }}
+              {% endif %}
 
               {% if addtoany_html %}
                 {{ addtoany_html|raw }}
@@ -46,11 +46,13 @@
               {% if universal_button_placement == 'after' %}
                 {{ universal_button }}
               {% endif %}
-        </span>
+            </span>
           </div>
-          <div class="col-4">
-            <a href="#" class="btn btn-sm btn-block btn-success">Apply</a>
-          </div>
+          {% if apply_btn is not empty %}
+            <div class="col-4">
+              <a href="{{ apply_btn.url }}" class="btn btn-sm btn-block btn-success" target="{{ apply_btn.target }}">Apply</a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

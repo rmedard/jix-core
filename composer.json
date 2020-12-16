@@ -40,6 +40,7 @@
         "drupal/publication_date": "^2.0@beta",
         "drupal/rules": "3.x-dev@dev",
         "drupal/simplenews": "^3.0@alpha",
+        "drupal/smtp": "^1.0",
         "drupal/telephone_validation": "^2.3",
         "drupal/token": "^1.7",
         "drupal/twig_tweak": "^3.0",
