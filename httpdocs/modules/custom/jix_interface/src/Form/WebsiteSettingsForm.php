@@ -12,17 +12,17 @@ class WebsiteSettingsForm extends ConfigFormBase
 
   const SETTINGS = 'jix_interface.website_settings';
 
-  protected function getEditableConfigNames()
+  protected function getEditableConfigNames(): array
   {
     return [static::SETTINGS];
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'jix_interface_website_settings';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $config = $this->config(static::SETTINGS);
     $form['site_owner'] = [

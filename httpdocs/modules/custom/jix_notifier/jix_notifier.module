@@ -3,3 +3,18 @@
  * @file
  * A description of what your module does.
  */
+
+/**
+ * Implements hook_theme().
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
+ */
+function jix_notifier_theme($existing, $type, $theme, $path): array
+{
+  return [
+
+  ];
+}

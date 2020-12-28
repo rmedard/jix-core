@@ -12,17 +12,17 @@ class SitesAndServicesForm extends ConfigFormBase
 
   const SETTINGS = 'jix_interface.sites_and_services';
 
-  protected function getEditableConfigNames()
+  protected function getEditableConfigNames(): array
   {
     return [static::SETTINGS];
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'jix_interface_sites_services';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $config = $this->config(static::SETTINGS);
     $form['our_services'] = [

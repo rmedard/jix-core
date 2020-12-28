@@ -1,0 +1,3 @@
+services:
+  jix_notifier.email_service:
+    class: Drupal\jix_notifier\Service\EmailService

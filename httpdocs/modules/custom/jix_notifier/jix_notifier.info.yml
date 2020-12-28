@@ -9,3 +9,4 @@ configure: jix_notifier.general.settings
 
 dependencies:
   - rules:rules
+  - twig_tweak:twig_tweak
