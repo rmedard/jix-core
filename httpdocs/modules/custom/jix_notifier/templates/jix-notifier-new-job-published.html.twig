@@ -1,6 +1,8 @@
 <div>
   <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
-  <p>{{ 'Your job @title has been published. It is available here: ' | t({'@title': job.title.value}) }}</p>
+  <p>{{ 'Your job @title has been published. It is available here: ' | t({'@title': job.title.value}) }}
+    <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
+  </p>
 
   <p>Best regards, <br>{{ drupal_token('site:name') }}</p>
 </div>

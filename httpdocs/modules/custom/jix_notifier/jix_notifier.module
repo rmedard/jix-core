@@ -18,3 +18,20 @@ function jix_notifier_theme($existing, $type, $theme, $path): array
 
   ];
 }
+
+/**
+ * Implements hook_mail().
+ * @param $key
+ * @param $message
+ * @param $params
+ */
+function jix_notifier_mail($key, &$message, $params)
+{
+  $message['from'] = Drupal::config('system.site')
+      ->get('name') . ' <' . Drupal::config('system.site')->get('mail') . '>';
+  if (array_key_exists('cc', $params)) {
+    $message['headers']['Cc'] = $params['cc'];
+  }
+  $message['subject'] = $params['subject'];
+  $message['body'][] = $params['message'];
+}

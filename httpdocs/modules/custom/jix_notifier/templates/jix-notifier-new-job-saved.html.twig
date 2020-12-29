@@ -1,29 +1,55 @@
-<div>
-  <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
-  <p>{{ 'A new job has been created, it is available here:' | t }}
-    <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
-  </p>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="x-ua-compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Notification</title>
+   <style type="text/css">
+     dt {
+       font-weight: bold;
+     }
 
-  <h4>{{ 'Job details' | t }}</h4>
-  <dl>
-    <dt>{{ 'Job title' | t }}</dt> <dd>{{ job.title.value }}</dd>
-    <dt>{{ 'Posting type' | t }}</dt> <dd>{{ job.field_job_posting_plan.value }}</dd>
-    <dt>{{ 'Category' | t }}</dt> <dd>{{ job.field_job_category.value }}</dd>
-  </dl>
+     dl, dd {
+       font-size: .9rem;
+     }
 
-  <h4>{{ 'Invoicing details' | t }}</h4>
-  <dl>
-    <dt>{{ 'Company name' | t }}</dt> <dd>{{ job.field_job_employer.entity.title.value }}</dd>
-    <dt>{{ 'Company email address' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_email.value }}</dd>
-    <dt>{{ 'Contact name' | t }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
-    <dt>{{ 'Contact phone number' | t }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
-    <dt>{{ 'Contact email' | t }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
-    <dt>{{ 'Contact TIN' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
-    <dt>{{ 'Poster location' | t }}</dt> <dd></dd>
-  </dl>
-  <p>{{ 'The job offer needs validation before it appears to the public.' | t }}</p>
+     dd {
+       margin-bottom: 1em;
+     }
+   </style>
+ </head>
+  <body>
+    <div>
+      <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
+      <p>{{ 'A new job has been created, it is available here:' | t }}
+        <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
+      </p>
 
-  <h4>{{ 'Additional recruitment services' | t }}</h4>
-  <img src="https://s3.eu-central-1.amazonaws.com/jirbucket/banners/250X250.gif"
-       style="width: 350px; height: auto" />
-</div>
+      <h4>{{ 'Job details' | t }}</h4>
+      <dl>
+        <dt>{{ 'Job title' | t }}</dt> <dd>{{ job.title.value }}</dd>
+        <dt>{{ 'Posting type' | t }}</dt> <dd>{{ job.field_job_posting_plan.value }}</dd>
+        <dt>{{ 'Category' | t }}</dt> <dd>
+          {% for category in job.field_job_category %}
+            {{ category.entity.name.value }}{% if not loop.last %},{% endif %}
+          {% endfor %}
+        </dd>
+      </dl>
+
+      <h4>{{ 'Invoicing details' | t }}</h4>
+      <dl>
+        <dt>{{ 'Company name' | t }}</dt> <dd>{{ job.field_job_employer.entity.title.value }}</dd>
+        <dt>{{ 'Company email address' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_email.value }}</dd>
+        <dt>{{ 'Contact name' | t }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
+        <dt>{{ 'Contact phone number' | t }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
+        <dt>{{ 'Contact email' | t }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
+        <dt>{{ 'Contact TIN' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
+      </dl>
+      <p>{{ 'The job offer needs validation before it appears to the public.' | t }}</p>
+
+      <h4>{{ 'Additional recruitment services' | t }}</h4>
+      <img src="https://s3.eu-central-1.amazonaws.com/jirbucket/banners/250X250.gif"
+           style="width: 350px; height: auto" />
+    </div>
+  </body>
+</html>

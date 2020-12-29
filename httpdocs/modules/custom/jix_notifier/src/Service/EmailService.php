@@ -38,22 +38,24 @@ class EmailService
       $to = '';
       $params = [];
       $replyTo = '';
+      $langCode = Drupal::languageManager()->getCurrentLanguage()->getId();
       switch ($emailData->getNotificationType()) {
         case NotificationType::NEW_JOB_SAVED:
           $job = $emailData->getEntity();
           $to = Drupal::config('system.site')->get('mail');
           $replyTo = Drupal::config('system.site')->get('mail');
           $params['cc'] = $job->get('field_job_contact_email')->value;
+          $params['subject'] = t('A new job has been submitted', [], ['langcode' => $langCode]);
           break;
         case NotificationType::NEW_JOB_PUBLISHED:
           $job = $emailData->getEntity();
           $to = $job->get('field_job_contact_email')->value;
+          $params['subject'] = t('Your job has been validated and published.', [], ['langcode' => $langCode]);
           $replyTo = Drupal::config('system.site')->get('mail');
           break;
       }
 
       $params['message'] = Markup::create($this->getEmailHtmlContent($emailData->getNotificationType(), $emailData->getEntity()));
-      $langCode = Drupal::languageManager()->getCurrentLanguage()->getId();
       $result = $this->mailManager->mail($this->channel, $emailData->getNotificationType(),
         $to, $langCode, $params, $replyTo, TRUE);
       if (intval($result['result']) != 1) {
@@ -75,7 +77,7 @@ class EmailService
       case NotificationType::NEW_JOB_SAVED:
         $variables = [
           'job' => $emailPayload,
-          'recipient' => 'customer'
+          'recipient' => $emailPayload->get('field_job_contact_name')->value
         ];
         $templatePath = '/templates/jix-notifier-new-job-saved.html.twig';
         break;
