@@ -5,7 +5,9 @@
  */
 
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\jix_interface\Form\WebsiteSettingsForm;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
 
 
@@ -98,4 +100,34 @@ function jix_interface_node_presave(EntityInterface $entity)
       $entity->set('field_job_creator_location', $location);
     }
   }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ * @param $element
+ * @param FormStateInterface $form_state
+ * @param $context
+ */
+function jix_interface_field_widget_form_alter(&$element, FormStateInterface $form_state, $context)
+{
+  $field_definition = $context['items']->getFieldDefinition();
+
+  // Base fields are not configurable.
+  if (!$field_definition instanceof FieldConfig) {
+    return;
+  }
+  if ($field_definition->getName() === 'field_job_full_description') {
+    // Set only full_html as allowed format.
+    $element['#allowed_formats'] = ['full_html'];
+    // Add after build to remove the help wrapper and text.
+    $element['#after_build'][] = 'jix_interface_after_build';
+  }
+}
+
+function jix_interface_after_build(&$element, FormStateInterface $form_state) {
+  unset($element['format']['help']);
+  unset($element['format']['guidelines']);
+  unset($element['format']['#type']);
+  unset($element['format']['#theme_wrappers']);
+  return $element;
 }

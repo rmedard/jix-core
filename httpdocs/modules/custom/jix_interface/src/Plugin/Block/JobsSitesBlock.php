@@ -8,7 +8,7 @@ use Drupal;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
-use Drupal\jix_interface\Form\SitesAndServicesForm;
+use Drupal\jix_settings\Form\SitesAndServicesForm;
 
 /**
  * Class JobsSitesBlock

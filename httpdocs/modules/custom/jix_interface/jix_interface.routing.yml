@@ -12,17 +12,3 @@ jix_interface.posting_plans_page.settings:
     _title: 'Posting Plans Page settings'
   requirements:
     _permission: 'administer site configuration'
-jix_interface.website_settings:
-  path: '/admin/manage/settings/website'
-  defaults:
-    _form: '\Drupal\jix_interface\Form\WebsiteSettingsForm'
-    _title: 'Website Details'
-  requirements:
-    _permission: 'administer site configuration'
-jix_interface.sites_and_services:
-  path: '/admin/manage/settings/sites-services'
-  defaults:
-    _form: '\Drupal\jix_interface\Form\SitesAndServicesForm'
-    _title: 'Our sites and services'
-  requirements:
-    _permission: 'administer site configuration'

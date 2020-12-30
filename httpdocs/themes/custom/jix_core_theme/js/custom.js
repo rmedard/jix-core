@@ -7,6 +7,7 @@
 
   'use strict';
 
+  Drupal.webform.intlTelInput = Drupal.webform.intlTelInput || {};
   Drupal.webform.select2 = Drupal.webform.select2 || {};
 
   Drupal.behaviors.jix_core_theme = {
@@ -29,6 +30,15 @@
       });
       jobCategorySelect.val(null).trigger('change');
       $(context).find('input.select2-search__field').addClass('w-100');
+
+      $(context).find('input.form-tel').each(function () {
+        if (settings.site?.target_country !== undefined) {
+          const countryCode = settings.site.target_country.toLowerCase();
+          $(this).intlTelInput({initialCountry: countryCode, nationalMode: false});
+        } else {
+          $(this).intlTelInput({nationalMode: false});
+        }
+      });
     }
   };
 

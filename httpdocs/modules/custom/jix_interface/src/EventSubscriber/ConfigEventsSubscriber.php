@@ -4,7 +4,7 @@
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Drupal\Core\Config\ConfigCrudEvent;
 use Drupal\Core\Config\ConfigEvents;
-use Drupal\jix_interface\Form\SitesAndServicesForm;
+use Drupal\jix_settings\Form\SitesAndServicesForm;
 
 /**
  * Class ConfigEventsSubscriber

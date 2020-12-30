@@ -16,3 +16,4 @@ global-styling:
     - core/modernizr
     - core/drupal
     - webform/webform.element.select2
+    - webform/webform.element.telephone

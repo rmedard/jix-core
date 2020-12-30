@@ -6,8 +6,13 @@
 
 /**
  * Implements hook_theme().
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
  */
-function jix_settings_theme($existing, $type, $theme, $path)
+function jix_settings_theme($existing, $type, $theme, $path): array
 {
     return array('jix_settings_manager' => array('variables' => array()));
 }

@@ -8,12 +8,14 @@
 use Drupal\block_content\BlockContentInterface;
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\Exception\MissingDataException;
 use Drupal\file\FileInterface;
 use Drupal\image\ImageStyleInterface;
+use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\link\LinkItemInterface;
 use Drupal\node\NodeInterface;
 
@@ -98,9 +100,9 @@ function jix_core_theme_preprocess_page(&$variables)
   }
 
   /*
-     * This regex accepts paths like "/" only, or "/jobs/*" where *
-     * is a word from a-z, no special character.
-     */
+   * This regex accepts paths like "/" only, or "/jobs/*" where *
+   * is a word from a-z, no special character.
+   */
   $variables['show_search_bar'] = false;
   $page_path = Drupal::request()->getPathInfo();
   if (Drupal::service('path.matcher')->isFrontPage() or preg_match('(\/jobs\/.*)', $page_path)) {
@@ -404,4 +406,14 @@ function jix_core_theme_preprocess_addtoany_standard(&$variables)
       }
     }
   }
+}
+
+/**
+ * Implements hook_js_settings_alter().
+ * @param array $settings
+ * @param AttachedAssetsInterface $assets
+ */
+function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets)
+{
+  $settings['site']['target_country'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_target_country');
 }
