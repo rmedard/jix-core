@@ -7,6 +7,8 @@
 
   'use strict';
 
+  Drupal.webform.select2 = Drupal.webform.select2 || {};
+
   Drupal.behaviors.jix_core_theme = {
     attach: function (context, settings) {
       const isMobile = Modernizr.mq('(max-width: 767.98px)');
@@ -14,6 +16,19 @@
         $(context).find('form#views-exposed-form-jobs-display-page-search-result-page > div.row > div').addClass('mb-2');
         $(context).find('nav#block-jobstabsmenu > ul').addClass('border border-light rounded p-2');
       }
+
+      const jobCategorySelect = $(context).find('select#edit-field-job-category');
+      jobCategorySelect.select2({
+        multiple: true,
+        width: '100%',
+        theme: 'bootstrap',
+        placeholder: {
+          id: '_none',
+          text: 'Select category'
+        },
+      });
+      jobCategorySelect.val(null).trigger('change');
+      $(context).find('input.select2-search__field').addClass('w-100');
     }
   };
 

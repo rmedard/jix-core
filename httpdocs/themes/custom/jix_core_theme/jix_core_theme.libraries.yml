@@ -1,15 +1,18 @@
 global-styling:
   version: VERSION
   js:
-    js/popper.min.js: {}
-    js/bootstrap.min.js: {}
-    js/barrio.js: {}
-    js/global.js: {}
-    js/custom.js: {}
+    js/popper.min.js: { }
+    js/bootstrap.min.js: { }
+    js/barrio.js: { }
+    js/global.js: { }
+    js/custom.js: { }
   css:
     component:
-      css/style.css: {}
+      css/style.css: { }
+      node_modules/select2-theme-bootstrap4/dist/select2-bootstrap.min.css: { minified: true }
+
   dependencies:
     - core/jquery
     - core/modernizr
     - core/drupal
+    - webform/webform.element.select2
