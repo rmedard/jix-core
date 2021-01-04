@@ -4,8 +4,12 @@
     <li class="list-group-item p-2 bg-light text-danger">This job has been viewed {{ viewsCount }} times</li>
     <li class="list-group-item p-2"><b>Location:</b> {{ job.field_job_city.value }}, {{ job.field_job_country.value }}
     </li>
-    <li class="list-group-item p-2"><b>Sector:</b> {{ job.field_job_category.entity.name.value }}</li>
-    <li class="list-group-item p-2"><b>Education level:</b> {{ job.field_job_education_level.entity.name.value }}</li>
+    {% if job.field_job_category is not empty %}
+      <li class="list-group-item p-2"><b>Sector:</b> {{ job.field_job_category.entity.name.value }}</li>
+    {% endif %}
+    {% if job.field_job_education_level is not empty %}
+      <li class="list-group-item p-2"><b>Education level:</b> {{ job.field_job_education_level.entity.name.value }}</li>
+    {% endif %}
     <li class="list-group-item p-2"><b>Desired experience:</b> {{ job.field_job_desired_experience.entity.name.value }}
     </li>
     <li class="list-group-item p-2">
