@@ -42,6 +42,7 @@
         "drupal/restui": "^1.19",
         "drupal/rules": "3.x-dev@dev",
         "drupal/simplenews": "^3.0@alpha",
+        "drupal/smart_ip": "^4.0",
         "drupal/swiftmailer": "^2.0@beta",
         "drupal/telephone_validation": "^2.3",
         "drupal/token": "^1.7",
@@ -50,7 +51,6 @@
         "drupal/views_bootstrap": "4.x-dev@dev",
         "drupal/webform": "6.x-dev@dev",
         "drush/drush": "^10.3",
-        "ip2location/ip2location-php": "~8.0",
         "kint-php/kint": "^3.3"
     },
     "require-dev": {

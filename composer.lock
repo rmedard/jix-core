@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22f2a8262e3c9d7991fce51d3bd6dd1d",
+    "content-hash": "4f819e0596df1383a761c28b0166d8d7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -105,6 +105,76 @@
             ],
             "description": "Drupal code generator",
             "time": "2020-12-05T05:59:11+00:00"
+        },
+        {
+            "name": "composer/ca-bundle",
+            "version": "1.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/ca-bundle.git",
+                "reference": "8a7ecad675253e4654ea05505233285377405215"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/8a7ecad675253e4654ea05505233285377405215",
+                "reference": "8a7ecad675253e4654ea05505233285377405215",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "ext-pcre": "*",
+                "php": "^5.3.2 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8",
+                "psr/log": "^1.0",
+                "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Composer\\CaBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
+            "keywords": [
+                "cabundle",
+                "cacert",
+                "certificate",
+                "ssl",
+                "tls"
+            ],
+            "funding": [
+                {
+                    "url": "https://packagist.com",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-08-23T12:54:47+00:00"
         },
         {
             "name": "composer/installers",
@@ -2695,7 +2765,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/country.git",
-                "reference": "3b0bb2fd78ab2ac30f7dd086d06668f72e03ac8c"
+                "reference": "91bcb96dc91153d1df556be574ca7650adba23ec"
             },
             "require": {
                 "drupal/core": "^8 || ^9"
@@ -2706,8 +2776,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta5+1-dev",
-                    "datestamp": "1597171537",
+                    "version": "8.x-1.0-beta5+3-dev",
+                    "datestamp": "1609618347",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -2732,7 +2802,7 @@
                 "source": "http://cgit.drupalcode.org/country",
                 "issues": "http://drupal.org/project/issues/country"
             },
-            "time": "2020-08-11T18:44:26+00:00"
+            "time": "2021-01-02T20:11:01+00:00"
         },
         {
             "name": "drupal/ctools",
@@ -2905,17 +2975,17 @@
         },
         {
             "name": "drupal/devel",
-            "version": "4.0.1",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/devel.git",
-                "reference": "4.0.1"
+                "reference": "4.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/devel-4.0.1.zip",
-                "reference": "4.0.1",
-                "shasum": "cf2458de1cbac00a88ed26ae3da2cf331e1bc047"
+                "url": "https://ftp.drupal.org/files/projects/devel-4.1.1.zip",
+                "reference": "4.1.1",
+                "shasum": "88e5d49dda26a3136291ecd97bc6c8e897b24198"
             },
             "require": {
                 "doctrine/common": "^2.7",
@@ -2926,16 +2996,7 @@
                 "kint-php/kint": "<3"
             },
             "require-dev": {
-                "composer/installers": "^1",
-                "cweagans/composer-patches": "~1.0",
-                "drupal/core-composer-scaffold": "^8.0",
-                "drupal/core-dev": "^8.0",
-                "drupal/core-recommended": "^8.0",
-                "drush/drush": "^10",
-                "mglaman/phpstan-drupal": "^0.12",
-                "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "zaporylie/composer-drupal-optimizations": "^1.0"
+                "drush/drush": "^10"
             },
             "suggest": {
                 "kint-php/kint": "Kint provides an informative display of arrays/objects. Useful for debugging and developing."
@@ -2943,36 +3004,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.1",
-                    "datestamp": "1600300079",
+                    "version": "4.1.1",
+                    "datestamp": "1609419527",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "installer-paths": {
-                    "web/core": [
-                        "type:drupal-core"
-                    ],
-                    "web/libraries/{$name}": [
-                        "type:drupal-library"
-                    ],
-                    "web/modules/contrib/{$name}": [
-                        "type:drupal-module"
-                    ],
-                    "web/profiles/{$name}": [
-                        "type:drupal-profile"
-                    ],
-                    "web/themes/{$name}": [
-                        "type:drupal-theme"
-                    ],
-                    "drush/{$name}": [
-                        "type:drupal-drush"
-                    ]
-                },
-                "drupal-scaffold": {
-                    "locations": {
-                        "web-root": "web/"
                     }
                 },
                 "drush": {
@@ -2981,44 +3017,7 @@
                     }
                 }
             },
-            "autoload": {
-                "classmap": [
-                    ".spoons/ScriptHandler.php"
-                ]
-            },
             "notification-url": "https://packages.drupal.org/8/downloads",
-            "scripts": {
-                "si": [
-                    "drush si -v --db-url=${SIMPLETEST_DB:-mysql://root:password@mariadb/db}"
-                ],
-                "phpcs": [
-                    "phpcs --runtime-set ignore_warnings_on_exit 1 --runtime-set ignore_errors_on_exit 1 web/modules/custom"
-                ],
-                "lint": [
-                    "parallel-lint --exclude web --exclude vendor ."
-                ],
-                "webserver": [
-                    "cd web && php -S 0.0.0.0:8888 .ht.router.php"
-                ],
-                "chromedriver": [
-                    "chromedriver --port=9515 --verbose --whitelisted-ips --log-path=/tmp/chromedriver.log --no-sandbox"
-                ],
-                "unit": [
-                    "phpunit --verbose web/modules/custom"
-                ],
-                "phpstan": [
-                    "phpstan analyse web/modules/custom"
-                ],
-                "stylelint": [
-                    "yarn --silent --cwd web/core stylelint --formatter verbose --config ./.stylelintrc.json ../modules/custom/**/*.css"
-                ],
-                "eslint": [
-                    "yarn --silent --cwd web/core eslint -c ./.eslintrc.json ../modules/custom"
-                ],
-                "post-update-cmd": [
-                    "Spoons\\ScriptHandler::createSymlinks"
-                ]
-            },
             "license": [
                 "GPL-2.0-or-later"
             ],
@@ -3110,7 +3109,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/filefield_paths.git",
-                "reference": "7c7078114c4df6bb2e4ea6034095bd9a1448897e"
+                "reference": "5eb461bc6ff6fe0836fd73b264ae7e8365cc7ffe"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -3154,7 +3153,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/filefield_paths"
             },
-            "time": "2020-12-01T07:03:42+00:00"
+            "time": "2020-12-29T17:19:19+00:00"
         },
         {
             "name": "drupal/fontawesome",
@@ -3923,7 +3922,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/rules.git",
-                "reference": "cfe1c81ee61616e91f750248c9afe28c00278b91"
+                "reference": "7d1833fde20e3a4577e1a875c5cad0ec8883b32b"
             },
             "require": {
                 "drupal/core": "^8.8.2 || ^9",
@@ -3939,7 +3938,7 @@
                 },
                 "drupal": {
                     "version": "8.x-3.x-dev",
-                    "datestamp": "1606180148",
+                    "datestamp": "1608672637",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -3975,7 +3974,7 @@
                 "source": "https://git.drupalcode.org/project/rules",
                 "issues": "https://www.drupal.org/project/issues/rules"
             },
-            "time": "2020-11-24T01:13:15+00:00"
+            "time": "2020-12-23T01:17:33+00:00"
         },
         {
             "name": "drupal/simplenews",
@@ -4045,21 +4044,78 @@
             }
         },
         {
+            "name": "drupal/smart_ip",
+            "version": "dev-4.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/smart_ip.git",
+                "reference": "63fed0519960e2e2c0c9929b5b06b4f293505ce0"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9",
+                "geoip2/geoip2": "~2.0",
+                "ip2location/ip2location-php": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-4.x": "4.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-4.0+1-dev",
+                    "datestamp": "1591691389",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Michael dela Peña (arpeggio)",
+                    "homepage": "https://www.webfoobar.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "birdsnbees",
+                    "homepage": "https://www.drupal.org/user/1242622"
+                },
+                {
+                    "name": "lance.gliser",
+                    "homepage": "https://www.drupal.org/user/424339"
+                },
+                {
+                    "name": "mertres",
+                    "homepage": "https://www.drupal.org/user/3513520"
+                }
+            ],
+            "description": "Smart IP identify visitor's geographical location (longitude/latitude), country, region, city and postal code based on the IP address of the visitor.",
+            "homepage": "https://drupal.org/project/smart_ip",
+            "support": {
+                "source": "https://git.drupalcode.org/project/smart_ip"
+            },
+            "time": "2020-12-31T15:43:22+00:00"
+        },
+        {
             "name": "drupal/swiftmailer",
-            "version": "2.0.0-beta1",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/swiftmailer.git",
-                "reference": "8.x-2.0-beta1"
+                "reference": "8.x-2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/swiftmailer-8.x-2.0-beta1.zip",
-                "reference": "8.x-2.0-beta1",
-                "shasum": "6df4816d0d57a85cfff0860960da64c5ff77680f"
+                "url": "https://ftp.drupal.org/files/projects/swiftmailer-8.x-2.0.zip",
+                "reference": "8.x-2.0",
+                "shasum": "9a4d9f511885246262224a81ec736c9c6aa2b466"
             },
             "require": {
-                "drupal/core": "^8 || ^9",
+                "drupal/core": "^8.9.11 || ^9.0.10",
                 "drupal/mailsystem": "^4.1.0",
                 "egulias/email-validator": "^2.0",
                 "html2text/html2text": "^4.0.1",
@@ -4070,17 +4126,17 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.0-beta1",
-                    "datestamp": "1596203348",
+                    "version": "8.x-2.0",
+                    "datestamp": "1609585507",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -4454,7 +4510,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "3350a8ef4853980e9a3544b37ddfbcc95aa67a4b"
+                "reference": "a9ec9d65ea969f76aa7805bc70d90f7e7e8d6c67"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9"
@@ -4506,7 +4562,7 @@
                 },
                 "drupal": {
                     "version": "6.x-dev",
-                    "datestamp": "1608424473",
+                    "datestamp": "1609598930",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -4575,7 +4631,7 @@
                 "docs": "https://www.drupal.org/docs/8/modules/webform",
                 "forum": "https://drupal.stackexchange.com/questions/tagged/webform"
             },
-            "time": "2020-12-20T01:25:48+00:00"
+            "time": "2021-01-02T14:49:36+00:00"
         },
         {
             "name": "drush/drush",
@@ -4767,6 +4823,59 @@
                 "validator"
             ],
             "time": "2020-09-26T15:48:38+00:00"
+        },
+        {
+            "name": "geoip2/geoip2",
+            "version": "v2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/GeoIP2-php.git",
+                "reference": "d01be5894a5c1a3381c58c9b1795cd07f96c30f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/d01be5894a5c1a3381c58c9b1795cd07f96c30f7",
+                "reference": "d01be5894a5c1a3381c58c9b1795cd07f96c30f7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "maxmind-db/reader": "~1.8",
+                "maxmind/web-service-common": "~0.8",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.*",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "GeoIp2\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "https://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind GeoIP2 PHP API",
+            "homepage": "https://github.com/maxmind/GeoIP2-php",
+            "keywords": [
+                "IP",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2020-10-01T18:48:34+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -5774,6 +5883,112 @@
                 "xml"
             ],
             "time": "2020-10-01T13:52:52+00:00"
+        },
+        {
+            "name": "maxmind-db/reader",
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+                "reference": "b566d429ac9aec10594b0935be8ff38302f8d5c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/b566d429ac9aec10594b0935be8ff38302f8d5c8",
+                "reference": "b566d429ac9aec10594b0935be8ff38302f8d5c8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "conflict": {
+                "ext-maxminddb": "<1.8.0,>=2.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.*",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpcov": ">=6.0.0",
+                "phpunit/phpunit": ">=8.0.0,<10.0.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "suggest": {
+                "ext-bcmath": "bcmath or gmp is required for decoding larger integers with the pure PHP decoder",
+                "ext-gmp": "bcmath or gmp is required for decoding larger integers with the pure PHP decoder",
+                "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\Db\\": "src/MaxMind/Db"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory J. Oschwald",
+                    "email": "goschwald@maxmind.com",
+                    "homepage": "https://www.maxmind.com/"
+                }
+            ],
+            "description": "MaxMind DB Reader API",
+            "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+            "keywords": [
+                "database",
+                "geoip",
+                "geoip2",
+                "geolocation",
+                "maxmind"
+            ],
+            "time": "2020-10-01T17:30:21+00:00"
+        },
+        {
+            "name": "maxmind/web-service-common",
+            "version": "v0.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxmind/web-service-common-php.git",
+                "reference": "32f274051c543fc865e5a84d3a2c703913641ea8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxmind/web-service-common-php/zipball/32f274051c543fc865e5a84d3a2c703913641ea8",
+                "reference": "32f274051c543fc865e5a84d3a2c703913641ea8",
+                "shasum": ""
+            },
+            "require": {
+                "composer/ca-bundle": "^1.0.3",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "2.*",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MaxMind\\Exception\\": "src/Exception",
+                    "MaxMind\\WebService\\": "src/WebService"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Gregory Oschwald",
+                    "email": "goschwald@maxmind.com"
+                }
+            ],
+            "description": "Internal MaxMind Web Service API",
+            "homepage": "https://github.com/maxmind/web-service-common-php",
+            "time": "2020-11-02T17:00:53+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -9506,76 +9721,6 @@
                 "webdriver"
             ],
             "time": "2020-03-11T14:43:21+00:00"
-        },
-        {
-            "name": "composer/ca-bundle",
-            "version": "1.2.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "8a7ecad675253e4654ea05505233285377405215"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/8a7ecad675253e4654ea05505233285377405215",
-                "reference": "8a7ecad675253e4654ea05505233285377405215",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "ext-pcre": "*",
-                "php": "^5.3.2 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8",
-                "psr/log": "^1.0",
-                "symfony/process": "^2.5 || ^3.0 || ^4.0 || ^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\CaBundle\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                }
-            ],
-            "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
-            "keywords": [
-                "cabundle",
-                "cacert",
-                "certificate",
-                "ssl",
-                "tls"
-            ],
-            "funding": [
-                {
-                    "url": "https://packagist.com",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/composer",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-08-23T12:54:47+00:00"
         },
         {
             "name": "composer/composer",
