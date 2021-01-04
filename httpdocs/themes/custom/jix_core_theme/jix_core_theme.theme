@@ -272,7 +272,8 @@ function jix_core_theme_theme($existing, $type, $theme, $path): array
  */
 function jix_core_theme_preprocess_input(&$variables)
 {
-  if (strpos($variables['element']['#id'], 'edit-submit-jobs-display') == 0) {
+  if (isset($variables['element']['#id'])
+    and strpos($variables['element']['#id'], 'edit-submit-jobs-display') == 0) {
     $variables['attributes']['class'][] = 'btn-block';
   }
 }

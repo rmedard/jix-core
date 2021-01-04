@@ -124,7 +124,8 @@ function jix_interface_field_widget_form_alter(&$element, FormStateInterface $fo
   }
 }
 
-function jix_interface_after_build(&$element, FormStateInterface $form_state) {
+function jix_interface_after_build(array $element, FormStateInterface $form_state): array
+{
   unset($element['format']['help']);
   unset($element['format']['guidelines']);
   unset($element['format']['#type']);
