@@ -28,7 +28,7 @@
           text: 'Select category'
         },
       });
-      jobCategorySelect.val(null).trigger('change');
+      // jobCategorySelect.val(null).trigger('change');
       $(context).find('input.select2-search__field').addClass('w-100');
 
       $(context).find('input.form-tel').each(function () {
