@@ -130,7 +130,8 @@ function jix_interface_field_widget_form_alter(&$element, FormStateInterface $fo
   if (!$field_definition instanceof FieldConfig) {
     return;
   }
-  if ($field_definition->getName() === 'field_job_full_description' or $field_definition->getName() === 'field_employer_summary') {
+  if ($field_definition->getName() === 'field_job_full_description'
+    or $field_definition->getName() === 'field_employer_summary') {
     // Set only full_html as allowed format.
     $element['#allowed_formats'] = ['full_html'];
     // Add after build to remove the help wrapper and text.
