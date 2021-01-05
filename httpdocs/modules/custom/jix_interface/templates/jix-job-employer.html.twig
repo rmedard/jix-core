@@ -8,12 +8,14 @@
       <div class="card-body p-1">
         {% if pageNodeBundle == 'job' %}
           <h5 class="card-title">
-            <a href="{{ path('entity.node.canonical', {'node': employer.id}) }}">
+            <a href="{{ path('entity.node.canonical', {'node': employer.nid.value}) }}">
               {{ employer.title.value }}
             </a>
           </h5>
         {% endif %}
-        {{ employer.field_employer_summary.value | truncate(300, true, true) | raw }}
+        {% if employer.field_employer_summary is not empty %}
+          {{ employer.field_employer_summary.value | truncate(300, true, true) | raw }}
+        {% endif %}
 
         {% if employer.field_employer_sector is not empty %}
           <dl class="row">

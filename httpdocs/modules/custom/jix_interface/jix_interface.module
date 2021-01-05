@@ -103,6 +103,20 @@ function jix_interface_node_presave(EntityInterface $entity)
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_create().
+ * @param EntityInterface $entity
+ */
+function jix_interface_node_create(EntityInterface $entity)
+{
+  if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
+    $postingPlan = Drupal::request()->get('posting_plan');
+    if (isset($postingPlan) && strlen($postingPlan) > 0) {
+      $entity->set('field_job_posting_plan', $postingPlan);
+    }
+  }
+}
+
+/**
  * Implements hook_field_widget_form_alter().
  * @param $element
  * @param FormStateInterface $form_state
