@@ -28,7 +28,21 @@
           text: 'Select category'
         },
       });
-      jobCategorySelect.change(function (){
+      jobCategorySelect.change(function () {
+        $(context).find('li.select2-selection__choice[title="- None -"]').hide();
+      });
+
+      const employerSectorSelect = $(context).find('select#edit-field-employer-sector');
+      employerSectorSelect.select2({
+        multiple: true,
+        width: '100%',
+        theme: 'bootstrap',
+        placeholder: {
+          id: '_none',
+          text: 'Choose sector'
+        },
+      });
+      employerSectorSelect.change(function () {
         $(context).find('li.select2-selection__choice[title="- None -"]').hide();
       });
 
