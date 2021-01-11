@@ -20,7 +20,7 @@ use Drupal\Core\Block\BlockBase;
 class AddressBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $servicesStr = strval(Drupal::configFactory()->get('jix_interface.website.info')->get('our_services')); //TODO Finish this...
     return[

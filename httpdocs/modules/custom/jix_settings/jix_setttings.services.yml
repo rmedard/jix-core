@@ -1,0 +1,5 @@
+services:
+  jix_settings.typed_data:
+    class: Drupal\jix_settings\Normalizer\CustomTypedDataNormalizer
+    tags:
+      - { name: normalizer, priority: 10 }

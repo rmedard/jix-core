@@ -20,7 +20,7 @@ use Drupal\Core\Block\BlockBase;
 class CopyrightBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     return [
       '#theme' => 'jix_copyright',

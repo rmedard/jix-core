@@ -20,7 +20,7 @@ use Drupal\Core\Block\BlockBase;
 class RealtimeStatsBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $statsService = Drupal::service('jix_interface.statistics_service');
     $output = [];

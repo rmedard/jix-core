@@ -24,7 +24,7 @@ use Drupal\node\NodeInterface;
 class JobEmployerBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $output = [];
     $output[]['#cache']['max-age'] = 0;

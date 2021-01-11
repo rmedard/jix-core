@@ -21,7 +21,7 @@ use Drupal\node\NodeInterface;
 class JobSummaryBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $output = [];
     $output[]['#cache']['max-age'] = 0;

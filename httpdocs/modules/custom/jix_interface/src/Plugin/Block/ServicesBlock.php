@@ -22,7 +22,7 @@ use Drupal\jix_settings\Form\SitesAndServicesForm;
 class ServicesBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $servicesStr = strval(Drupal::configFactory()->get(SitesAndServicesForm::SETTINGS)->get('our_services'));
     $services = empty($servicesStr) ? array() : explode('|', $servicesStr);

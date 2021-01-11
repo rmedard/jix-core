@@ -19,7 +19,7 @@ use Drupal\Core\Block\BlockBase;
 class UploadCvBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     return[
       '#label' => t('Upload CV'),

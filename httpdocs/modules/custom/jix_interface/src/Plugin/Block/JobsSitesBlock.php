@@ -22,7 +22,7 @@ use Drupal\jix_settings\Form\SitesAndServicesForm;
 class JobsSitesBlock extends BlockBase
 {
 
-  public function build()
+  public function build(): array
   {
     $sitesStr = strval(Drupal::configFactory()->get(SitesAndServicesForm::SETTINGS)->get('our_sites'));
     $sites = empty($sitesStr) ? array() : explode('|', $sitesStr);
