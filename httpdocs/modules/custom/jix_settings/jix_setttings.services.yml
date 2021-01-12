@@ -1,5 +1,6 @@
 services:
   jix_settings.typed_data:
     class: Drupal\jix_settings\Normalizer\CustomTypedDataNormalizer
+    arguments: ['@logger.factory']
     tags:
       - { name: normalizer, priority: 10 }

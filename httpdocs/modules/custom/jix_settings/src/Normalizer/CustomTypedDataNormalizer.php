@@ -5,23 +5,32 @@ namespace Drupal\jix_settings\Normalizer;
 
 
 use Drupal;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\serialization\Normalizer\TypedDataNormalizer;
 
 class CustomTypedDataNormalizer extends TypedDataNormalizer
 {
+  /**
+   * @var LoggerChannelFactoryInterface
+   */
+  private $loggerChannelFactory;
 
-//  protected $supportedInterfaceOrClass = TypedDataInterface::class;
+  /**
+   * CustomTypedDataNormalizer constructor.
+   * @param LoggerChannelFactoryInterface $loggerChannelFactory
+   */
+  public function __construct(LoggerChannelFactoryInterface $loggerChannelFactory)
+  {
+    $this->loggerChannelFactory = $loggerChannelFactory;
+  }
 
-//  public function denormalize($data, $type, $format = null, array $context = [])
-//  {
-//    $this->denormalize($data, $type, $format, $context);
-//  }
 
   /**
    * {@inheritdoc}
    */
   public function normalize($object, $format = null, array $context = [])
   {
+    $this->loggerChannelFactory->get('default')->debug('Normalizer called');
     Drupal::logger('jix_settings')->warning('Normalizer called');
 //    $values = $object->getValue();
 //    if (isset($values[0]) && isset($values[0]['value'])) {
