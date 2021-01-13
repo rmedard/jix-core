@@ -28,4 +28,4 @@ jix_data.management.page:
     _controller: '\Drupal\jix_settings\Controller\DataManagementPageController::content'
     _title: 'Jix Data Management'
   requirements:
-    _permission: 'administer site configuration'
+    _permission: 'manage business data'

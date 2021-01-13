@@ -1,0 +1,4 @@
+manage business data:
+  title: 'Manage business data'
+  description: 'Give access to business data such as jobs, employers, etc.'
+  restrict access: true
