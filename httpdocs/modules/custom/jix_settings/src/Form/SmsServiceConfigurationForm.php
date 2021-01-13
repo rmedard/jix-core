@@ -87,7 +87,7 @@ class SmsServiceConfigurationForm extends ConfigFormBase
     $username = $form_state->getValue('mtarget_ftp_username');
     $password = $form_state->getValue('mtarget_ftp_password');
     if (empty($password)) {
-      $password = Drupal::config('jix_sms.general.settings')->get('mtarget_ftp_password');
+      $password = Drupal::config(static::SETTINGS)->get('mtarget_ftp_password');
     }
 
     $this->configFactory->getEditable(static::SETTINGS)
