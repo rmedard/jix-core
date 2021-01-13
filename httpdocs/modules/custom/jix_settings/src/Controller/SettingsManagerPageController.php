@@ -12,7 +12,8 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class SettingsManagerPageController extends ControllerBase
 {
-    public function content(){
+    public function content(): array
+    {
       return [
           '#theme' => 'jix_settings_manager'
       ];

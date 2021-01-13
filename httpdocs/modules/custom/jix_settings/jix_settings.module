@@ -1,8 +1,8 @@
 <?php
 /**
-* @file
-* A description of what your module does.
-*/
+ * @file
+ * A description of what your module does.
+ */
 
 /**
  * Implements hook_theme().
@@ -14,5 +14,8 @@
  */
 function jix_settings_theme($existing, $type, $theme, $path): array
 {
-    return array('jix_settings_manager' => array('variables' => array()));
+  return [
+    'jix_settings_manager' => ['variables' => []],
+    'jix_data_manager' => ['variables' => []]
+  ];
 }

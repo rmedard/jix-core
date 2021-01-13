@@ -21,3 +21,11 @@ jix_settings.management.page:
     _title: 'Jix Settings Management'
   requirements:
     _permission: 'administer site configuration'
+
+jix_data.management.page:
+  path: '/admin/jix-management'
+  defaults:
+    _controller: '\Drupal\jix_settings\Controller\DataManagementPageController::content'
+    _title: 'Jix Data Management'
+  requirements:
+    _permission: 'administer site configuration'
