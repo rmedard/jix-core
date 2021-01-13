@@ -8,3 +8,4 @@ version: '9.x-1.0'
 
 dependencies:
   - twig_tweak:twig_tweak
+  - phpseclib

@@ -14,6 +14,14 @@ jix_settings.website.info:
   requirements:
     _permission: 'administer site configuration'
 
+jix_settings.sms.settings:
+  path: '/admin/manage/settings/sms'
+  defaults:
+    _form: '\Drupal\jix_settings\Form\SmsServiceConfigurationForm'
+    _title: 'SMS Service Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
 jix_settings.management.page:
   path: '/admin/manage/settings'
   defaults:

@@ -18,7 +18,7 @@ class SitesAndServicesForm extends ConfigFormBase
      *   An array of configuration object names that are editable if called in
      *   conjunction with the trait's config() method.
      */
-    protected function getEditableConfigNames()
+    protected function getEditableConfigNames(): array
     {
         return [static::SETTINGS];
     }
@@ -33,7 +33,7 @@ class SitesAndServicesForm extends ConfigFormBase
      * @return string
      *   The unique string identifying the form.
      */
-    public function getFormId()
+    public function getFormId(): string
     {
         return 'jix_settings_sites_services';
     }
@@ -41,7 +41,8 @@ class SitesAndServicesForm extends ConfigFormBase
     /**
      * {@inheritdoc}
      */
-    public function buildForm(array $form, FormStateInterface $form_state){
+    public function buildForm(array $form, FormStateInterface $form_state): array
+    {
         $config = $this->config(static::SETTINGS);
         $form['our_services'] = [
             '#type' => 'textarea',

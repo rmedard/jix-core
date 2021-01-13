@@ -28,6 +28,7 @@
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
         "drupal/country": "1.x-dev@dev",
+        "drupal/date_popup": "^1.1",
         "drupal/delete_all": "^2.0",
         "drupal/devel": "^4.0",
         "drupal/field_permissions": "^1.1",
@@ -52,7 +53,8 @@
         "drupal/webform": "^6.0",
         "drupal/webform_views": "^5.0@alpha",
         "drush/drush": "^10.3",
-        "kint-php/kint": "^3.3"
+        "kint-php/kint": "^3.3",
+        "phpseclib/phpseclib": "^3.0"
     },
     "require-dev": {
         "drupal/core-dev": "^9"
