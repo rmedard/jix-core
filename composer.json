@@ -54,7 +54,8 @@
         "drupal/webform_views": "^5.0@alpha",
         "drush/drush": "^10.3",
         "kint-php/kint": "^3.3",
-        "phpseclib/phpseclib": "^3.0"
+        "phpseclib/phpseclib": "^3.0",
+        "ext-ftp": "*"
     },
     "require-dev": {
         "drupal/core-dev": "^9"
