@@ -11,6 +11,7 @@ use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
+use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\Exception\MissingDataException;
@@ -248,6 +249,10 @@ function jix_core_theme_form_node_form_alter(&$form, FormStateInterface $form_st
 {
   unset($form['meta']);
   unset($form['menu']);
+  if ($form['#form_id'] == 'node_job_form') {
+    $form['field_job_employer']['widget'][0]['target_id']['#description'] =
+      FieldFilteredMarkup::create("<a href='/node/add/employer'>" . t("Can't find an employer? Create one.") . "</a>");
+  }
 }
 
 /**

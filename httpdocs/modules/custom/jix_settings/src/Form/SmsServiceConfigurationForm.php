@@ -81,6 +81,19 @@ class SmsServiceConfigurationForm extends ConfigFormBase
       '#default_value' => $config->get('ftp_password'),
       '#description' => $this->t('The currently set password is hidden for security reasons.')
     );
+    $form['file_settings'] = array(
+      '#title' => $this->t('File Settings'),
+      '#type' => 'fieldset',
+      '#collapsible' => false,
+      '#collapsed' => false,
+    );
+    $form['file_settings']['filename_format'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('SMS filename format'),
+      '#default_value' => $config->get('filename_format'),
+      '#required' => true,
+      '#description' => $this->t('SMS filename format. Do NOT edit text in brackets. E.g: JOBIN_RWA_[deadline]_[publishedOn]_[jobIdentifier].txt')
+    );
     return parent::buildForm($form, $form_state);
   }
 
@@ -115,6 +128,7 @@ class SmsServiceConfigurationForm extends ConfigFormBase
       ->set('ftp_directory', $directory)
       ->set('ftp_username', $username)
       ->set('ftp_password', $password)
+      ->set('filename_format', $form_state->getValue('filename_format'))
       ->save();
     parent::submitForm($form, $form_state);
 
