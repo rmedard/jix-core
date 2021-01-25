@@ -50,6 +50,7 @@ httpdocs/themes/contrib/
 # Ignore configuration files that may contain sensitive information
 httpdocs/sites/*/*settings*.php
 httpdocs/sites/*/*services*.yml
+httpdocs/sites/*/*sites*.php
 
 # Ignore paths that may contain user-generated content
 httpdocs/sites/*/files
