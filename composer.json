@@ -36,7 +36,7 @@
         "drupal/filefield_paths": "1.x-dev@dev",
         "drupal/fontawesome": "^2.17",
         "drupal/geotimezone": "^3.0",
-        "drupal/google_analytics": "3.x-dev@dev",
+        "drupal/google_analytics": "^3.1",
         "drupal/honeypot": "^2.0",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/module_filter": "3.x-dev",
