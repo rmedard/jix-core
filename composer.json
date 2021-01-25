@@ -20,6 +20,7 @@
         "drupal/addtoany": "^1.14",
         "drupal/admin_toolbar": "^2.3",
         "drupal/adminimal_admin_toolbar": "^1.11",
+        "drupal/adsense": "^1.2",
         "drupal/better_exposed_filters": "^5.0@beta",
         "drupal/bootstrap_barrio": "^5.1",
         "drupal/bootstrap_sass": "^5.0",
