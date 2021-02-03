@@ -58,8 +58,7 @@
       });
 
       if(settings.path.isFront) {
-        const homeMenu = $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child');
-        homeMenu.addClass('active')
+        $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child').addClass('active');
       }
     }
   };
