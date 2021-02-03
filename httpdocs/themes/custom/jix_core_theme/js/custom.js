@@ -59,7 +59,7 @@
 
       const homeMenuLink = $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child > a');
       if (homeMenuLink.hasClass('is-active')) {
-        const homeMenu = $(context).find('ul.nal[block="block-jix-core-theme-main-menu"] > li:first-child');
+        const homeMenu = $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child');
         homeMenu.addClass('active')
       }
     }
