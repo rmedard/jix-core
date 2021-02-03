@@ -57,8 +57,7 @@
         }
       });
 
-      const homeMenuLink = $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child > a');
-      if (homeMenuLink.hasClass('is-active')) {
+      if(settings.path.isFront) {
         const homeMenu = $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child');
         homeMenu.addClass('active')
       }
