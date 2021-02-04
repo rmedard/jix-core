@@ -1,25 +1,31 @@
 <div class="panel">
-    <h3 class="panel__title">JIX Settings Management Panel</h3>
-    <div class="panel__content">
-        <ul class="admin-list">
-            <li>
-                <a href="/admin/manage/settings/website">
-                    <span class="label">Websites details</span>
-                    <div class="description">Website identification information.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/admin/manage/settings/sites-services">
-                    <span class="label">Our sites and services</span>
-                    <div class="description">Other job boards and services we propose.</div>
-                </a>
-            </li>
-          <li>
-            <a href="/admin/manage/settings/sms">
-              <span class="label">SMS service: FTP configuration</span>
-              <div class="description">FTP configuration settings for SMS service.</div>
-            </a>
-          </li>
-        </ul>
-    </div>
+  <h3 class="panel__title">{{ 'JIX Settings Management Panel'|t }}</h3>
+  <div class="panel__content">
+    <ul class="admin-list">
+      <li>
+        <a href="{{ path('jix_settings.website.info') }}">
+          <span class="label">{{ 'Websites details'|t }}</span>
+          <div class="description">{{ 'Website identification information.'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_settings.sites.services') }}">
+          <span class="label">{{ 'Our sites and services'|t }}</span>
+          <div class="description">{{ 'Other job boards and services we propose.'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_settings.sms.settings') }}">
+          <span class="label">{{ 'SMS service: FTP configuration'|t }}</span>
+          <div class="description">{{ 'FTP configuration settings for SMS service.'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_settings.social_media.settings') }}">
+          <span class="label">{{ 'Social media settings'|t }}</span>
+          <div class="description">{{ 'Configure website social media settings.'|t }}</div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,37 +1,40 @@
 <div class="panel">
-    <h3 class="panel__title">JIX Data Management</h3>
-    <div class="panel__content">
-        <ul class="admin-list">
-            <li>
-                <a href="/admin/jix-management/jobs-management-board">
-                    <span class="label">Jobs management board</span>
-                    <div class="description">Board to manage jobs. Publish or unpublish jobs.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/admin/jix-management/employers-management-board">
-                    <span class="label">Employers management board</span>
-                    <div class="description">Board to manage employers. Publish or unpublish employers</div>
-                </a>
-            </li>
-          <li>
-            <a href="/admin/jix-management/news-management-board">
-              <span class="label">News management board</span>
-              <div class="description">Board to manage {{ drupal_token('site:name') }} news. Delete, publish or unpublish news</div>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/jix-management/applications-management-board">
-              <span class="label">Job applications management board</span>
-              <div class="description">Board to manage job applications. Filtering and exporting job applications</div>
-            </a>
-          </li>
-          <li>
-            <a href="/admin/jix-management/testimonials-management-board">
-              <span class="label">Testimonials management board</span>
-              <div class="description">Board to manage testimonials.</div>
-            </a>
-          </li>
-        </ul>
-    </div>
+  <h3 class="panel__title">{{ 'JIX Data Management'|t }}</h3>
+  <div class="panel__content">
+    <ul class="admin-list">
+      <li>
+        <a href="{{ path('jix_data.management.page') ~ '/jobs-management-board' }}">
+          <span class="label">{{ 'Jobs management board'|t }}</span>
+          <div class="description">{{ 'Board to manage jobs. Publish or unpublish jobs.'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_data.management.page') ~ '/employers-management-board' }}">
+          <span class="label">{{ 'Employers management board'|t }}</span>
+          <div class="description">{{ 'Board to manage employers. Publish or unpublish employers'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_data.management.page') ~ '/news-management-board' }}">
+          <span class="label">{{ 'News management board'|t }}</span>
+          <div class="description">
+            {{ 'Board to manage @sitename news. Delete, publish or unpublish news'|t({'@sitename' : drupal_token('site:name')}) }}
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_data.management.page') ~ '/applications-management-board' }}">
+          <span class="label">{{ 'Job applications management board'|t }}</span>
+          <div
+            class="description">{{ 'Board to manage job applications. Filtering and exporting job applications'|t }}</div>
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('jix_data.management.page') ~ '/testimonials-management-board' }}">
+          <span class="label">{{ 'Testimonials management board'|t }}</span>
+          <div class="description">{{ 'Board to manage testimonials.'|t }}</div>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

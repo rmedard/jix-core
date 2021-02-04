@@ -37,6 +37,7 @@ regions:
   footer_third: 'Footer third'
   footer_fourth: 'Footer fourth'
   footer_fifth: 'Footer fifth'
+  footer_social: 'Footer Social'
 
 # Information added by Drupal.org packaging script on 2020-10-11
 version: '5.0.2'
