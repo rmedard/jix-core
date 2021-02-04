@@ -22,6 +22,14 @@ jix_settings.sms.settings:
   requirements:
     _permission: 'administer site configuration'
 
+jix_settings.social_media.settings:
+  path: '/admin/manage/settings/social-media'
+  defaults:
+    _form: '\Drupal\jix_settings\Form\SocialMediaSettingsForm'
+    _title: 'Social Media Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
 jix_settings.management.page:
   path: '/admin/manage/settings'
   defaults:

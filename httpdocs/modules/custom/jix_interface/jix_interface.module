@@ -83,6 +83,14 @@ function jix_interface_theme($existing, $type, $theme, $path): array
         'employers_count' => 0,
         'candidates_count' => 0
       ]
+    ],
+    'jix_social_media_buttons' => [
+      'variables' => [
+        'facebook' => '',
+        'twitter' => '',
+        'instagram' => '',
+        'youtube' => ''
+      ]
     ]
   ];
 }

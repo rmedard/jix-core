@@ -12,7 +12,7 @@ use Drupal\jix_settings\Form\SitesAndServicesForm;
 
 /**
  * Class ServicesBlock
- * @package Drupal\jir_blocks\Plugin\Block
+ * @package Drupal\jix_interface\Plugin\Block
  * @Block(
  *     id = "services_block",
  *     admin_label = @Translation("Services block"),
@@ -33,7 +33,7 @@ class ServicesBlock extends BlockBase
   }
 
   // Needed because there is an event listener in JixSettings that clear this cache on config save.
-  public function getCacheTags()
+  public function getCacheTags(): array
   {
     return Cache::mergeTags(parent::getCacheTags(), ['services_block']);
   }
