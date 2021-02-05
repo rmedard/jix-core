@@ -13,17 +13,17 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
 
   const SETTINGS = 'jix_notifier.general.settings';
 
-  protected function getEditableConfigNames()
+  protected function getEditableConfigNames(): array
   {
     return [static::SETTINGS];
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'jix_notifier_general_settings';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $config = $this->config(static::SETTINGS);
     $form['general_newsletter_url'] = [
@@ -32,17 +32,31 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
       '#default_value' => $config->get('general_newsletter_url'),
       '#description' => t('Enter a valid and absolute URL. No query parameters.')
     ];
+    $form['cv_search_url'] = [
+      '#type' => 'textfield',
+      '#title' => t('CV search url'),
+      '#default_value' => $config->get('cv_search_url'),
+      '#description' => t('Enter a valid and absolute URL. No query parameters.')
+    ];
     return parent::buildForm($form, $form_state);
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state)
   {
-    $url = $form_state->getValue('general_newsletter_url');
-    if (isset($url)) {
-      if (!UrlHelper::isValid($url, true)) {
+    $newsletterUrl = $form_state->getValue('general_newsletter_url');
+    if (isset($newsletterUrl)) {
+      if (!UrlHelper::isValid($newsletterUrl, true)) {
         $form_state->setErrorByName('general_newsletter_url', 'Invalid URL. This url has to be valid and absolute.');
-      } elseif (strpos($url, '?') !== false) {
+      } elseif (strpos($newsletterUrl, '?') !== false) {
         $form_state->setErrorByName('general_newsletter_url', 'Invalid URL. No query parameters required.');
+      }
+    }
+    if (!$form_state->isValueEmpty('cv_search_url')) {
+      $cvSearchUrl = $form_state->getValue('cv_search_url');
+      if (!UrlHelper::isValid($cvSearchUrl, true)) {
+        $form_state->setErrorByName('cv_search_url', 'Invalid URL. This url has to be valid and absolute.');
+      } elseif (strpos($cvSearchUrl, '?') !== false) {
+        $form_state->setErrorByName('cv_search_url', 'Invalid URL. No query parameters required.');
       }
     }
   }
@@ -51,6 +65,7 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
   {
     $this->configFactory->getEditable(static::SETTINGS)
       ->set('general_newsletter_url', $form_state->getValue('general_newsletter_url'))
+      ->set('cv_search_url', $form_state->getValue('cv_search_url'))
       ->save();
     parent::submitForm($form, $form_state);
   }
