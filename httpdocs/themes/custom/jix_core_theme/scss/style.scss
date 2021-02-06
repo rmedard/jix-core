@@ -127,6 +127,12 @@ ul[block='block-jix-core-theme-main-menu'] {
   }
 }
 
+nav#block-jobstabsmenu {
+  .nav-pills .nav-link.active {
+    background-color: $secondary-shade;
+  }
+}
+
 .badge-dark {
   color: #fff;
   background-color: $secondary-shade;
