@@ -15,7 +15,9 @@ class StatisticsService
   {
     try {
       $storage = Drupal::entityTypeManager()->getStorage('node');
-      return $storage->getQuery()->condition('type', $entityType)->count()->execute();
+      return $storage->getQuery()
+        ->accessCheck(false)
+        ->condition('type', $entityType)->count()->execute();
     } catch (InvalidPluginDefinitionException $e) {
       Drupal::logger('jix_interface')->error('Invalid plugin: ' . $e->getMessage());
     } catch (PluginNotFoundException $e) {
@@ -28,6 +30,7 @@ class StatisticsService
     try {
       $storage = Drupal::entityTypeManager()->getStorage('webform_submission');
       return $storage->getQuery()
+        ->accessCheck(false)
         ->condition('webform_id', 'default_job_application_form')
         ->count()->execute();
     } catch (InvalidPluginDefinitionException $e) {
