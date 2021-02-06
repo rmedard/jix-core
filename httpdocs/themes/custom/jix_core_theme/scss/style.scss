@@ -118,9 +118,12 @@ footer.site-footer {
   background-color: #0a6eb4;
 }
 
-nav#block-jobstabsmenu {
-  .nav-pills .nav-link.active {
-    background-color: $secondary-shade;
+ul[block='block-jix-core-theme-main-menu'] {
+  li > a {
+    color: $white;
+  }
+  li > a.is-active {
+    color: $gray-400;
   }
 }
 
@@ -131,4 +134,8 @@ nav#block-jobstabsmenu {
 
 .jix-pricing-price {
   font-variant: small-caps;
+}
+
+fieldset.form-type-fivestar {
+  margin-bottom: 0;
 }

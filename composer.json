@@ -35,6 +35,7 @@
         "drupal/devel": "^4.0",
         "drupal/field_permissions": "^1.1",
         "drupal/filefield_paths": "1.x-dev@dev",
+        "drupal/fivestar": "^1.0@alpha",
         "drupal/fontawesome": "^2.17",
         "drupal/geotimezone": "^3.0",
         "drupal/google_analytics": "^3.1",
