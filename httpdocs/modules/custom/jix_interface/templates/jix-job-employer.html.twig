@@ -18,9 +18,9 @@
         {% endif %}
 
         {% if employer.field_employer_sector is not empty %}
-          <dl class="row">
-            <dt class="col-sm-3">Sector</dt>
-            <dd class="col-sm-9">
+          <dl class="row mb-1">
+            <dt class="col-sm-4">Sector</dt>
+            <dd class="col-sm-8">
               {% for sector in employer.field_employer_sector %}
                 {{ sector.entity.name.value }}{% if not loop.last %}, {% endif %}
               {% endfor %}
