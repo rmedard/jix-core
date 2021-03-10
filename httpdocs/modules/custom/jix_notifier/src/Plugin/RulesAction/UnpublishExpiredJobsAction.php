@@ -73,6 +73,7 @@ class UnpublishExpiredJobsAction extends RulesActionBase implements ContainerFac
 
   protected function doExecute()
   {
+    Drupal::logger($this->channel)->info("UnPublishing expired jobs started!!");
     try {
       $storage = $this->entityTypeManager->getStorage('node');
       $now = new DrupalDateTime('now');
@@ -89,6 +90,8 @@ class UnpublishExpiredJobsAction extends RulesActionBase implements ContainerFac
             Drupal::logger($this->channel)->info(t('Expired job @id unpublished', ['@id' => $jobId]));
           }
         }
+      } else {
+        Drupal::logger($this->channel)->info("No expired jobs to unPublish");
       }
     } catch (InvalidPluginDefinitionException $e) {
       Drupal::logger($this->channel)->error("Plugin definition exception: " . $e->getMessage());
