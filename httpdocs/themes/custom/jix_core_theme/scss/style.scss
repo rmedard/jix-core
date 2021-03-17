@@ -35,8 +35,14 @@ a {
   }
 }
 
-.menu--main li a {
-  color: $primary-shade;
+.menu--main {
+  li a {
+    color: $primary-shade;
+  }
+  li.active {
+    background: opacify(rgba(#000000, 0.1), 0.2);
+    border-radius: 0.35rem;
+  }
 }
 
 .menu--account li a {
@@ -83,6 +89,12 @@ a {
 }
 
 @media(max-width: 767.98px) { /* Mobile style */
+  .menu--main {
+    li {
+      padding-left: 1rem;
+    }
+  }
+
   nav#navbar-top {
     padding: 0;
     img {

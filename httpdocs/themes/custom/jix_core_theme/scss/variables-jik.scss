@@ -11,6 +11,7 @@ $accent-shade: rgb(181, 0, 0);
 $accent-light: lighten($accent-shade, 37%);
 $accent-dark: darken($accent-shade, 12%);
 // Reassign color vars to semantic color scheme
+$black: rgba(#000, 0.8);
 $red: #b50000;
 $yellow: #ffc107;
 $orange: #F39C12;
