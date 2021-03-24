@@ -106,18 +106,9 @@
                 </a>
               </h5>
             {% endif %}
-            {% set description = attribute(content.field_employer_summary.0, '#text') %}
-              {% if description|length > 300 %}
-                {{ description|truncate(300, '...', true)|check_markup('full_html') }}
-                <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Read more...
-                </a>
-                <div class="collapse" id="collapseExample">
-                  {{ description|check_markup('full_html') }}
-                </div>
-              {% else %}
-                {{ description|check_markup('full_html') }}
-              {% endif %}
+            <div class="employer-description" style="overflow: hidden">
+              {{ attribute(content.field_employer_summary.0, '#text')|check_markup('full_html') }}
+            </div>
 
             {% if content.field_employer_sector['#items'] %}
               <dl class="row mb-1">

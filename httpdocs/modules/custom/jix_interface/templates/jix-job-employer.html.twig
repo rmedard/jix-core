@@ -14,7 +14,9 @@
           </h5>
         {% endif %}
         {% if employer.field_employer_summary is not empty %}
-          {{ employer.field_employer_summary.value | truncate(300, true, true) | raw }}
+          <div class="employer-description" style="overflow: hidden">
+            {{ employer.field_employer_summary.value | raw }}
+          </div>
         {% endif %}
 
         {% if employer.field_employer_sector is not empty %}
