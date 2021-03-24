@@ -11,7 +11,7 @@
           </a>
           <div class="media-body">
             <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
-              <h6 class="mt-0">{{ job.title.value|truncate(60, true,'...') }}</h6>
+              <h6 class="mt-0 mb-0">{{ job.title.value|truncate(60, true,'...') }}</h6>
             </a>
             <p class="mb-0"><small><i class="fas fa-map-marker-alt"></i> <strong>{{ job.field_job_city.value }}</strong> | Published
                 on {{ job.published_at.value|date("d/m/Y") }}
