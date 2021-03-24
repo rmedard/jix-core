@@ -2,7 +2,35 @@
   <h2 class="card-header p-2 text-center bg-primary text-white mb-0">{{ 'Similar jobs'|t }}</h2>
   <ul class="list-group list-group-flush">
     {% for job in jobs %}
-      <li class="list-group-item p-2">{{ job.nid.value }} | {{ job.title.value }} | {{ job.field_job_offer_type.value }}</li>
+      <li class="list-group-item p-2">
+        <div class="media">
+          <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
+            <img
+              src="{{ job.field_job_employer.entity.field_employer_logo.entity.uri.value|image_style('small_50x50') }}"
+              class="mr-3" alt="{{ job.field_job_employer.entity.title.value }}">
+          </a>
+          <div class="media-body">
+            <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
+              <h6 class="mt-0">{{ job.title.value|truncate(60, true,'...') }}</h6>
+            </a>
+            <p class="mb-0"><small><i class="fas fa-map-marker-alt"></i> <strong>{{ job.field_job_city.value }}</strong> | Published
+                on {{ job.published_at.value|date("d/m/Y") }}
+                <br> Deadline {{ job.field_job_application_deadline.value|date("d/m/Y") }}
+                | {{ job.field_job_desired_experience.entity.name.value }}</small></p>
+            {% if job.field_job_offer_type.value  == 'job' %}
+              <span class="badge badge-primary">{{ job.field_job_offer_type.value }}</span>
+            {% elseif job.field_job_offer_type.value == 'tender' %}
+              <span class="badge badge-light">{{ job.field_job_offer_type.value }}</span>
+            {% elseif job.field_job_offer_type.value == 'internship' %}
+              <span class="badge badge-warning">{{ job.field_job_offer_type.value }}</span>
+            {% elseif job.field_job_offer_type.value == 'consultancy' %}
+              <span class="badge badge-success">{{ job.field_job_offer_type.value }}</span>
+            {% elseif job.field_job_offer_type.value == 'other' %}
+              <span class="badge badge-info">{{ job.field_job_offer_type.value }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </li>
     {% endfor %}
   </ul>
 </div>

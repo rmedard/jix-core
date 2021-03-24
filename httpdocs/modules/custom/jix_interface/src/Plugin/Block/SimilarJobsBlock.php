@@ -39,12 +39,13 @@ class SimilarJobsBlock extends BlockBase
           $query = $query
             ->condition('type', 'job')
             ->condition('status', Node::PUBLISHED)
+            ->condition('nid', $node->id(), '<>')
             ->condition('field_job_offer_type', $node->get('field_job_offer_type')->value);
           $categories = $node->get('field_job_category')->getValue();
           if (!empty($categories)) {
             $or = $query->orConditionGroup();
             foreach ($categories as $category) {
-              $or->condition('field_job_category', [$category], 'IN');
+              $or->condition('field_job_category.target_id', $category, 'IN');
             }
             $and = $query->andConditionGroup();
             $and->condition($or);
