@@ -6,6 +6,7 @@ global-styling:
     js/barrio.js: { }
     js/global.js: { }
     js/custom.js: { }
+    node_modules/readmore-js/readmore.min.js: { minified: true }
   css:
     component:
       css/style.css: { }

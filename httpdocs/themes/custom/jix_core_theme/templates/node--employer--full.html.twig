@@ -106,7 +106,9 @@
                 </a>
               </h5>
             {% endif %}
-            {{ attribute(content.field_employer_summary.0, '#text')|truncate(300, '...', true)|check_markup('full_html') }}
+            <div class="employer-description">
+              {{ attribute(content.field_employer_summary.0, '#text')|check_markup('full_html') }}
+            </div>
 
             {% if content.field_employer_sector['#items'] %}
               <dl class="row mb-1">
