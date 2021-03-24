@@ -91,6 +91,11 @@ function jix_interface_theme($existing, $type, $theme, $path): array
         'instagram' => '',
         'youtube' => ''
       ]
+    ],
+    'jix_similar_jobs' => [
+      'variables' => [
+        'jobs' => []
+      ]
     ]
   ];
 }

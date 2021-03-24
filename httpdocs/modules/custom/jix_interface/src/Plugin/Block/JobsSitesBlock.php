@@ -33,7 +33,7 @@ class JobsSitesBlock extends BlockBase
   }
 
   // Needed because there is an event listener in JixSettings that clear this cache on config save.
-  public function getCacheTags()
+  public function getCacheTags(): array
   {
     return Cache::mergeTags(parent::getCacheTags(), ['jobs_sites_block']);
   }

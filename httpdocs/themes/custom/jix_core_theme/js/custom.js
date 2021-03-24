@@ -18,6 +18,8 @@
         $(context).find('nav#block-jobstabsmenu > ul').addClass('border border-light rounded p-2');
       }
 
+      $(context).find('div.employer-description').readmore({collapsedHeight: 100});
+
       const jobCategorySelect = $(context).find('select#edit-field-job-category');
       jobCategorySelect.select2({
         multiple: true,

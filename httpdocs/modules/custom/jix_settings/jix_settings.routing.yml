@@ -22,6 +22,14 @@ jix_settings.sms.settings:
   requirements:
     _permission: 'administer site configuration'
 
+jix_settings.email.settings:
+  path: '/admin/manage/settings/email'
+  defaults:
+    _form: '\Drupal\jix_settings\Form\EmailsServiceConfigurationForm'
+    _title: 'Emails Service Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
 jix_settings.social_media.settings:
   path: '/admin/manage/settings/social-media'
   defaults:

@@ -20,7 +20,8 @@
     "bootstrap-icons": "^1.0.0-alpha3",
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
-    "select2-theme-bootstrap4": "^1.0.0"
+    "select2-theme-bootstrap4": "^1.0.0",
+    "readmore-js": "^2.2.1"
   },
   "devDependencies": {
     "browser-sync": "^2.24.7",

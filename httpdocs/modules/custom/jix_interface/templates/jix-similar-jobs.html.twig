@@ -1,0 +1,8 @@
+<div class="card border-primary">
+  <h2 class="card-header p-2 text-center bg-primary text-white mb-0">{{ 'Similar jobs'|t }}</h2>
+  <ul class="list-group list-group-flush">
+    {% for job in jobs %}
+      <li class="list-group-item p-2">{{ job.nid.value }} | {{ job.title.value }} | {{ job.field_job_offer_type.value }}</li>
+    {% endfor %}
+  </ul>
+</div>

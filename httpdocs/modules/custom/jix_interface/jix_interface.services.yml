@@ -1,3 +1,7 @@
 services:
   jix_interface.statistics_service:
     class: Drupal\jix_interface\Service\StatisticsService
+  jix_interface.config_events:
+    class: Drupal\jix_interface\EventSubscriber\ConfigEventsSubscriber
+    tags:
+      - { name: event_subscriber }

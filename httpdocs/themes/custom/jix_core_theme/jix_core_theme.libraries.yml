@@ -4,6 +4,7 @@ global-styling:
     js/popper.min.js: { }
     js/bootstrap.min.js: { }
     js/barrio.js: { }
+    node_modules/readmore-js/readmore.min.js: { minified: true }
     js/global.js: { }
     js/custom.js: { }
   css:
@@ -17,3 +18,4 @@ global-styling:
     - core/drupal
     - webform/webform.element.select2
     - webform/webform.element.telephone
+    - jquery_ui_effects/fade

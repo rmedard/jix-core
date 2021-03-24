@@ -1,10 +1,16 @@
 <?php
 
+namespace Drupal\jix_interface\EventSubscriber;
 
-use Composer\EventDispatcher\EventSubscriberInterface;
+use Drupal;
 use Drupal\Core\Config\ConfigCrudEvent;
 use Drupal\Core\Config\ConfigEvents;
+use Drupal\Core\Routing\RequestHelper;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\jix_settings\Form\SitesAndServicesForm;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class ConfigEventsSubscriber
@@ -33,7 +39,8 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
   public static function getSubscribedEvents(): array
   {
     return [
-      ConfigEvents::SAVE => 'onConfigSave'
+      ConfigEvents::SAVE => 'onConfigSave',
+      KernelEvents::RESPONSE => 'onRequest'
     ];
   }
 
@@ -42,5 +49,23 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
       Drupal::service('cache_tags.invalidator')->invalidateTags(['services_block']); // Clear services block cache after modification
       Drupal::service('cache_tags.invalidator')->invalidateTags(['jobs_sites_block']);
     }
+  }
+
+  public function onRequest(ResponseEvent $requestEvent) {
+    if (!RequestHelper::isCleanUrl($requestEvent->getRequest())) {
+      Drupal::logger('jix_interface')->warning('Invalid Url with /index.php detected.');
+      $cleanRequestUri = $this->cleanPath($requestEvent->getRequest()->getRequestUri());
+      Drupal::logger('jix_interface')->warning('Clean Url: ' . $cleanRequestUri . ' | Type: ' . $requestEvent->getRequestType());
+      $response = new TrustedRedirectResponse($cleanRequestUri, 302);
+      $response->headers->set('X-Drupal-Route-Normalizer', 1);
+      $requestEvent->setResponse($response);
+    }
+  }
+
+  private function cleanPath($pathStr): string {
+    if (substr($pathStr, 0, 10) === '/index.php') {
+      return $this->cleanPath(substr_replace($pathStr, '', 0, 10));
+    }
+    return $pathStr;
   }
 }
