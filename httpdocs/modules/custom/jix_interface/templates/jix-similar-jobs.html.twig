@@ -5,8 +5,9 @@
       <li class="list-group-item p-2">
         <div class="media">
           <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
+            {% set logoUrl = job.field_job_employer.entity.field_employer_logo.entity.uri.value|default('public://default_images/no_logo.jpg') %}
             <img
-              src="{{ job.field_job_employer.entity.field_employer_logo.entity.uri.value|image_style('small_50x50') }}"
+              src="{{ logoUrl|image_style('small_50x50') }}"
               class="mr-3" alt="{{ job.field_job_employer.entity.title.value }}">
           </a>
           <div class="media-body">
