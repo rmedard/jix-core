@@ -170,3 +170,7 @@ div#block-similarjobsblock {
   border: none;
   padding: inherit;
 }
+
+.alert-warning::before {
+  display: none;
+}
