@@ -38,7 +38,7 @@ a {
       .card-body {
         background-color: white;
         padding: 0.5rem;
-        margin: 0 0.20rem 0.20rem 0.20rem;
+        margin: 0 0.15rem 0.15rem 0.15rem;
         border-radius: 0.25rem;
       }
     }
@@ -70,6 +70,24 @@ a {
   margin: 0;
   width: 100%;
   height: auto;
+}
+
+.card.sidebar-block {
+  background-color: $brand-primary;
+  .card-header {
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.5rem;
+  }
+  .card-body {
+    background-color: white;
+    padding: 0.5rem;
+    margin: 0 0.15rem 0.15rem 0.15rem;
+    border-radius: 0.25rem;
+  }
 }
 
 .card-group .field--type-image {
