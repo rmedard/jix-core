@@ -11,7 +11,8 @@ $accent-shade: rgb(181, 0, 0);
 $accent-light: lighten($accent-shade, 37%);
 $accent-dark: darken($accent-shade, 12%);
 // Reassign color vars to semantic color scheme
-$black: rgba(#000, 0.8);
+$black: rgb(9, 9, 6);
+$matteBlack: rgb(34, 34, 34);
 $red: #b50000;
 $yellow: #ffc107;
 $orange: #F39C12;
@@ -20,7 +21,16 @@ $cyan: #3498DB;
 $white: #fff;
 $gray-100: #f8f9fa;
 $gray-800: #343a40;
-$theme-colors: ( primary: $primary-shade, secondary: $accent-shade, success: $accent-shade, info: $cyan, warning: $orange, danger: $red, light: $gray-100, dark: $gray-800);
+$theme-colors: (
+  primary: $primary-shade,
+  secondary: $accent-shade,
+  success: $accent-shade,
+  info: $cyan,
+  warning: $orange,
+  danger: $red,
+  light: $gray-100,
+  dark: $matteBlack
+);
 
 $brand-primary: $primary-shade;
 $brand-success: $accent-shade;
@@ -53,3 +63,8 @@ $enable-gradients: false;
 $navbar-dark-active-color: $white;
 $navbar-dark-hover-color: #eee;
 $navbar-dark-color: $white;
+
+// Custom variables
+$footer-block-color: $green;
+$footer-bg-color: $black;
+$footer-bg-color-light: $matteBlack;

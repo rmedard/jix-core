@@ -26,7 +26,7 @@
         "drupal/bootstrap_barrio": "^5.1",
         "drupal/bootstrap_sass": "^5.0",
         "drupal/clientside_validation": "^3.0@RC",
-        "drupal/conditional_fields": "^1.0@alpha",
+        "drupal/conditional_fields": "1.x-dev@dev",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
@@ -36,7 +36,7 @@
         "drupal/devel": "^4.0",
         "drupal/field_permissions": "^1.1",
         "drupal/filefield_paths": "1.x-dev@dev",
-        "drupal/fivestar": "^1.0@alpha",
+        "drupal/fivestar": "1.x-dev@dev",
         "drupal/fontawesome": "^2.17",
         "drupal/geotimezone": "^3.0",
         "drupal/google_analytics": "^3.1",
@@ -81,17 +81,36 @@
             }
         },
         "installer-paths": {
-            "httpdocs/core": ["type:drupal-core"],
-            "httpdocs/libraries/{$name}": ["type:drupal-library"],
-            "httpdocs/modules/contrib/{$name}": ["type:drupal-module"],
-            "httpdocs/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "httpdocs/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "httpdocs/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "httpdocs/themes/custom/{$name}": ["type:drupal-custom-theme"]
+            "httpdocs/core": [
+                "type:drupal-core"
+            ],
+            "httpdocs/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "httpdocs/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "httpdocs/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "httpdocs/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "httpdocs/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "httpdocs/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
         },
         "drupal-core-project-message": {
-            "include-keys": ["homepage", "support"],
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                         </>",
                 "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
@@ -99,7 +118,6 @@
                 "<bg=blue;fg=white>                                                         </>",
                 "",
                 "<bg=yellow;fg=black>Next steps</>:",
-
                 "  * Install the site: https://www.drupal.org/docs/8/install",
                 "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
                 "  * Get support: https://www.drupal.org/support",

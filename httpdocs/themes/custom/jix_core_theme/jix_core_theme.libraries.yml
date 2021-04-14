@@ -1,17 +1,14 @@
 global-styling:
   version: VERSION
   js:
-    js/popper.min.js: { }
-    js/bootstrap.min.js: { }
     js/barrio.js: { }
     node_modules/readmore-js/readmore.min.js: { minified: true }
     js/global.js: { }
     js/custom.js: { }
   css:
     component:
-      css/style.css: { }
+      css/style.min.css: { minified: true }
       node_modules/select2-theme-bootstrap4/dist/select2-bootstrap.min.css: { minified: true }
-
   dependencies:
     - core/jquery
     - core/modernizr
@@ -19,3 +16,8 @@ global-styling:
     - webform/webform.element.select2
     - webform/webform.element.telephone
     - jquery_ui_effects/fade
+
+bootstrap:
+  js:
+    js/popper.min.js: { minified: true }
+    js/bootstrap.min.js: { minified: true }

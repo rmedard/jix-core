@@ -39,7 +39,7 @@ const paths = {
 
 // Compile sass into CSS & auto-inject into browsers
 function styles () {
-  return gulp.src([paths.scss.bootstrap, paths.scss.src])
+  return gulp.src([paths.scss.src])
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [

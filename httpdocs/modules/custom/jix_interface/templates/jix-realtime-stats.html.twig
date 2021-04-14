@@ -1,10 +1,12 @@
-<div class="card border-primary">
-  <div class="card-header pl-3 bg-primary text-white">
-      <i class="fas fa-chart-bar"></i> {{ title }}
-    </div>
+<div class="card footer-block">
+  <div class="card-header">
+    <i class="fas fa-chart-bar"></i> {{ title }}
+  </div>
+  <div class="card-body">
     <ul class="list-group">
-        <li class="list-group-item p-2">Published jobs <span class="badge badge-pill badge-primary float-right">{{ jobs_count }}</span></li>
-        <li class="list-group-item p-2">Registered employers <span class="badge badge-pill badge-primary float-right">{{ employers_count }}</span></li>
-        <li class="list-group-item p-2">Registered job candidates <span class="badge badge-pill badge-primary float-right">{{ candidates_count }}</span></li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">Published jobs <span class="badge badge-pill badge-dark float-right">{{ jobs_count }}</span></li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">Registered employers <span class="badge badge-pill badge-dark float-right">{{ employers_count }}</span></li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">Registered job candidates <span class="badge badge-pill badge-dark float-right">{{ candidates_count }}</span></li>
     </ul>
+  </div>
 </div>

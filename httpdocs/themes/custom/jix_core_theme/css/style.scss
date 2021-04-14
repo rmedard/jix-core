@@ -30,17 +30,6 @@ a {
     width: 100%;
     .card.footer-block {
       background-color: $footer-block-color;
-      .card-header {
-        color: white;
-        border: none;
-        text-align: center;
-      }
-      .card-body {
-        background-color: white;
-        padding: 0.5rem;
-        margin: 0 0.20rem 0.20rem 0.20rem;
-        border-radius: 0.25rem;
-      }
     }
   }
   .jix-footer-bottom {
@@ -81,27 +70,27 @@ a {
 }
 
 .slick > div {
-  margin: 0 15px;
+  margin: 0 0.9375rem;
 }
 
-@media(min-width: 768px) { /* Modify this based on column def */
+@media(min-width: 48rem) { /* Modify this based on column def */
 
   .custom-gutter > [class*='col-'] {
-    padding-right: 4px;
-    padding-left: 4px;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
   }
 
   .custom-gutter > [class*="col-"]:first-child {
-    padding-left: 15px;
+    padding-left: 0.9375rem;
   }
 
   .custom-gutter > [class*="col-"]:last-child {
-    padding-right: 15px;
+    padding-right: 0.9375rem;
   }
 
 }
 
-@media(max-width: 767.98px) { /* Mobile style */
+@media(max-width: 47.99875rem) { /* Mobile style */
   .menu--main {
     li {
       padding-left: 1rem;
@@ -124,7 +113,7 @@ a {
   }
 }
 
-@media(min-width: 768px) { /* Big screens */
+@media(min-width: 48rem) { /* Big screens */
   nav#block-jobstabsmenu {
     border-bottom: 2px solid $secondary-shade;
     ul > li > a {
@@ -158,6 +147,11 @@ nav#block-jobstabsmenu {
   }
 }
 
+.badge-dark {
+  color: #fff;
+  background-color: $secondary-shade;
+}
+
 .jix-pricing-price {
   font-variant: small-caps;
 }
@@ -173,29 +167,4 @@ div#block-similarjobsblock {
 
 .alert-warning::before {
   display: none;
-}
-
-.badge-success:not(.badge-pill) {
-  color: $brand-success;
-  background-color: lighten($brand-success, 60%);
-}
-
-.badge-primary:not(.badge-pill) {
-  color: $brand-primary;
-  background-color: lighten($brand-primary, 70%);
-}
-
-.badge-warning:not(.badge-pill) {
-  color: $brand-warning;
-  background-color: lighten($brand-warning, 40%);
-}
-
-.badge-light:not(.badge-pill) {
-  color: $matteBlack;
-  background-color: lighten($matteBlack, 80%);
-}
-
-.badge-info:not(.badge-pill) {
-  color: $brand-info;
-  background-color: lighten($brand-info, 40%);
 }
