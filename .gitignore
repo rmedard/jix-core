@@ -12,6 +12,7 @@ gen
 # Ignore drupal core (if not versioning drupal sources)
 /vendor
 /drush
+/recovery.*
 httpdocs/.csslintrc
 httpdocs/.editorconfig
 httpdocs/.eslintignore
