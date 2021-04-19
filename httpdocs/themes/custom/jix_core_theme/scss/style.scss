@@ -217,3 +217,10 @@ div#block-similarjobsblock {
   color: $brand-info;
   background-color: lighten($brand-info, 40%);
 }
+
+div#block-managedad {
+  padding: 0;
+  div.adsense {
+    border: none;
+  }
+}
