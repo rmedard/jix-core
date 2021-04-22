@@ -44,21 +44,3 @@ docker-sync.yml
 docker.mk
 traefik.yml
 .docker-sync/
-httpdocs/core/
-httpdocs/modules/contrib/
-httpdocs/themes/contrib/
-
-# Ignore configuration files that may contain sensitive information
-httpdocs/sites/*/*settings*.php
-httpdocs/sites/*/*services*.yml
-httpdocs/sites/*/*sites*.php
-
-# Ignore paths that may contain user-generated content
-httpdocs/sites/*/files
-httpdocs/sites/*/public
-httpdocs/sites/*/private
-httpdocs/sites/*/files-public
-httpdocs/sites/*/files-private
-
-httpdocs/sites/default/settings.php
-httpdocs/sites/default/services.yml
