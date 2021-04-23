@@ -5,7 +5,7 @@
     <div class="card-body">
         {% for site in sites %}
             {% set site = site|split(':') %}
-            <i class="fa fa-check"></i><a href="http://{{ site[1]|lower|trim }}" target="_blank"> {{ site[0]|trim }}</a><br>
+            <i class="fa fa-check"></i><a href="{{ 'https://' ~ site[1]|lower|trim }}" target="_blank"> {{ site[0]|trim }}</a><br>
         {% endfor %}
     </div>
 </div>
