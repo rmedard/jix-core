@@ -31,6 +31,7 @@ httpdocs/.ht.router.php
 /logs
 /subdomains
 /tmp
+/private/webform
 
 /.env
 /mariadb-init
