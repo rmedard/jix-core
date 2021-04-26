@@ -29,10 +29,10 @@
         <li class="list-group-item  pt-1 pb-0 pl-0 pr-0 border-0 job-apply-btn">
           {% if  job.field_job_how_to_apply.value == 'email' %}
             <a href="/form/default-job-application-form?job_application_job={{ job.nid.value }}"
-               class="btn btn-success btn-sm btn-block">Apply</a>
+               class="btn btn-success btn-sm btn-block">{{ 'Apply'|t }}</a>
           {% elseif job.field_job_how_to_apply.value == 'external_link' %}
             <a href="{{ job.field_job_ext_application_link.uri }}" class="btn btn-success btn-sm btn-block"
-               target="_blank">Apply</a>
+               target="_blank">{{ 'Apply'|t }}</a>
           {% endif %}
         </li>
       {% endif %}
