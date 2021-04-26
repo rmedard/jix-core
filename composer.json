@@ -44,7 +44,6 @@
         "drupal/honeypot": "^2.0",
         "drupal/jquery_ui_effects": "^1.2",
         "drupal/jsonapi_extras": "^3.17",
-        "drupal/linkit": "^6.0@beta",
         "drupal/memcache": "^2.3",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/module_filter": "3.x-dev",
