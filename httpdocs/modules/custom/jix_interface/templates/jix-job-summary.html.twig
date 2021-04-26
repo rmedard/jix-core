@@ -1,30 +1,30 @@
 <div class="card border-primary sidebar-block">
   <div class="card-header bg-primary">
-    Summary
+    {{ 'Summary'|t }}
   </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0 text-danger text-center">This job has been viewed {{ viewsCount }} times</li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Location:</b> {{ job.field_job_city.value }}, {{ job.field_job_country.value }}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0 text-danger text-center">{{ 'This job has been viewed %viewsCount% times' | trans({'%viewsCount%': viewsCount}) }}</li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Location'|t }}:</b> {{ job.field_job_city.value }}, {{ job.field_job_country.value }}
       </li>
       {% if job.field_job_category is not empty %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Sector:</b>
+        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Sector'|t }}:</b>
           {% for category in job.field_job_category %}
             {{ category.entity.name.value }}{% if not loop.last %},{% endif %}
           {% endfor %}
         </li>
       {% endif %}
       {% if job.field_job_education_level is not empty %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Education level:</b> {{ job.field_job_education_level.entity.name.value }}</li>
+        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Education level'|t }}:</b> {{ job.field_job_education_level.entity.name.value }}</li>
       {% endif %}
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Desired experience:</b> {{ job.field_job_desired_experience.entity.name.value }}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Desired experience'|t }}:</b> {{ job.field_job_desired_experience.entity.name.value }}
       </li>
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
-        <b>Contract:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
+        <b>{{ 'Contract'|t }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Deadline:</b> {{ job.field_job_application_deadline.value|date("l, d/m/Y H:i") }}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Deadline'|t }}:</b> {{ job.field_job_application_deadline.value|date("l, d/m/Y H:i") }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>Number of positions:</b> {{ job.field_job_number_of_positions.value }}</li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Number of positions'|t }}:</b> {{ job.field_job_number_of_positions.value }}</li>
       {% if job.field_job_how_to_apply.value != 'no_online_app' %}
         <li class="list-group-item  pt-1 pb-0 pl-0 pr-0 border-0 job-apply-btn">
           {% if  job.field_job_how_to_apply.value == 'email' %}
