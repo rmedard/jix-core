@@ -102,6 +102,10 @@ a {
   margin: 0 15px;
 }
 
+div.content {
+  word-break: break-word;
+}
+
 @media(min-width: 768px) { /* Modify this based on column def */
 
   .custom-gutter > [class*='col-'] {
@@ -221,4 +225,8 @@ div#block-similarjobsblock {
 div#block-managedad {
   padding: 0;
   border: none;
+}
+
+.sidebar .block .content {
+  font-size: 0.9rem;
 }

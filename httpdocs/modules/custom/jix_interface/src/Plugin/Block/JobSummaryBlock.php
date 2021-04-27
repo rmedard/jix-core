@@ -44,7 +44,7 @@ class JobSummaryBlock extends BlockBase
     return $output;
   }
 
-  public function getCacheMaxAge()
+  public function getCacheMaxAge(): int
   {
     return 0;
   }

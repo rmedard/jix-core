@@ -22,7 +22,10 @@
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
         <b>{{ 'Contract'|t }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Deadline'|t }}:</b> {{ job.field_job_application_deadline.value|date("l, d/m/Y H:i") }}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
+        {% set day = job.field_job_application_deadline.value|date("l")|t %}
+        {% set datetime = job.field_job_application_deadline.value|date("d/m/Y H:i") %}
+        <b>{{ 'Deadline'|t }}:</b> {{ day }}, {{ datetime }}
       </li>
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Number of positions'|t }}:</b> {{ job.field_job_number_of_positions.value }}</li>
       {% if job.field_job_how_to_apply.value != 'no_online_app' %}
