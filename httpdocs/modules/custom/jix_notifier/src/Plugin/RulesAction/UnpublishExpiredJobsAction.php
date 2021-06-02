@@ -30,14 +30,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UnpublishExpiredJobsAction extends RulesActionBase implements ContainerFactoryPluginInterface
 {
 
-  private $channel;
+  private string $channel;
 
   /**
    * The entity type manager service.
    *
    * @var EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * Overrides \Drupal\Component\Plugin\PluginBase::__construct().
@@ -61,6 +61,7 @@ class UnpublishExpiredJobsAction extends RulesActionBase implements ContainerFac
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->channel = 'jix_notifier';
     $this->entityTypeManager = $entity_type_manager;
+    Drupal::logger($this->channel)->info('Unpublish expired action initiated');
   }
 
   /**

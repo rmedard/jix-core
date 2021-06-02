@@ -134,6 +134,16 @@ class MigratorForm extends FormBase
         $termIds = $query->execute();
       }
 
+      $employerWebsite = [];
+      if (!empty($employer['field_employer_website'])) {
+        $link = $employer['field_employer_website']['und'][0]['url'];
+        if (substr($link, 0, 4) === "http") {
+          $employerWebsite = $link;
+        } else {
+          $employerWebsite = 'http://' . $link;
+        }
+      }
+
       try {
         Node::create([
           'type' => $employer['type'],
@@ -148,13 +158,10 @@ class MigratorForm extends FormBase
           'field_employer_featured' => empty($employer['field_featured_employer']) ? [] : $employer['field_featured_employer']['und'][0]['value'] == "1",
           'field_employer_public_service' => empty($employer['field_employer_public_employer']) ? [] : $employer['field_employer_public_employer']['und'][0]['value'] == "1",
           'field_employer_sent2dwh' => true,
-          'field_employer_summary' => empty($employer['field_summary']) ? [] : [
-            'value' => $employer['field_summary']['und'][0]['safe_value'],
-            'format' => 'basic_html'
-          ],
+          'field_employer_summary' => ['value' => $employer['field_summary']['und'][0]['safe_value'], 'format' => 'full_html'],
           'field_employer_tin_number' => empty($employer['field_tax_identification_number']) ? [] : $employer['field_tax_identification_number']['und'][0]['value'],
           'field_employer_telephone' => empty($employer['field_employer_telephone']) ? [] : $employer['field_employer_telephone']['und'][0]['value'],
-          'field_employer_website' => empty($employer['field_employer_website']) ? [] : $employer['field_employer_website']['und'][0]['url'],
+          'field_employer_website' => $employerWebsite,
           'field_employer_logo' => $savedFile instanceof FileInterface ? $savedFile : [],
           'field_employer_sector' => $termIds
         ])->save();
