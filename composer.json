@@ -26,7 +26,7 @@
         "drupal/bootstrap_barrio": "^5.1",
         "drupal/bootstrap_sass": "^5.0",
         "drupal/clientside_validation": "^3.0@RC",
-        "drupal/conditional_fields": "1.x-dev@dev",
+        "drupal/conditional_fields": "^4.0@alpha",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
