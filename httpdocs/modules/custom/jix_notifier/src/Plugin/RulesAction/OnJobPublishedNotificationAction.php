@@ -27,7 +27,7 @@ use Drupal\rules\Core\RulesActionBase;
 class OnJobPublishedNotificationAction extends RulesActionBase
 {
 
-  private $channel;
+  private string $channel;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition)
   {

@@ -14,7 +14,7 @@ use Drupal\jix_notifier\Utils\NotificationType;
 class EmailService
 {
 
-  private $channel;
+  private string $channel;
   private $mailManager;
   private $twigService;
 
@@ -30,7 +30,7 @@ class EmailService
 
 
   /**
-   * @param $emailData
+   * @param EmailData $emailData
    */
   public function send(EmailData $emailData)
   {
