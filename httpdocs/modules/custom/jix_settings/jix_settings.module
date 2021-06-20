@@ -4,6 +4,11 @@
  * A description of what your module does.
  */
 
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\Plugin\views\query\Sql;
+use Drupal\views\ViewExecutable;
+
 /**
  * Implements hook_theme().
  * @param $existing
@@ -18,4 +23,28 @@ function jix_settings_theme($existing, $type, $theme, $path): array
     'jix_settings_manager' => ['variables' => []],
     'jix_data_manager' => ['variables' => []]
   ];
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
+{
+  if ($view->storage->id() === 'job_applications' && $view->current_display === 'page_job_applications_management') {
+    if ($query instanceof Sql) {
+      foreach ($query->where as &$condition_group) {
+        foreach ($condition_group['conditions'] as &$condition) {
+          if (strpos($condition['field'], 'webform_submission.created') !== FALSE) {
+            $formula_parts = explode(' ', $condition['field']);
+            $from = DrupalDateTime::createFromTimestamp(intval($formula_parts[2]));
+            $to = DrupalDateTime::createFromTimestamp(intval($formula_parts[4]));
+            $formula_parts[2] = $from->setTime(0, 0)->getTimestamp();
+            $formula_parts[4] = $to->setTime(23, 59, 59)->getTimestamp();
+            $condition['field'] = implode(' ', $formula_parts);
+            break;
+          }
+        }
+      }
+    }
+  }
 }
