@@ -160,3 +160,18 @@ function jix_interface_after_build(array $element, FormStateInterface $form_stat
   unset($element['format']['#theme_wrappers']);
   return $element;
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function jix_interface_views_data_alter(array &$data)
+{
+  $data['node']['job_submissions_count_views_field'] = [
+    'title' => t('Job submissions count'),
+    'field' => [
+      'title' => t('Job submissions count'),
+      'help' => t('Plugin that retrieves the count of submissions per job.'),
+      'id' => 'job_submissions_count_views_field',
+    ],
+  ];
+}
