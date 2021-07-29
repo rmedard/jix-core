@@ -15,19 +15,19 @@
         </li>
       {% endif %}
       {% if job.field_job_education_level is not empty %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Education level'|t }}:</b> {{ job.field_job_education_level.entity.name.value }}</li>
+        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_education_level.fieldDefinition.label }}:</b> {{ job.field_job_education_level.entity.name.value }}</li>
       {% endif %}
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Desired experience'|t }}:</b> {{ job.field_job_desired_experience.entity.name.value }}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_desired_experience.fieldDefinition.label }}:</b> {{ job.field_job_desired_experience.entity.name.value }}
       </li>
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
-        <b>{{ 'Contract'|t }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
+        <b>{{ job.field_job_contract_type.fieldDefinition.label }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
       </li>
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
         {% set day = job.field_job_application_deadline.value|date("l")|t %}
         {% set datetime = job.field_job_application_deadline.value|date("d/m/Y H:i") %}
         <b>{{ 'Deadline'|t }}:</b> {{ day }}, {{ datetime }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Number of positions'|t }}:</b> {{ job.field_job_number_of_positions.value }}</li>
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_number_of_positions.fieldDefinition.label }}:</b> {{ job.field_job_number_of_positions.value }}</li>
       {% if job.field_job_how_to_apply.value != 'no_online_app' %}
         <li class="list-group-item  pt-1 pb-0 pl-0 pr-0 border-0 job-apply-btn">
           {% if  job.field_job_how_to_apply.value == 'email' %}
