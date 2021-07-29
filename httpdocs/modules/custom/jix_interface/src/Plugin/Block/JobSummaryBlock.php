@@ -37,7 +37,8 @@ class JobSummaryBlock extends BlockBase
         $output[] = [
           '#theme' => 'jix_job_summary',
           '#job' => $job,
-          '#viewsCount' => $viewsCount
+          '#viewsCount' => $viewsCount,
+          '#lang' => Drupal::languageManager()->getCurrentLanguage()->getId()
         ];
       }
     }

@@ -30,7 +30,8 @@ function jix_interface_theme($existing, $type, $theme, $path): array
     'jix_job_summary' => [
       'variables' => [
         'job' => [],
-        'viewsCount' => 0
+        'viewsCount' => 0,
+        'lang' => ''
       ]
     ],
     'jix_job_employer' => [
