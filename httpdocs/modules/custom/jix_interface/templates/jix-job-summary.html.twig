@@ -10,14 +10,20 @@
       {% if job.field_job_category is not empty %}
         <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Sector'|t }}:</b>
           {% for category in job.field_job_category %}
-            {{ category.entity.translation(lang).name.value }}{% if not loop.last %},{% endif %}
+            {% set categoryEntity = category.entity %}
+            {% set sector = categoryEntity.hasTranslation(lang) ? categoryEntity.translation(lang) : categoryEntity %}
+            {{ sector.name.value }}{% if not loop.last %},{% endif %}
           {% endfor %}
         </li>
       {% endif %}
       {% if job.field_job_education_level is not empty %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_education_level.fieldDefinition.label }}:</b> {{ job.field_job_education_level.entity.translation(lang).name.value }}</li>
+        {% set levelEntity = job.field_job_education_level.entity %}
+        {% set eduLevel = levelEntity.hasTranslation(lang) ? levelEntity.translation(lang) : levelEntity %}
+        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_education_level.fieldDefinition.label }}:</b> {{ eduLevel.name.value }}</li>
       {% endif %}
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_desired_experience.fieldDefinition.label }}:</b> {{ job.field_job_desired_experience.entity.translation(lang).name.value }}
+      {% set experienceEntity = job.field_job_desired_experience.entity %}
+      {% set experience = experienceEntity.hasTranslation(lang) ? experienceEntity.translation(lang) : experienceEntity %}
+      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_desired_experience.fieldDefinition.label }}:</b> {{ experience.name.value }}
       </li>
       <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
         <b>{{ job.field_job_contract_type.fieldDefinition.label }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
