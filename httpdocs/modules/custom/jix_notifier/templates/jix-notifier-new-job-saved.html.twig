@@ -27,9 +27,9 @@
 
       <h4>{{ 'Job details' | t }}</h4>
       <dl>
-        <dt>{{ 'Job title' | t }}</dt> <dd>{{ job.title.value }}</dd>
-        <dt>{{ 'Posting type' | t }}</dt> <dd>{{ job.field_job_posting_plan.value }}</dd>
-        <dt>{{ 'Category' | t }}</dt> <dd>
+        <dt>{{ job.title.fieldDefinition.label }}</dt> <dd>{{ job.title.value }}</dd>
+        <dt>{{ job.field_job_posting_plan.fieldDefinition.label }}</dt> <dd>{{ job.field_job_posting_plan.value }}</dd>
+        <dt>{{ job.field_job_category.fieldDefinition.label }}</dt> <dd>
           {% for category in job.field_job_category %}
             {{ category.entity.name.value }}{% if not loop.last %},{% endif %}
           {% endfor %}
@@ -37,14 +37,16 @@
       </dl>
       <h4>{{ 'Invoicing details' | t }}</h4>
       <dl>
-        <dt>{{ 'Company name' | t }}</dt> <dd>{{ job.field_job_employer.entity.title.value }}</dd>
-        <dt>{{ 'Company email address' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_email.value }}</dd>
-        <dt>{{ 'Contact name' | t }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
-        <dt>{{ 'Contact phone number' | t }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
-        <dt>{{ 'Contact email' | t }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
-        <dt>{{ 'Contact TIN' | t }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
+        <dt>{{ job.field_job_employer.entity.title.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.title.value }}</dd>
+        <dt>{{ job.field_job_employer.entity.field_employer_email.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_email.value }}</dd>
+        <dt>{{ job.field_job_contact_name.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
+        <dt>{{ job.field_job_contact_phone.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
+        <dt>{{ job.field_job_contact_email.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
+        <dt>{{ job.field_job_employer.entity.field_employer_tin_number..fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
       </dl>
       <p>{{ 'The job offer needs validation before it appears to the public.' | t }}</p>
+      <br>
+      <p>{{ 'Best regards,' | t }} <br>{{ drupal_token('site:name') }}</p>
     </div>
   </body>
 </html>
