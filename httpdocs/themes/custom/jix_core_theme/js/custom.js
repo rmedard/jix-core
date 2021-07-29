@@ -21,13 +21,14 @@
       $(context).find('div.employer-description').readmore({collapsedHeight: 100});
 
       const jobCategorySelect = $(context).find('select#edit-field-job-category');
+      const selectTitle = Drupal.t('Select category');
       jobCategorySelect.select2({
         multiple: true,
         width: '100%',
         theme: 'bootstrap',
         placeholder: {
           id: '_none',
-          text: 'Select category'
+          text: selectTitle
         },
       });
       jobCategorySelect.change(function () {
@@ -35,13 +36,14 @@
       });
 
       const employerSectorSelect = $(context).find('select#edit-field-employer-sector');
+      const sectorTitle = Drupal.t('Choose sector');
       employerSectorSelect.select2({
         multiple: true,
         width: '100%',
         theme: 'bootstrap',
         placeholder: {
           id: '_none',
-          text: 'Choose sector'
+          text: sectorTitle
         },
       });
       employerSectorSelect.change(function () {
