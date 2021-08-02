@@ -50,6 +50,7 @@
         "drupal/module_filter": "3.x-dev",
         "drupal/pathauto": "^1.8",
         "drupal/publication_date": "^2.0@beta",
+        "drupal/recaptcha": "^3.0",
         "drupal/restui": "^1.19",
         "drupal/rules": "3.x-dev@dev",
         "drupal/simplenews": "^3.0@alpha",
