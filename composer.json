@@ -40,7 +40,7 @@
         "drupal/fivestar": "^1.0@alpha",
         "drupal/fontawesome": "^2.17",
         "drupal/geotimezone": "^3.0",
-        "drupal/google_analytics": "4.x-dev@dev",
+        "drupal/google_analytics": "^3.1",
         "drupal/honeypot": "^2.0",
         "drupal/imagemagick": "^3.2",
         "drupal/jquery_ui_effects": "^1.2",
