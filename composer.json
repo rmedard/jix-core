@@ -50,6 +50,7 @@
         "drupal/mimemail": "^1.0@alpha",
         "drupal/module_filter": "3.x-dev",
         "drupal/pathauto": "^1.8",
+        "drupal/recaptcha": "^3.0",
         "drupal/publication_date": "2.x-dev@dev",
         "drupal/restui": "^1.19",
         "drupal/rules": "3.x-dev@dev",
