@@ -16,6 +16,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\Exception\MissingDataException;
 use Drupal\file\FileInterface;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\image\ImageStyleInterface;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\link\LinkItemInterface;
@@ -80,6 +81,88 @@ function jix_core_theme_form_system_theme_settings_alter(&$form, FormStateInterf
 function jix_core_theme_preprocess_select(&$variables)
 {
   $variables['attributes']['class'][] = 'custom-select';
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_node(&$variables)
+{
+  if (boolval($variables['teaser']) === true) {
+    $node = $variables['node'];
+    if ($node instanceof NodeInterface and $node->bundle() === 'job') {
+      $offer_type = $node->get('field_job_offer_type')->value;
+      $offer_value = '';
+      switch ($offer_type) {
+        case 'job':
+          $offer_value = '<span class="badge badge-primary">'. $offer_type .'</span>';
+          break;
+        case 'tender':
+          $offer_value = '<span class="badge badge-light">'. $offer_type .'</span>';
+          break;
+        case 'consultancy':
+          $offer_value = '<span class="badge badge-success">'. $offer_type .'</span>';
+          break;
+        case 'internship':
+          $offer_value = '<span class="badge badge-warning">'. $offer_type .'</span>';
+          break;
+        case 'other':
+          $offer_value = '<span class="badge badge-info">'. $offer_type .'</span>';
+          break;
+      }
+      $variables['content']['is_super_featured'] = boolval($node->get('field_job_super_featured')->value);
+      $variables['content']['offer_type_badge'] = ['#markup'=> $offer_value];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_container(&$variables)
+{
+  if ($variables['attributes']['data-drupal-selector'] === 'edit-actions') {
+    if ($variables['element']['#webform'] === 'general_newsletter') {
+      $variables['attributes']['class'][] = 'd-grid';
+    } else {
+      $variables['attributes']['class'][] = 'd-flex justify-content-end gap-1';
+    }
+  }
+
+  if ($variables['attributes']['data-drupal-selector'] === 'edit-field-employer-sector-wrapper') {
+    $variables['attributes']['class'][] = 'col-md-8';
+  }
+
+  $growable = [
+    'edit-field-job-offer-type-wrapper',
+    'edit-field-job-contract-type-wrapper',
+    'edit-field-job-category-wrapper'
+  ];
+  if (in_array($variables['attributes']['data-drupal-selector'], $growable)) {
+    $variables['attributes']['class'][] = 'flex-grow-1';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_input(&$variables)
+{
+  if ($variables['element']['#id'] === 'edit-submit') {
+    $variables['attributes']['class'][] = 'col-4';
+  }
+
+  if ($variables['element']['#id'] === 'edit-submit-jobs-display') {
+    $variables['attributes']['class'][] = 'col-12';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_datetime_form(&$variables)
+{
+  $variables['attributes']['class'][] = 'd-flex gap-1';
 }
 
 /**
@@ -176,7 +259,7 @@ function jix_core_theme_preprocess_block(&$variables)
  */
 function jix_core_theme_preprocess_menu(&$variables)
 {
-  if (isset($variables['menu_name']) and $variables['menu_name'] == 'jobs-tabs-menu') {
+  if ($variables['menu_name'] == 'jobs-tabs-menu') {
     $variables['attributes']['class'][] = 'nav-pills';
     $variables['attributes']['class'][] = 'nav-fill';
 
@@ -278,18 +361,6 @@ function jix_core_theme_theme($existing, $type, $theme, $path): array
       'render element' => 'form',
     ],
   ];
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- * @param $variables
- */
-function jix_core_theme_preprocess_input(&$variables)
-{
-  if (isset($variables['element']['#id'])
-    and strpos($variables['element']['#id'], 'edit-submit-jobs-display') == 0) {
-    $variables['attributes']['class'][] = 'btn-block';
-  }
 }
 
 /**

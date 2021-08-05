@@ -42,6 +42,6 @@ regions:
   footer_social: 'Footer Social'
 
 # Information added by Drupal.org packaging script on 2020-10-11
-version: '5.0.2'
+version: '5.0.3'
 project: 'bootstrap_sass'
-datestamp: 1602444143
+datestamp: 1626639823

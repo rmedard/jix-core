@@ -30,8 +30,8 @@ const paths = {
   js: {
     bootstrap: './node_modules/bootstrap/dist/js/bootstrap.min.js',
     jquery: './node_modules/jquery/dist/jquery.min.js',
-    popper: './node_modules/@popperjs/core/dist/umd/popper.min.js',
-    poppermap: './node_modules/@popperjs/core/dist/umd/popper.min.js.map',
+    popper: './node_modules/popper.js/dist/umd/popper.min.js',
+    poppermap: './node_modules/popper.js/dist/umd/popper.min.js.map',
     barrio: '../../contrib/bootstrap_barrio/js/barrio.js',
     dest: './js'
   }
@@ -39,7 +39,7 @@ const paths = {
 
 // Compile sass into CSS & auto-inject into browsers
 function styles () {
-  return gulp.src([paths.scss.src])
+  return gulp.src([paths.scss.bootstrap, paths.scss.src])
     .pipe(sourcemaps.init())
     .pipe(sass({
       includePaths: [
@@ -78,7 +78,7 @@ function js () {
 // Static Server + watching scss/html files
 function serve () {
   browserSync.init({
-    proxy: 'http://jir.docker.localhost',
+    proxy: 'http://yourdomain.com',
   })
 
   gulp.watch([paths.scss.watch, paths.scss.bootstrap], styles).on('change', browserSync.reload)

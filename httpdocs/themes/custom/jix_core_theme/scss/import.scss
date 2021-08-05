@@ -1,20 +1,15 @@
 /* IMPORTS */
 
-/*
-@import url(font-awesome.min.css);
-*/
-
-@import "variables";
-
-@import "../node_modules/bootstrap/scss/bootstrap";
-
-/*
-  material design bootstrap
-  @import "../node_modules/mdbootstrap/scss/mdb";
-*/
-
-@import "barrio";
-
+//@import url(font-awesome.min.css);
+// variables
+@import "variables-jit";
+// typography
 @import "typography";
-
+//bootstrap
+@import "bootstrap";
+//material design bootstrap
+//@import "../node_modules/mdbootstrap/scss/mdb-free.scss";
+// mixins
 @import "mixins";
+// barrio
+@import "barrio";

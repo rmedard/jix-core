@@ -4,11 +4,13 @@
   </div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0 text-danger text-center">{{ 'This job has been viewed %viewsCount% times' | trans({'%viewsCount%': viewsCount}) }}</li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Location'|t }}:</b> {{ job.field_job_city.value }}, {{ job.field_job_country.value }}
+      <li
+        class="list-group-item py-1 px-0 border-0 text-danger text-center">{{ 'This job has been viewed %viewsCount% times' | trans({'%viewsCount%': viewsCount}) }}</li>
+      <li class="list-group-item pt-1 pb-1 px-0 border-0"><b>{{ 'Location'|t }}:</b> {{ job.field_job_city.value }}
+        , {{ job.field_job_country.value }}
       </li>
       {% if job.field_job_category is not empty %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ 'Sector'|t }}:</b>
+        <li class="list-group-item py-1 px-0 border-0"><b>{{ 'Sector'|t }}:</b>
           {% for category in job.field_job_category %}
             {% set categoryEntity = category.entity %}
             {% set sector = categoryEntity.hasTranslation(lang) ? categoryEntity.translation(lang) : categoryEntity %}
@@ -19,28 +21,32 @@
       {% if job.field_job_education_level is not empty %}
         {% set levelEntity = job.field_job_education_level.entity %}
         {% set eduLevel = levelEntity.hasTranslation(lang) ? levelEntity.translation(lang) : levelEntity %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_education_level.fieldDefinition.label }}:</b> {{ eduLevel.name.value }}</li>
+        <li class="list-group-item py-1 px-0 border-0"><b>{{ job.field_job_education_level.fieldDefinition.label }}
+            :</b> {{ eduLevel.name.value }}</li>
       {% endif %}
       {% set experienceEntity = job.field_job_desired_experience.entity %}
       {% set experience = experienceEntity.hasTranslation(lang) ? experienceEntity.translation(lang) : experienceEntity %}
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_desired_experience.fieldDefinition.label }}:</b> {{ experience.name.value }}
+      <li class="list-group-item py-1 px-0 border-0">
+        <b>{{ job.field_job_desired_experience.fieldDefinition.label }}:</b> {{ experience.name.value }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
-        <b>{{ job.field_job_contract_type.fieldDefinition.label }}:</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
+      <li class="list-group-item pt-1 pb-1 px-0 border-0">
+        <b>{{ job.field_job_contract_type.fieldDefinition.label }}
+          :</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
+      <li class="list-group-item py-1 px-0 border-0">
         {% set day = job.field_job_application_deadline.value|date("l")|t %}
         {% set datetime = job.field_job_application_deadline.value|date("d/m/Y H:i") %}
         <b>{{ 'Deadline'|t }}:</b> {{ day }}, {{ datetime }}
       </li>
-      <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0"><b>{{ job.field_job_number_of_positions.fieldDefinition.label }}:</b> {{ job.field_job_number_of_positions.value }}</li>
+      <li class="list-group-item pt-1 pb-1 px-0 border-0">
+        <b>{{ job.field_job_number_of_positions.fieldDefinition.label }}:</b> {{ job.field_job_number_of_positions.value }}</li>
       {% if job.field_job_how_to_apply.value != 'no_online_app' %}
-        <li class="list-group-item  pt-1 pb-0 pl-0 pr-0 border-0 job-apply-btn">
+        <li class="list-group-item px-0 pb-0 job-apply-btn d-grid">
           {% if  job.field_job_how_to_apply.value == 'email' %}
             <a href="/form/default-job-application-form?job_application_job={{ job.nid.value }}"
-               class="btn btn-success btn-sm btn-block">{{ 'Apply'|t }}</a>
+               class="btn btn-success btn-sm">{{ 'Apply'|t }}</a>
           {% elseif job.field_job_how_to_apply.value == 'external_link' %}
-            <a href="{{ job.field_job_ext_application_link.uri }}" class="btn btn-success btn-sm btn-block"
+            <a href="{{ job.field_job_ext_application_link.uri }}" class="btn btn-success btn-sm"
                target="_blank">{{ 'Apply'|t }}</a>
           {% endif %}
         </li>

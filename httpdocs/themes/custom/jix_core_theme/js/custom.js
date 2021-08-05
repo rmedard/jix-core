@@ -18,7 +18,16 @@
         $(context).find('nav#block-jobstabsmenu > ul').addClass('border border-light rounded p-2');
       }
 
+      if(settings.path.isFront) {
+        $(context).find('nav#block-jix-core-theme-main-menu > ul.nav > li:first-child').addClass('active');
+        $(context).find('nav#block-jix-core-theme-main-menu > ul.nav > li:first-child > a').addClass('active');
+      }
+
+      $(context).find('a#edit-delete').addClass('btn btn-danger');
+
       $(context).find('div.employer-description').readmore({collapsedHeight: 100});
+
+      $(context).find('fieldset#grp-social-media > div').addClass('border border-1 p-2 rounded-2')
 
       const jobCategorySelect = $(context).find('select#edit-field-job-category');
       const selectTitle = Drupal.t('Select category');
@@ -61,9 +70,6 @@
         }
       });
 
-      if(settings.path.isFront) {
-        $(context).find('ul.nav[block="block-jix-core-theme-main-menu"] > li:first-child').addClass('active');
-      }
     }
   };
 

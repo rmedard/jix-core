@@ -1,10 +1,9 @@
 {
   "name": "barrio_sass",
-  "version": "5.1.0",
+  "version": "4.4",
   "description": "Barrio SASS implementation",
   "main": "index.js",
   "scripts": {
-    "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,29 +15,27 @@
   "author": "@hatuhay",
   "license": "MIT",
   "dependencies": {
-    "@popperjs/core": "^2.9.2",
-    "bootstrap": "^5.0.0",
-    "bootstrap-icons": "^1.4.0",
-    "jquery": "^3.6.0",
-    "readmore-js": "^2.2.1",
-    "select2-theme-bootstrap4": "^1.0.0"
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "bootstrap-icons": "^1.0.0-alpha3"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.5",
+    "browser-sync": "^2.24.7",
     "del": "^3.0.0",
-    "gulp": "^4.0.2",
+    "gulp": "^4.0.0",
     "gulp-autoprefixer": "^4.1.0",
-    "gulp-clean-css": "^4.3.0",
+    "gulp-scss-lint": "^1.0.0",
+    "gulp-clean-css": "3.9.4",
     "gulp-concat": "^2.6.1",
     "gulp-html-replace": "^1.6.2",
-    "gulp-load-plugins": "^2.0.7",
-    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^4.1.1",
-    "gulp-scss-lint": "^1.0.0",
+    "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4",
+    "gulp-postcss": "^8.0.0",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
+    "gulp-load-plugins": "^2.0.4",
     "postcss-inline-svg": "^4.1.0",
     "postcss-pxtorem": "^5.1.1"
   }
