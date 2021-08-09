@@ -6,21 +6,16 @@
  */
 
 use Drupal\block_content\BlockContentInterface;
-use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Asset\AttachedAssetsInterface;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\Field\FieldFilteredMarkup;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\TypedData\Exception\MissingDataException;
-use Drupal\file\FileInterface;
-use Drupal\image\Entity\ImageStyle;
-use Drupal\image\ImageStyleInterface;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\link\LinkItemInterface;
 use Drupal\node\NodeInterface;
+use Drupal\views\ResultRow;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_form_system_theme_settings_alter() for settings form.
@@ -91,27 +86,29 @@ function jix_core_theme_preprocess_node(&$variables)
   if (boolval($variables['teaser']) === true) {
     $node = $variables['node'];
     if ($node instanceof NodeInterface and $node->bundle() === 'job') {
-      $offer_type = $node->get('field_job_offer_type')->value;
-      $offer_value = '';
+      $offer_type_field = $node->get('field_job_offer_type');
+      $offer_values = $offer_type_field->getSetting('allowed_values');
+      $offer_type = $offer_type_field->value;
+      $offer_value_pill = '';
       switch ($offer_type) {
         case 'job':
-          $offer_value = '<span class="badge badge-primary">'. $offer_type .'</span>';
+          $offer_value_pill = '<span class="badge badge-primary">' . $offer_values[$offer_type] . '</span>';
           break;
         case 'tender':
-          $offer_value = '<span class="badge badge-light">'. $offer_type .'</span>';
+          $offer_value_pill = '<span class="badge badge-light">' . $offer_values[$offer_type] . '</span>';
           break;
         case 'consultancy':
-          $offer_value = '<span class="badge badge-success">'. $offer_type .'</span>';
+          $offer_value_pill = '<span class="badge badge-success">' . $offer_values[$offer_type] . '</span>';
           break;
         case 'internship':
-          $offer_value = '<span class="badge badge-warning">'. $offer_type .'</span>';
+          $offer_value_pill = '<span class="badge badge-warning">' . $offer_values[$offer_type] . '</span>';
           break;
         case 'other':
-          $offer_value = '<span class="badge badge-info">'. $offer_type .'</span>';
+          $offer_value_pill = '<span class="badge badge-info">' . $offer_values[$offer_type] . '</span>';
           break;
       }
       $variables['content']['is_super_featured'] = boolval($node->get('field_job_super_featured')->value);
-      $variables['content']['offer_type_badge'] = ['#markup'=> $offer_value];
+      $variables['content']['offer_type_badge'] = ['#markup' => $offer_value_pill];
     }
   }
 }
@@ -212,7 +209,7 @@ function jix_core_theme_preprocess_page(&$variables)
 function jix_core_theme_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
   $form['#attributes']['class'][] = 'webform-client-form';
-  if ($form['#id'] == 'views-exposed-form-jobs-display-page-search-result-page') {
+  if ($form['#id'] == 'views-exposed-form-jobs-display-page-search-result') {
     $form['filter_titles_field']['#attributes']['placeholder'] = t('Job title or company name. E.g tigo, ...');
   }
 }
@@ -470,4 +467,25 @@ function jix_core_theme_preprocess_addtoany_standard(&$variables)
 function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets)
 {
   $settings['site']['target_country'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_target_country');
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_views_view_unformatted(&$variables)
+{
+  $view = $variables['view'];
+  if ($view instanceof ViewExecutable && $view->current_display === 'page_search_result') {
+    $reformatted_rows = [];
+    foreach ($variables['rows'] as $row) {
+      $result_row = $row['content']['#row'];
+      if ($result_row instanceof ResultRow) {
+        $view_builder = Drupal::entityTypeManager()->getViewBuilder('node');
+        $job = $result_row->_entity;
+        $pre_render = $view_builder->view($job, 'teaser');
+        array_push($reformatted_rows, ['content' => $pre_render, 'attributes' => $row['attributes']]);
+      }
+    }
+    $variables['rows'] = $reformatted_rows;
+  }
 }

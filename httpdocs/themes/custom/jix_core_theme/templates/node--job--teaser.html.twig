@@ -68,7 +68,7 @@
   node.isSticky() ? 'node--sticky',
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-  'clearfix', 'm-0', 'border-0'
+  'clearfix', 'm-0', 'border-0', 'pb-2'
 ] %}
 <article{{ attributes.addClass(classes) }}>
   {% set employer = attribute(content.field_job_employer.0, '#node') %}
@@ -82,14 +82,14 @@
           {% endif %}
         </div>
         <div class="col-md-10">
-          <div class="card-body">
+          <div class="card-body p-2">
             <h5 class="card-title"><a href="{{ url }}">{{ label }}</a></h5>
             <p class="card-text">
               {{ employer.title.value }} | <i class="fas fa-map-marker-alt"></i> {{ content.field_job_city|field_value }} |
               Published on {{ content.published_at|field_value }} |
               Deadline {{ content.field_job_application_deadline|field_value }}<br/>
               {% if content.field_job_desired_experience is not empty %}
-                {{ content.field_job_desired_experience }}<br/>
+                {{ content.field_job_desired_experience|field_value }}<br/>
               {% endif %}
               {{ content.offer_type_badge }}
             </p>
