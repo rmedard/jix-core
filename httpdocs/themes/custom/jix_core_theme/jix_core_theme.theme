@@ -119,10 +119,8 @@ function jix_core_theme_preprocess_node(&$variables)
 function jix_core_theme_preprocess_container(&$variables)
 {
   if ($variables['attributes']['data-drupal-selector'] === 'edit-actions') {
-    if ($variables['element']['#webform'] === 'general_newsletter') {
-      $variables['attributes']['class'][] = 'd-grid';
-    } else {
-      $variables['attributes']['class'][] = 'd-flex justify-content-end gap-1';
+    if (in_array($variables['element']['#type'], ['actions', 'webform_actions'])) {
+      $variables['attributes']['class'][] = 'd-block';
     }
   }
 
@@ -148,8 +146,7 @@ function jix_core_theme_preprocess_input(&$variables)
   if ($variables['element']['#id'] === 'edit-submit') {
     $variables['attributes']['class'][] = 'col-4';
   }
-
-  if ($variables['element']['#id'] === 'edit-submit-jobs-display') {
+  if (in_array($variables['element']['#id'], ['edit-submit-jobs-display', 'edit-actions-submit'])) {
     $variables['attributes']['class'][] = 'col-12';
   }
 }

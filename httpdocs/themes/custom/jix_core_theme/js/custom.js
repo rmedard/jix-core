@@ -23,7 +23,7 @@
         $(context).find('nav#block-jix-core-theme-main-menu > ul.nav > li:first-child > a').addClass('active');
       }
 
-      $(context).find('a#edit-delete').addClass('btn btn-danger');
+      $(context).find('a#edit-delete').addClass('btn btn-danger btn-sm');
 
       $(context).find('div.employer-description').readmore({collapsedHeight: 100});
 
