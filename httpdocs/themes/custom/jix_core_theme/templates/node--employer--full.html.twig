@@ -94,8 +94,10 @@
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
     <div class="card border-light shadow-sm bg-light">
       <div class="row no-gutters">
-        <div class="col-md-4 text-center d-flex justify-content-center align-self-center">
-          {{ content.field_employer_logo }}
+        <div class="col-md-4 text-center d-flex justify-content-center p-2">
+          {% set logoUrl = attribute(content.field_employer_logo.0, '#markup') %}
+          {% set companyName = attribute(label.0, '#context').value %}
+          <img src="{{ logoUrl }}" alt="{{ companyName ~ ' logo' }}" class="img-fluid align-self-center">
         </div>
         <div class="col-md-8">
           <div class="card-body p-1">
