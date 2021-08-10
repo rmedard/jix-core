@@ -94,10 +94,10 @@
             {% endif %}
             {{ page.header }}
             {% if page.primary_menu or page.header_form %}
-              <button class="navbar-toggler" type="button" data-toggle="collapse"
-                      data-target="#CollapsingNavbar" aria-controls="CollapsingNavbar" aria-expanded="false"
+              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false"
                       aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-              <div class="collapse navbar-collapse" id="CollapsingNavbar">
+              <div class="collapse navbar-collapse mt-2" id="collapsingNavbar">
                 {{ page.primary_menu }}
                 {% if page.header_form %}
                   <div class="form-inline navbar-form justify-content-end">
@@ -118,7 +118,7 @@
       {% endblock %}
     </header>
     {% if page.jix_search_bar and show_search_bar %}
-      <div id="search-bar" class="container-fluid pt-2 pb-2 bg-light mb-3">
+      <div id="search-bar" class="container-fluid bg-light mb-3 pt-3">
         <div class="container">
           <div class="row">
             <div class="col-md-8">{{ page.jix_search_bar }}</div>

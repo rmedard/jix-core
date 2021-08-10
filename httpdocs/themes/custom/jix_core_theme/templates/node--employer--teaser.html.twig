@@ -72,8 +72,12 @@
 %}
 
 <div{{ attributes.addClass(classes) }}>
-  <div class="card-body d-flex justify-content-center">
-    {{ content.field_employer_logo }}
+  {% set companyName = attribute(label.0, '#context').value %}
+  <div class="card-body d-flex justify-content-center p-2">
+    {% set logoUrl = attribute(content.field_employer_logo.0, '#markup') %}
+    <a href="{{ url }}">
+      <img src="{{ logoUrl }}" alt="{{ companyName ~ ' logo' }}" class="img-fluid align-self-center">
+    </a>
   </div>
   <div class="card-footer text-center font-weight-bold">
     <a href="{{ url }}">{{ label }}</a>

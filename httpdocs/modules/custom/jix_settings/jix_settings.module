@@ -35,16 +35,33 @@ function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $q
       foreach ($query->where as &$condition_group) {
         foreach ($condition_group['conditions'] as &$condition) {
           if (strpos($condition['field'], 'webform_submission.created') !== FALSE) {
-            $formula_parts = explode(' ', $condition['field']);
-            $from = DrupalDateTime::createFromTimestamp(intval($formula_parts[2]));
-            $to = DrupalDateTime::createFromTimestamp(intval($formula_parts[4]));
-            $formula_parts[2] = $from->setTime(0, 0)->getTimestamp();
-            $formula_parts[4] = $to->setTime(23, 59, 59)->getTimestamp();
-            $condition['field'] = implode(' ', $formula_parts);
+            adjustDayHoursInterval($condition);
             break;
           }
         }
       }
     }
   }
+
+  if ($view->storage->id() === 'jobs_management_board' && $view->current_display === 'page_jobs_management') {
+    if ($query instanceof Sql) {
+      foreach ($query->where as &$condition_group) {
+        foreach ($condition_group['conditions'] as &$condition) {
+          if (strpos($condition['field'], 'node_field_data.created') !== FALSE) {
+            adjustDayHoursInterval($condition);
+            break;
+          }
+        }
+      }
+    }
+  }
+}
+
+function adjustDayHoursInterval(array &$condition) {
+  $formula_parts = explode(' ', $condition['field']);
+  $from = DrupalDateTime::createFromTimestamp(intval($formula_parts[2]));
+  $to = DrupalDateTime::createFromTimestamp(intval($formula_parts[4]));
+  $formula_parts[2] = $from->setTime(0, 0)->getTimestamp();
+  $formula_parts[4] = $to->setTime(23, 59, 59)->getTimestamp();
+  $condition['field'] = implode(' ', $formula_parts);
 }
