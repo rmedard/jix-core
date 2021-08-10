@@ -72,7 +72,7 @@
     <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
       {% block head %}
         {% if page.secondary_menu or page.top_header or page.top_header_form %}
-          <nav{{ navbar_top_attributes.addClass('pt-1 pb-1') }}>
+          <nav{{ navbar_top_attributes.addClass('py-1') }}>
             {% if container_navbar %}
             <div class="container flex-nowrap">
               {% endif %}
@@ -97,7 +97,7 @@
               <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false"
                       aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-              <div class="collapse navbar-collapse mt-2" id="collapsingNavbar">
+              <div class="collapse navbar-collapse" id="collapsingNavbar">
                 {{ page.primary_menu }}
                 {% if page.header_form %}
                   <div class="form-inline navbar-form justify-content-end">
