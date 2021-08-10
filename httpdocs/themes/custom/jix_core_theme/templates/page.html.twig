@@ -94,10 +94,10 @@
             {% endif %}
             {{ page.header }}
             {% if page.primary_menu or page.header_form %}
-              <button class="navbar-toggler" type="button" data-toggle="collapse"
-                      data-target="#CollapsingNavbar" aria-controls="CollapsingNavbar" aria-expanded="false"
+              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapsingNavbar" aria-controls="collapsingNavbar" aria-expanded="false"
                       aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-              <div class="collapse navbar-collapse" id="CollapsingNavbar">
+              <div class="collapse navbar-collapse" id="collapsingNavbar">
                 {{ page.primary_menu }}
                 {% if page.header_form %}
                   <div class="form-inline navbar-form justify-content-end">
