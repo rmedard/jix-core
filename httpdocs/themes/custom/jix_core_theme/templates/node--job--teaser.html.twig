@@ -75,7 +75,7 @@
   <div{{ content_attributes.addClass('clearfix') }}>
     <div class="card shadow-sm {{ content.is_super_featured ? 'border-success' : 'border-light' }}">
       <div class="row g-0">
-        <div class="col-md-2 d-flex justify-content-center">
+        <div class="col-md-2 d-flex justify-content-center p-2">
           {% set image_uri = employer.field_employer_logo|file_uri %}
           {% if image_uri is not null %}
             <img src="{{ image_uri|image_style('jobs_list_logo') }}" class="img-fluid rounded-start align-self-center" alt="...">
