@@ -2,7 +2,7 @@
 
 //@import url(font-awesome.min.css);
 // variables
-@import "variables";
+@import "variables-jik";
 
 // typography
 @import "typography";
@@ -17,4 +17,4 @@
 @import "mixins";
 
 // barrio
-//@import "/../../contrib/bootstrap_barrio/scss/barrio";
+@import "../../contrib/bootstrap_barrio/scss/barrio";
