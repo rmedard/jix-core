@@ -1,4 +1,10 @@
-<div class="card border-light shadow-sm bg-light">
+{% set employer_attributes = create_attribute({
+  'class': ['node--type-employer', 'node--view-mode-teaser'],
+  'data-quickedit-entity-id': 'node/' ~ employer.nid.value
+  })
+%}
+{% set classes = ['card', 'border-light', 'shadow-sm', 'bg-light'] %}
+<div{{ employer_attributes.addClass(classes) }}>
   <div class="row g-0">
     <div class="col-md-4 text-center align-self-center pt-2 pb-2">
       <img src="{{ employer.field_employer_logo.entity.uri.value | image_style('medium') }}"
