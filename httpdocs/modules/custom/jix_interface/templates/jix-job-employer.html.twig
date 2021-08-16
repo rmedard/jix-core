@@ -7,11 +7,9 @@
     <div class="col-md-8">
       <div class="card-body p-1">
         {% if pageNodeBundle == 'job' %}
-          <h5 class="card-title">
-            <a href="{{ path('entity.node.canonical', {'node': employer.nid.value}) }}">
-              {{ employer.title.value }}
-            </a>
-          </h5>
+          <a href="{{ path('entity.node.canonical', {'node': employer.nid.value}) }}">
+            <h5 class="card-title">{{ employer.title.value }}</h5>
+          </a>
         {% endif %}
         {% if employer.field_employer_summary is not empty %}
           <div class="employer-description" style="overflow: hidden">
@@ -32,7 +30,8 @@
 
         <dl class="row mb-0">
           <dt class="col-sm-4 mb-0">{{ 'Rate this employer'|t }}</dt>
-          <dd class="col-sm-8 mb-0">{{ drupal_field('field_employer_rating', 'node', employer.nid.value, 'teaser') }}</dd>
+          <dd
+            class="col-sm-8 mb-0">{{ drupal_field('field_employer_rating', 'node', employer.nid.value, 'teaser') }}</dd>
         </dl>
 
         <div class="card-footer border-0 p-1">
@@ -49,7 +48,8 @@
               {% endif %}
             </div>
             <div class="col-4 d-flex justify-content-around">
-              <a href="{{ employer.field_employer_facebook.uri }}" target="_blank" class="disabled"><i class="fab fa-facebook"></i></a>
+              <a href="{{ employer.field_employer_facebook.uri }}" target="_blank" class="disabled"><i
+                  class="fab fa-facebook"></i></a>
               <a href="{{ employer.field_employer_twitter.uri }}" target="_blank"><i
                   class="fab fa-twitter"></i></a>
               <a href="{{ employer.field_employer_linkedin.uri }}" target="_blank"><i class="fab fa-linkedin"></i></a>
