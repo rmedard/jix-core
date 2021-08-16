@@ -17,8 +17,8 @@
               </div>
               <div class="col-10">
                 <div class="card-body px-2 py-0">
-                  <h5 class="card-title">
-                    <a href="{{ jobUrl }}">{{ job.title.value|truncate(60, true,'...') }}</a></h5>
+                  <h6 class="card-title">
+                    <a href="{{ jobUrl }}">{{ job.title.value|truncate(60, true,'...') }}</a></h6>
                   <p class="card-text mb-1">
                     <i class="fas fa-map-marker-alt"></i> <strong>{{ job.field_job_city.value }}</strong> | Published
                     on {{ job.published_at.value|date("d/m/Y") }}
