@@ -9,7 +9,6 @@ use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 
 /**
@@ -38,7 +37,7 @@ class SimilarJobsBlock extends BlockBase
           $query = $storage->getQuery()->range(0, 5);
           $query = $query
             ->condition('type', 'job')
-            ->condition('status', Node::PUBLISHED)
+            ->condition('status', NodeInterface::PUBLISHED)
             ->condition('nid', $node->id(), '<>')
             ->condition('field_job_offer_type', $node->get('field_job_offer_type')->value);
           $categories = $node->get('field_job_category')->getValue();

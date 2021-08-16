@@ -3,33 +3,41 @@
   <div class="card-body">
     <ul class="list-group list-group-flush">
       {% for job in jobs %}
-        <li class="list-group-item pt-1 pb-1 pl-0 pr-0 border-0">
-          <div class="media">
-            <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
-              {% set logoUrl = job.field_job_employer.entity.field_employer_logo.entity.uri.value|default('public://default_images/no_logo.jpg') %}
-              <img
-                src="{{ logoUrl|image_style('small_50x50') }}"
-                class="mr-3" alt="{{ job.field_job_employer.entity.title.value }}">
-            </a>
-            <div class="media-body">
-              <a href="{{ path('entity.node.canonical', {'node':job.id}) }}">
-                <h6 class="mt-0 mb-0">{{ job.title.value|truncate(60, true,'...') }}</h6>
-              </a>
-              <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <strong>{{ job.field_job_city.value }}</strong> | Published
-                  on {{ job.published_at.value|date("d/m/Y") }}
-                  <br> Deadline {{ job.field_job_application_deadline.value|date("d/m/Y") }}
-                  | {{ job.field_job_desired_experience.entity.name.value }}</p>
-              {% if job.field_job_offer_type.value  == 'job' %}
-                <span class="badge badge-primary">{{ job.field_job_offer_type.value }}</span>
-              {% elseif job.field_job_offer_type.value == 'tender' %}
-                <span class="badge badge-light">{{ job.field_job_offer_type.value }}</span>
-              {% elseif job.field_job_offer_type.value == 'internship' %}
-                <span class="badge badge-warning">{{ job.field_job_offer_type.value }}</span>
-              {% elseif job.field_job_offer_type.value == 'consultancy' %}
-                <span class="badge badge-success">{{ job.field_job_offer_type.value }}</span>
-              {% elseif job.field_job_offer_type.value == 'other' %}
-                <span class="badge badge-info">{{ job.field_job_offer_type.value }}</span>
-              {% endif %}
+        <li class="list-group-item p-0 border-0">
+          <div class="card border-0 mb-1">
+            {% set jobUrl = path('entity.node.canonical', {'node':job.id}) %}
+            <div class="row g-0">
+              <div class="col-2 d-flex justify-content-center px-2">
+                <a href="{{ jobUrl }}">
+                  {% set logoUrl = job.field_job_employer.entity.field_employer_logo.entity.uri.value|default('public://default_images/no_logo.jpg') %}
+                  <img
+                    src="{{ logoUrl|image_style('small_50x50') }}"
+                    class="mr-3" alt="{{ job.field_job_employer.entity.title.value }}">
+                </a>
+              </div>
+              <div class="col-10">
+                <div class="card-body px-2 py-0">
+                  <h5 class="card-title">
+                    <a href="{{ jobUrl }}">{{ job.title.value|truncate(60, true,'...') }}</a></h5>
+                  <p class="card-text mb-1">
+                    <i class="fas fa-map-marker-alt"></i> <strong>{{ job.field_job_city.value }}</strong> | Published
+                    on {{ job.published_at.value|date("d/m/Y") }}
+                    <br> Deadline {{ job.field_job_application_deadline.value|date("d/m/Y") }}
+                    | {{ job.field_job_desired_experience.entity.name.value }}
+                  </p>
+                  {% if job.field_job_offer_type.value  == 'job' %}
+                    <span class="badge badge-primary">{{ job.field_job_offer_type.value }}</span>
+                  {% elseif job.field_job_offer_type.value == 'tender' %}
+                    <span class="badge badge-light">{{ job.field_job_offer_type.value }}</span>
+                  {% elseif job.field_job_offer_type.value == 'internship' %}
+                    <span class="badge badge-warning">{{ job.field_job_offer_type.value }}</span>
+                  {% elseif job.field_job_offer_type.value == 'consultancy' %}
+                    <span class="badge badge-success">{{ job.field_job_offer_type.value }}</span>
+                  {% elseif job.field_job_offer_type.value == 'other' %}
+                    <span class="badge badge-info">{{ job.field_job_offer_type.value }}</span>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         </li>
