@@ -72,20 +72,23 @@
 ] %}
 <article{{ attributes.addClass(classes) }}>
   {% set employer = attribute(content.field_job_employer.0, '#node') %}
+  {% set employer_url = path('entity.node.canonical', {'node': employer.nid.value}) %}
   <div{{ content_attributes.addClass('clearfix') }}>
     <div class="card shadow-sm {{ content.is_super_featured ? 'border-success' : 'border-light' }}">
       <div class="row g-0">
         <div class="col-md-2 d-flex justify-content-center p-2">
           {% set image_uri = employer.field_employer_logo|file_uri %}
           {% if image_uri is not null %}
-            <img src="{{ image_uri|image_style('jobs_list_logo') }}" class="img-fluid rounded-start align-self-center" alt="...">
+            <a href="{{ url }}" class="d-flex justify-content-center">
+              <img src="{{ image_uri|image_style('jobs_list_logo') }}" class="img-fluid rounded align-self-center" alt="...">
+            </a>
           {% endif %}
         </div>
         <div class="col-md-10">
           <div class="card-body p-2">
-            <h5 class="card-title"><a href="{{ url }}">{{ label }}</a></h5>
+            <a href="{{ url }}"><h5 class="card-title">{{ label }}</h5></a>
             <p class="card-text">
-              {{ employer.title.value }} | <i class="fas fa-map-marker-alt"></i> {{ content.field_job_city|field_value }} |
+              <a href="{{ employer_url }}">{{ employer.title.value }}</a> | <i class="fas fa-map-marker-alt"></i> {{ content.field_job_city|field_value }} |
               Published on {{ content.published_at|field_value }} |
               Deadline {{ content.field_job_application_deadline|field_value }}<br/>
               {% if content.field_job_desired_experience is not empty %}
