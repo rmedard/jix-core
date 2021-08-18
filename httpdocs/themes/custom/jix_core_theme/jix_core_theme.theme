@@ -257,7 +257,7 @@ function jix_core_theme_preprocess_block(&$variables)
  */
 function jix_core_theme_preprocess_menu(&$variables)
 {
-  if ($variables['menu_name'] == 'jobs-tabs-menu') {
+  if (array_key_exists('menu_name', $variables) and $variables['menu_name'] == 'jobs-tabs-menu') {
     $variables['attributes']['class'][] = 'nav-pills';
     $variables['attributes']['class'][] = 'nav-fill';
 
