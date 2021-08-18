@@ -97,7 +97,7 @@
         <div class="col-md-4 text-center d-flex justify-content-center p-2">
           {% set logoUrl = attribute(content.field_employer_logo.0, '#markup') %}
           {% set companyName = attribute(label.0, '#context').value %}
-          <img src="{{ logoUrl }}" alt="{{ companyName ~ ' logo' }}" class="img-fluid align-self-center">
+          <img src="{{ logoUrl }}" alt="{{ companyName ~ ' logo' }}" class="img-fluid align-self-center rounded">
         </div>
         <div class="col-md-8">
           <div class="card-body p-1">
