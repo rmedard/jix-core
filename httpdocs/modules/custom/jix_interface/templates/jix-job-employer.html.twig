@@ -6,9 +6,9 @@
 {% set classes = ['card', 'border-light', 'shadow-sm', 'bg-light'] %}
 <div{{ employer_attributes.addClass(classes) }}>
   <div class="row g-0">
-    <div class="col-md-4 text-center align-self-center pt-2 pb-2">
+    <div class="col-md-4 text-center align-self-center p-2">
       <img src="{{ employer.field_employer_logo.entity.uri.value | image_style('medium') }}"
-           alt="{{ employer.field_employer_logo.entity.alt }}" class="rounded">
+           alt="{{ employer.field_employer_logo.entity.alt }}" class="rounded img-fluid">
     </div>
     <div class="col-md-8">
       <div class="card-body p-1">
