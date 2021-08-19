@@ -45,7 +45,7 @@ We call a macro which calls itself to render the full tree.
         ] %}
         <li{{ item.attributes.addClass(classes) }}>
           {% set link_classes = [
-            'nav-link', 'pl-1', 'pr-1',
+            'nav-link', 'px-2',
             item.in_active_trail ? 'active',
             item.url.getOption('attributes').class ? item.url.getOption('attributes').class | join(''),
             'nav-link-' ~ item.url.toString() | clean_class,
