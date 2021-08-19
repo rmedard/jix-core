@@ -169,10 +169,11 @@ function jix_core_theme_preprocess_datetime_form(&$variables)
  */
 function jix_core_theme_preprocess_page(&$variables)
 {
+  $routeName = Drupal::routeMatch()->getRouteName();
   $requestUri = Drupal::request()->getRequestUri();
   $variables['navbar_top_attributes']['class'] = ['navbar', 'navbar-light', 'bg-white', 'shadow-sm'];
   $fullSizePages = ['/post-advert'];
-  if (in_array($requestUri, $fullSizePages)) {
+  if (in_array($requestUri, $fullSizePages) or preg_match('(jix_interface\.40.*)', $routeName)) {
     unset($variables['page']['sidebar_first']);
     unset($variables['page']['sidebar_second']);
     unset($variables['page']['jix_horizontal_sidebar']);

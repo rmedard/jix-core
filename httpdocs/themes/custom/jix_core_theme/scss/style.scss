@@ -8,8 +8,15 @@ Description: Bootstrap 4 with Sass
 /* GENERAL STYLES
 -------------------------------------------------*/
 
-body {
-  background: $white;
+html {
+  height: 100%;
+  body {
+    background: $white;
+    height: 100vh;
+    div.dialog-off-canvas-main-canvas {
+      height: 100vh;
+    }
+  }
 }
 
 

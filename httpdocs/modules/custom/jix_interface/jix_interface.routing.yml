@@ -5,6 +5,23 @@ jix_interface.posting_plans_page:
     _controller: '\Drupal\jix_interface\Controller\PagesController::postingPlansPage'
   requirements:
     _permission: 'access content'
+
+jix_interface.404:
+  path: '/error-404'
+  defaults:
+    _title: '404 Error - Content Not Found'
+    _controller: '\Drupal\jix_interface\Controller\PagesController::error404Page'
+  requirements:
+    _access: 'TRUE'
+
+jix_interface.403:
+  path: '/system/403'
+  defaults:
+    _title: 'Access denied'
+    _controller: '\Drupal\jix_interface\Controller\CustomHttp4xxController::on403'
+  requirements:
+    _access: 'TRUE'
+
 jix_interface.posting_plans_page.settings:
   path: '/admin/manage/settings/posting-plans'
   defaults:

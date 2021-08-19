@@ -97,6 +97,9 @@ function jix_interface_theme($existing, $type, $theme, $path): array
       'variables' => [
         'jobs' => []
       ]
+    ],
+    'error_404' => [
+      'variables' => []
     ]
   ];
 }

@@ -67,8 +67,8 @@
  * @see html.html.twig
  */
 #}
-<div id="page-wrapper">
-  <div id="page">
+<div id="page-wrapper" class="h-100">
+  <div id="page" class="h-100 d-flex flex-column">
     <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
       {% block head %}
         {% if page.secondary_menu or page.top_header or page.top_header_form %}
@@ -196,16 +196,16 @@
         </aside>
       </div>
     {% endif %}
-    <footer class="site-footer mt-3 pb-0">
+    <footer class="footer site-footer mt-auto pb-0">
       {% block footer %}
         <div class="container-fluid p-0">
           {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
             <div class="container pb-2">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-2">{{ page.footer_first }}</div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-2">{{ page.footer_second }}</div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-2">{{ page.footer_third }}</div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-2">{{ page.footer_fourth }}</div>
+              <div class="row g-2">
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-2">{{ page.footer_first }}</div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-2">{{ page.footer_second }}</div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-2">{{ page.footer_third }}</div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-2">{{ page.footer_fourth }}</div>
               </div>
             </div>
           {% endif %}

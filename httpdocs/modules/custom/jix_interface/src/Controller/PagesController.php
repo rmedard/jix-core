@@ -9,7 +9,7 @@ use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\jix_interface\Form\PostingPlansPageSettingsForm;
-use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
 
 class PagesController extends ControllerBase
 {
@@ -20,7 +20,7 @@ class PagesController extends ControllerBase
       $storage = Drupal::entityTypeManager()->getStorage('node');
       $query = $storage->getQuery()->range(0, 4)
         ->condition('type', 'pricing_plan')
-        ->condition('status', Node::PUBLISHED)
+        ->condition('status', NodeInterface::PUBLISHED)
         ->sort('field_pricing_plan_order_number', 'ASC');
       $planIds = $query->execute();
       if (!empty($planIds)) {
@@ -38,6 +38,12 @@ class PagesController extends ControllerBase
       '#plans' => $pricing_plans,
       '#header_text' => $headerText,
       '#footer_text' => $footerText,
+    ];
+  }
+
+  public function error404Page(): array {
+    return [
+      '#theme' => 'error_404'
     ];
   }
 }
