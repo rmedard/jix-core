@@ -2,7 +2,9 @@
   <div class="card-header bg-primary">{{ 'Similar jobs'|t }}</div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
-      {% for job in jobs %}
+      {% for jobWithPill in jobs %}
+        {% set job = jobWithPill[0] %}
+        {% set jobOfferType = jobWithPill[1] %}
         <li class="list-group-item p-0 border-0">
           <div class="card border-0 mb-1">
             {% set jobUrl = path('entity.node.canonical', {'node':job.id}) %}
@@ -26,17 +28,7 @@
                     <br> Deadline {{ job.field_job_application_deadline.value|date("d/m/Y") }}
                     | {{ job.field_job_desired_experience.entity.name.value }}
                   </p>
-                  {% if job.field_job_offer_type.value  == 'job' %}
-                    <span class="badge badge-primary">{{ job.field_job_offer_type.value }}</span>
-                  {% elseif job.field_job_offer_type.value == 'tender' %}
-                    <span class="badge badge-light">{{ job.field_job_offer_type.value }}</span>
-                  {% elseif job.field_job_offer_type.value == 'internship' %}
-                    <span class="badge badge-warning">{{ job.field_job_offer_type.value }}</span>
-                  {% elseif job.field_job_offer_type.value == 'consultancy' %}
-                    <span class="badge badge-success">{{ job.field_job_offer_type.value }}</span>
-                  {% elseif job.field_job_offer_type.value == 'other' %}
-                    <span class="badge badge-info">{{ job.field_job_offer_type.value }}</span>
-                  {% endif %}
+                  {{ jobOfferType|raw }}
                 </div>
               </div>
             </div>

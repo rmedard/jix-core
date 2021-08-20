@@ -52,9 +52,18 @@ class SimilarJobsBlock extends BlockBase
           }
           $jobIds = $query->execute();
           if (!empty($jobIds)) {
+            $themingService = Drupal::service('jix_interface.theming_service');
+            $jobs = $storage->loadMultiple($jobIds);
+            $jobsWithPills = [];
+            foreach ($jobs as $job) {
+              if ($job instanceof NodeInterface) {
+                array_push($jobsWithPills, [$job, $themingService->getOfferTypePill($job)]);
+              }
+            }
+
             $output[] = [
               '#theme' => 'jix_similar_jobs',
-              '#jobs' => $storage->loadMultiple($jobIds)
+              '#jobs' => $jobsWithPills
             ];
           }
         } catch (InvalidPluginDefinitionException | PluginNotFoundException $e) {

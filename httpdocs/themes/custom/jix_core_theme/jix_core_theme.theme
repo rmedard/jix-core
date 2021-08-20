@@ -86,29 +86,9 @@ function jix_core_theme_preprocess_node(&$variables)
   if (boolval($variables['teaser']) === true) {
     $node = $variables['node'];
     if ($node instanceof NodeInterface and $node->bundle() === 'job') {
-      $offer_type_field = $node->get('field_job_offer_type');
-      $offer_values = $offer_type_field->getSetting('allowed_values');
-      $offer_type = $offer_type_field->value;
-      $offer_value_pill = '';
-      switch ($offer_type) {
-        case 'job':
-          $offer_value_pill = '<span class="badge badge-primary">' . $offer_values[$offer_type] . '</span>';
-          break;
-        case 'tender':
-          $offer_value_pill = '<span class="badge badge-light">' . $offer_values[$offer_type] . '</span>';
-          break;
-        case 'consultancy':
-          $offer_value_pill = '<span class="badge badge-success">' . $offer_values[$offer_type] . '</span>';
-          break;
-        case 'internship':
-          $offer_value_pill = '<span class="badge badge-warning">' . $offer_values[$offer_type] . '</span>';
-          break;
-        case 'other':
-          $offer_value_pill = '<span class="badge badge-info">' . $offer_values[$offer_type] . '</span>';
-          break;
-      }
+      $themingService = Drupal::service('jix_interface.theming_service');
       $variables['content']['is_super_featured'] = boolval($node->get('field_job_super_featured')->value);
-      $variables['content']['offer_type_badge'] = ['#markup' => $offer_value_pill];
+      $variables['content']['offer_type_badge'] = ['#markup' => $themingService->getOfferTypePill($node)];
     }
   }
 }
