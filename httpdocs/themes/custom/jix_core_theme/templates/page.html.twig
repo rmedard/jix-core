@@ -118,7 +118,7 @@
       {% endblock %}
     </header>
     {% if page.jix_search_bar and show_search_bar %}
-      <div id="search-bar" class="container-fluid bg-light mb-3 pt-3">
+      <div id="search-bar" class="container-fluid bg-light pt-3">
         <div class="container">
           <div class="row">
             <div class="col-md-8">{{ page.jix_search_bar }}</div>
@@ -128,7 +128,7 @@
       </div>
     {% endif %}
     {% if page.highlighted %}
-      <div class="highlighted mt-auto">
+      <div class="highlighted mt-3">
         <aside class="{{ container }} section clearfix" role="complementary">
           {{ page.highlighted }}
         </aside>
