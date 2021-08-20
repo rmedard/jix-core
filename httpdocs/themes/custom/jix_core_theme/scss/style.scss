@@ -205,28 +205,28 @@ div#block-similarjobsblock {
 }
 
 .badge-success:not(.badge-pill) {
-  color: $brand-success;
-  background-color: lighten($brand-success, 50%);
+  color: $success-pill;
+  background-color: $success-pill-background;
 }
 
 .badge-primary:not(.badge-pill) {
-  color: $brand-primary;
-  background-color: lighten($brand-primary, 70%);
+  color: $primary-pill;
+  background-color: $primary-pill-background;
 }
 
 .badge-warning:not(.badge-pill) {
-  color: $brand-warning;
-  background-color: lighten($brand-warning, 40%);
+  color: $warning-pill;
+  background-color: $warning-pill-background;
 }
 
 .badge-light:not(.badge-pill) {
-  color: $matteBlack;
-  background-color: lighten($matteBlack, 80%);
+  color: $light-pill;
+  background-color: $light-pill-background;
 }
 
 .badge-info:not(.badge-pill) {
-  color: $brand-info;
-  background-color: lighten($brand-info, 40%);
+  color: $info-pill;
+  background-color: $info-pill-background;
 }
 
 div#block-managedad {

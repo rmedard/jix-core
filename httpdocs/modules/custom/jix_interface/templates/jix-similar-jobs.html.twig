@@ -9,7 +9,7 @@
           <div class="card border-0 mb-1">
             {% set jobUrl = path('entity.node.canonical', {'node':job.id}) %}
             <div class="row g-0">
-              <div class="col-2 d-flex justify-content-center px-2 mt-1">
+              <div class="col-2 d-flex justify-content-center mt-1">
                 <a href="{{ jobUrl }}">
                   {% set logoUrl = job.field_job_employer.entity.field_employer_logo.entity.uri.value|default('public://default_images/no_logo.jpg') %}
                   <img
