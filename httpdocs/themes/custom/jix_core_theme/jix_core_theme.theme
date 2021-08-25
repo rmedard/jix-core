@@ -107,7 +107,7 @@ function jix_core_theme_preprocess_container(&$variables)
     }
 
     if ($selector === 'edit-field-employer-sector-wrapper') {
-      $variables['attributes']['class'][] = 'col-md-8';
+      $variables['attributes']['class'][] = 'col-md-7';
     }
 
     $growable = [
