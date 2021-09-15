@@ -76,7 +76,7 @@
   <div{{ content_attributes.addClass('clearfix') }}>
     <div class="card shadow-sm {{ content.is_super_featured ? 'border-success' : 'border-light' }}">
       <div class="row g-0">
-        <div class="col-md-2 d-flex justify-content-center p-2">
+        <div class="col-2 d-flex justify-content-center p-2">
           {% set image_uri = employer.field_employer_logo|file_uri %}
           {% if image_uri is not null %}
             <a href="{{ url }}" class="d-flex justify-content-center">
@@ -84,7 +84,7 @@
             </a>
           {% endif %}
         </div>
-        <div class="col-md-10">
+        <div class="col-10">
           <div class="card-body p-2">
             <a href="{{ url }}"><h5 class="card-title">{{ label }}</h5></a>
             <p class="card-text">
