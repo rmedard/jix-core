@@ -175,7 +175,7 @@ function jix_interface_views_data_alter(array &$data)
     'field' => [
       'title' => t('Job submissions count'),
       'help' => t('Number of submissions a job has.'),
-      'id' => 'job_submissions_count_views_field',
+      'id' => 'job_submissions_count_views_field'
     ],
   ];
 }

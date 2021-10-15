@@ -5,6 +5,10 @@
  */
 
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\jix_settings\Plugin\Field\AliasUrlComputedField;
+use Drupal\jix_settings\Plugin\Field\JobCategoryComputedField;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\Plugin\views\query\Sql;
 use Drupal\views\ViewExecutable;
@@ -64,4 +68,34 @@ function adjustDayHoursInterval(array &$condition) {
   $formula_parts[2] = $from->setTime(0, 0)->getTimestamp();
   $formula_parts[4] = $to->setTime(23, 59, 59)->getTimestamp();
   $condition['field'] = implode(' ', $formula_parts);
+}
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ */
+function jix_settings_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type)
+{
+  if ($entity_type->id() == 'node') {
+    $fields['alias_url'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Alias Url'))
+      ->setName(t('Alias Url'))
+      ->setDescription(t('This is the alias url of the node'))
+      ->setComputed(true)
+      ->setClass(AliasUrlComputedField::class);
+  }
+}
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle)
+{
+  if ($entity_type->id() == 'node' && $bundle == 'job') {
+    $fields['field_job_category__computed'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Job Category'))
+      ->setName(t('Computed Job Category'))
+      ->setDescription(t('This is the job category'))
+      ->setComputed(true)
+      ->setClass(JobCategoryComputedField::class);
+  }
 }

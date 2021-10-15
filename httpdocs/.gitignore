@@ -18,3 +18,4 @@ sites/*/files-private
 
 sites/default/settings.php
 sites/default/services.yml
+/libraries/

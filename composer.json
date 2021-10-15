@@ -22,7 +22,6 @@
         "drupal/adminimal_admin_toolbar": "^1.11",
         "drupal/adsense": "^1.2",
         "drupal/back_to_top": "^1.1",
-        "drupal/bootstrap_barrio": "^5.5",
         "drupal/bootstrap_sass": "^5.0",
         "drupal/clientside_validation": "^3.0@RC",
         "drupal/conditional_fields": "^4.0@alpha",
