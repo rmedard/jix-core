@@ -8,7 +8,12 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\jix_settings\Plugin\Field\AliasUrlComputedField;
+use Drupal\jix_settings\Plugin\Field\JobAttachmentUrlComputedField;
 use Drupal\jix_settings\Plugin\Field\JobCategoryComputedField;
+use Drupal\jix_settings\Plugin\Field\JobDesiredExperienceComputedField;
+use Drupal\jix_settings\Plugin\Field\JobEducationLevelComputedField;
+use Drupal\jix_settings\Plugin\Field\JobEmployerIdComputedField;
+use Drupal\jix_settings\Plugin\Field\NodeViewsCountComputedField;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\Plugin\views\query\Sql;
 use Drupal\views\ViewExecutable;
@@ -97,5 +102,40 @@ function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterfa
       ->setDescription(t('This is the job category'))
       ->setComputed(true)
       ->setClass(JobCategoryComputedField::class);
+
+    $fields['field_job_desired_experience__computed'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Job Desired Experience'))
+      ->setName(t('Computed Job Desired Experience'))
+      ->setDescription(t('Desired experience for this job'))
+      ->setComputed(true)
+      ->setClass(JobDesiredExperienceComputedField::class);
+
+    $fields['field_job_education_level__computed'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Job Desired Education Level'))
+      ->setName(t('Computed Job Desired Education Level'))
+      ->setDescription(t('Desired education level for this job'))
+      ->setComputed(true)
+      ->setClass(JobEducationLevelComputedField::class);
+
+    $fields['field_job_attachment__computed'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Job Attachment Uri'))
+      ->setName(t('Computed Job Attachment Uri'))
+      ->setDescription(t('Computed Job Attachment Uri'))
+      ->setComputed(true)
+      ->setClass(JobAttachmentUrlComputedField::class);
+
+    $fields['field_job_employer_id'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Job Employer'))
+      ->setName(t('Computed Job Employer'))
+      ->setDescription(t('Identifier of the employer owning this job'))
+      ->setComputed(true)
+      ->setClass(JobEmployerIdComputedField::class);
+
+    $fields['views_count'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Views Count'))
+      ->setName(t('Views Count'))
+      ->setDescription(t('The number of times a job has been viewed'))
+      ->setComputed(true)
+      ->setClass(NodeViewsCountComputedField::class);
   }
 }
