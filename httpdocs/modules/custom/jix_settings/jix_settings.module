@@ -8,6 +8,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\jix_settings\Plugin\Field\AliasUrlComputedField;
+use Drupal\jix_settings\Plugin\Field\EmployerLogoUrlComputedField;
 use Drupal\jix_settings\Plugin\Field\JobAttachmentUrlComputedField;
 use Drupal\jix_settings\Plugin\Field\JobCategoryComputedField;
 use Drupal\jix_settings\Plugin\Field\JobDesiredExperienceComputedField;
@@ -137,5 +138,14 @@ function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterfa
       ->setDescription(t('The number of times a job has been viewed'))
       ->setComputed(true)
       ->setClass(NodeViewsCountComputedField::class);
+  }
+
+  if ($entity_type->id() == 'node' && $bundle == 'employer') {
+    $fields['field_employer_logo__computed'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Computed Employer Logo Uri'))
+      ->setName(t('Computed Employer Logo Uri'))
+      ->setDescription(t('Computed Employer Logo Uri'))
+      ->setComputed(true)
+      ->setClass(EmployerLogoUrlComputedField::class);
   }
 }
