@@ -127,11 +127,14 @@ function jix_core_theme_preprocess_container(&$variables)
  */
 function jix_core_theme_preprocess_input(&$variables)
 {
-  if ($variables['element']['#id'] === 'edit-submit') {
-    $variables['attributes']['class'][] = 'col-4';
-  }
-  if (in_array($variables['element']['#id'], ['edit-submit-jobs-display', 'edit-actions-submit'])) {
-    $variables['attributes']['class'][] = 'col-12';
+  $element = $variables['element'];
+  if (is_array($element) && array_key_exists('#id', $element)) {
+    if ($element['#id'] === 'edit-submit') {
+      $variables['attributes']['class'][] = 'col-4';
+    }
+    if (in_array($element['#id'], ['edit-submit-jobs-display', 'edit-actions-submit'])) {
+      $variables['attributes']['class'][] = 'col-12';
+    }
   }
 }
 
