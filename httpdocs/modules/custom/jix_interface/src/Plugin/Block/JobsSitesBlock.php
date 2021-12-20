@@ -9,6 +9,7 @@ use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\jix_settings\Form\SitesAndServicesForm;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class JobsSitesBlock
@@ -22,6 +23,7 @@ use Drupal\jix_settings\Form\SitesAndServicesForm;
 class JobsSitesBlock extends BlockBase
 {
 
+  #[ArrayShape(['#theme' => "string", '#sites' => "array|string[]"])]
   public function build(): array
   {
     $sitesStr = strval(Drupal::configFactory()->get(SitesAndServicesForm::SETTINGS)->get('our_sites'));

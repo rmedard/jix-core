@@ -32,7 +32,7 @@ use Psr\Http\Message\ResponseInterface;
 class OnJobApplicationAction extends RulesActionBase
 {
 
-  private $channel;
+  private string $channel;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition)
   {
@@ -121,7 +121,7 @@ class OnJobApplicationAction extends RulesActionBase
    * @return string
    */
   private function cleanupFileUrl($url, $submissionId): string {
-    if (strpos($url, '_sid_') !== false) {
+    if (str_contains($url, '_sid_')) {
       return str_replace('_sid_', strval($submissionId), $url);
     }
     return $url;

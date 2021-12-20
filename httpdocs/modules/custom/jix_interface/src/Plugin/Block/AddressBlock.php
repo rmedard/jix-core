@@ -7,6 +7,7 @@ namespace Drupal\jix_interface\Plugin\Block;
 use Drupal;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class AddressBlock
@@ -20,6 +21,7 @@ use Drupal\Core\Block\BlockBase;
 class AddressBlock extends BlockBase
 {
 
+  #[ArrayShape(['#theme' => "string"])]
   public function build(): array
   {
     $servicesStr = strval(Drupal::configFactory()->get('jix_interface.website.info')->get('our_services')); //TODO Finish this...

@@ -13,7 +13,7 @@ class CustomTypedDataNormalizer extends TypedDataNormalizer
   /**
    * @var LoggerChannelFactoryInterface
    */
-  private $loggerChannelFactory;
+  private LoggerChannelFactoryInterface $loggerChannelFactory;
 
   /**
    * CustomTypedDataNormalizer constructor.
@@ -28,7 +28,7 @@ class CustomTypedDataNormalizer extends TypedDataNormalizer
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = null, array $context = [])
+  public function normalize($object, $format = null, array $context = []): float|int|\ArrayObject|bool|array|string|null
   {
     $this->loggerChannelFactory->get('default')->debug('Normalizer called');
     Drupal::logger('jix_settings')->warning('Normalizer called');

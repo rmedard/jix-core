@@ -57,7 +57,7 @@ class SimilarJobsBlock extends BlockBase
             $jobsWithPills = [];
             foreach ($jobs as $job) {
               if ($job instanceof NodeInterface) {
-                array_push($jobsWithPills, [$job, $themingService->getOfferTypePill($job)]);
+                $jobsWithPills[] = [$job, $themingService->getOfferTypePill($job)];
               }
             }
 

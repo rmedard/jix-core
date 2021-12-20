@@ -12,7 +12,6 @@ use Drupal\rules\Core\RulesActionBase;
 use Drupal\webform\Entity\WebformSubmission;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class UnsubscribeUserAction
@@ -30,7 +29,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class UnsubscribeUserAction extends RulesActionBase
 {
 
-  private $channel;
+  private string $channel;
 
   /**
    * Overrides \Drupal\Component\Plugin\PluginBase::__construct().

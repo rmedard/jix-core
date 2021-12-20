@@ -27,12 +27,9 @@ use Drupal\rules\Core\RulesActionBase;
 class OnJobPublishedNotificationAction extends RulesActionBase
 {
 
-  private string $channel;
-
   public function __construct(array $configuration, $plugin_id, $plugin_definition)
   {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->channel = 'jix_notifier';
   }
 
   protected function doExecute(NodeInterface $entity) {

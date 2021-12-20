@@ -2,7 +2,7 @@ jix_migrator.migratorbatch:
   path: '/admin/batch-import-employers'
   defaults:
     _title: 'Import employers'
-    _form: '\Drupal\jix_migrator\Form\MigratorForm'
+    _form: '\Drupal\jix_migrator\Form\EmployersMigratorForm'
   requirements:
     _permission: 'access content'
 jix_migrator.newsmigratorbatch:
@@ -17,5 +17,12 @@ jix_migrator.jobsmigratorbatch:
   defaults:
     _title: 'Import jobs'
     _form: '\Drupal\jix_migrator\Form\JobsMigratorForm'
+  requirements:
+    _permission: 'access content'
+jix_migrator.applicationsmigratorbatch:
+  path: '/admin/batch-import-applications'
+  defaults:
+    _title: 'Import applications'
+    _form: '\Drupal\jix_migrator\Form\ApplicationsMigratorForm'
   requirements:
     _permission: 'access content'

@@ -465,7 +465,7 @@ function jix_core_theme_preprocess_views_view_unformatted(&$variables)
         $view_builder = Drupal::entityTypeManager()->getViewBuilder('node');
         $job = $result_row->_entity;
         $pre_render = $view_builder->view($job, 'teaser');
-        array_push($reformatted_rows, ['content' => $pre_render, 'attributes' => $row['attributes']]);
+        $reformatted_rows[] = ['content' => $pre_render, 'attributes' => $row['attributes']];
       }
     }
     $variables['rows'] = $reformatted_rows;

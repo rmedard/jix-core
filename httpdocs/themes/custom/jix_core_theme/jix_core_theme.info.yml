@@ -41,7 +41,7 @@ regions:
   footer_fifth: 'Footer fifth'
   footer_social: 'Footer Social'
 
-# Information added by Drupal.org packaging script on 2020-10-11
-version: '5.0.3'
-project: 'bootstrap_sass'
-datestamp: 1626639823
+# Information added by Drupal.org packaging script on 2021-10-11
+version: '5.0.5'
+project: 'jix_core_theme'
+datestamp: 1633918678

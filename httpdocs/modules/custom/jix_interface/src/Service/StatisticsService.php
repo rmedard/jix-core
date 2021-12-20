@@ -11,7 +11,7 @@ use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 class StatisticsService
 {
 
-  public function countContentEntities($entityType)
+  public function countContentEntities($entityType): array|int
   {
     try {
       $storage = Drupal::entityTypeManager()->getStorage('node');
@@ -26,7 +26,8 @@ class StatisticsService
     return 0;
   }
 
-  public function countJobSubmissions() {
+  public function countJobSubmissions(): array|int
+  {
     try {
       $storage = Drupal::entityTypeManager()->getStorage('webform_submission');
       return $storage->getQuery()

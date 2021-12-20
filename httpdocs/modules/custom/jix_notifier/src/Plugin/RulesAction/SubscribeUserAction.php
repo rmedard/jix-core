@@ -28,7 +28,7 @@ use Psr\Http\Message\ResponseInterface;
 class SubscribeUserAction extends RulesActionBase
 {
 
-  private $channel;
+  private string $channel;
 
   /**
    * Overrides \Drupal\Component\Plugin\PluginBase::__construct().

@@ -6,6 +6,7 @@ namespace Drupal\jix_interface\Plugin\Block;
 
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class AddressBlock
@@ -19,6 +20,7 @@ use Drupal\Core\Block\BlockBase;
 class UploadCvBlock extends BlockBase
 {
 
+  #[ArrayShape(['#label' => "\Drupal\Core\StringTranslation\TranslatableMarkup", '#theme' => "string"])]
   public function build(): array
   {
     return[

@@ -47,7 +47,7 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
     if (isset($newsletterUrl)) {
       if (!UrlHelper::isValid($newsletterUrl, true)) {
         $form_state->setErrorByName('general_newsletter_url', 'Invalid URL. This url has to be valid and absolute.');
-      } elseif (strpos($newsletterUrl, '?') !== false) {
+      } elseif (str_contains($newsletterUrl, '?')) {
         $form_state->setErrorByName('general_newsletter_url', 'Invalid URL. No query parameters required.');
       }
     }
@@ -55,7 +55,7 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
       $cvSearchUrl = $form_state->getValue('cv_search_url');
       if (!UrlHelper::isValid($cvSearchUrl, true)) {
         $form_state->setErrorByName('cv_search_url', 'Invalid URL. This url has to be valid and absolute.');
-      } elseif (strpos($cvSearchUrl, '?') !== false) {
+      } elseif (str_contains($cvSearchUrl, '?')) {
         $form_state->setErrorByName('cv_search_url', 'Invalid URL. No query parameters required.');
       }
     }

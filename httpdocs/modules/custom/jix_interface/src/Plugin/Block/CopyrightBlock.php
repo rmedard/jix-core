@@ -6,6 +6,7 @@ namespace Drupal\jix_interface\Plugin\Block;
 
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class CopyrightBlock
@@ -20,6 +21,7 @@ use Drupal\Core\Block\BlockBase;
 class CopyrightBlock extends BlockBase
 {
 
+  #[ArrayShape(['#theme' => "string"])]
   public function build(): array
   {
     return [

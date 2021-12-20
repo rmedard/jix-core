@@ -8,8 +8,8 @@ use Drupal\node\NodeInterface;
 
 class EmailData
 {
-  private $notificationType;
-  private $entity;
+  private string $notificationType;
+  private NodeInterface $entity;
 
   /**
    * EmailData constructor.

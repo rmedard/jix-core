@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -22,9 +23,9 @@ use GuzzleHttp\Exception\GuzzleException;
 class JobsMigratorForm extends FormBase
 {
 
-  private $channel;
-  private $url;
-  private $client;
+  private string $channel;
+  private string $url;
+  private Client $client;
 
   public function __construct()
   {
@@ -33,12 +34,12 @@ class JobsMigratorForm extends FormBase
     $this->client = Drupal::httpClient();
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'batch_jobs_migrator_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $form['actions'] = array(
       '#type' => 'actions',
@@ -82,7 +83,7 @@ class JobsMigratorForm extends FormBase
     $form_state->setRebuild(TRUE);
   }
 
-  public static function process($item, &$contect)
+  public static function process($item, &$context)
   {
     $processed = 0;
     $termUrl = "https://www.jobinrwanda.com/jirapi/taxonomy_term/";
@@ -233,17 +234,11 @@ class JobsMigratorForm extends FormBase
       $howToApply = [];
       if (!empty($job['field_application_form_type'])) {
         $howTermId = intval($job['field_application_form_type']['und'][0]['tid']);
-        switch ($howTermId) {
-          case 26:
-            $howToApply = 'email';
-            break;
-          case 28:
-            $howToApply = 'external_link';
-            break;
-          default:
-            $howToApply = 'no_online_app';
-            break;
-        }
+        $howToApply = match ($howTermId) {
+          26 => 'email',
+          28 => 'external_link',
+          default => 'no_online_app',
+        };
       }
 
       $postingPlan = [];
@@ -273,16 +268,17 @@ class JobsMigratorForm extends FormBase
       $externalLink = [];
       if (!empty($job['field_external_application_link'])) {
         $link = $job['field_external_application_link']['und'][0]['url'];
-        if (substr($link, 0, 4) === "http") {
+        if (str_starts_with($link, "http")) {
           $externalLink = $link;
         } else {
-          $externalLink = 'http://' . $link;
+          $externalLink = 'https://' . $link;
         }
       }
 
       try {
         Node::create([
           'type' => 'job',
+          'field_job_old_nid' => $job['nid'],
           'title' => $job['title'],
           'uid' => 1,
           'status' => 1,

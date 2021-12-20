@@ -8,6 +8,7 @@ use Drupal\Core\Config\ConfigEvents;
 use Drupal\Core\Routing\RequestHelper;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\jix_settings\Form\SitesAndServicesForm;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -36,6 +37,7 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
    *
    * @return array The event names to listen to
    */
+  #[ArrayShape([ConfigEvents::SAVE => "string", KernelEvents::RESPONSE => "string"])]
   public static function getSubscribedEvents(): array
   {
     return [
@@ -63,7 +65,7 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
   }
 
   private function cleanPath($pathStr): string {
-    if (substr($pathStr, 0, 10) === '/index.php') {
+    if (str_starts_with($pathStr, '/index.php')) {
       return $this->cleanPath(substr_replace($pathStr, '', 0, 10));
     }
     return $pathStr;

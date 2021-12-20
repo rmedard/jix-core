@@ -8,6 +8,7 @@ use Drupal;
 use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\jix_settings\Form\SocialMediaSettingsForm;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class SocialMediaButtonsBlock
@@ -21,6 +22,7 @@ use Drupal\jix_settings\Form\SocialMediaSettingsForm;
 class SocialMediaButtonsBlock extends BlockBase
 {
 
+  #[ArrayShape(['#theme' => "string", '#facebook' => "string", '#twitter' => "string", '#instagram' => "string", '#youtube' => "string"])]
   public function build(): array
   {
     $facebook = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('facebook_page');

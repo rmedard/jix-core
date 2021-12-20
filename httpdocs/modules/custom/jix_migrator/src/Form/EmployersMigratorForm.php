@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -20,12 +21,12 @@ use GuzzleHttp\Exception\GuzzleException;
  *
  * @ingroup batch_import_employers
  */
-class MigratorForm extends FormBase
+class EmployersMigratorForm extends FormBase
 {
 
-  private $channel;
-  private $url;
-  private $client;
+  private string $channel;
+  private string $url;
+  private Client $client;
 
   public function __construct()
   {
@@ -34,12 +35,12 @@ class MigratorForm extends FormBase
     $this->client = Drupal::httpClient();
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'batch_migrator_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $form['actions'] = array(
       '#type' => 'actions',
@@ -62,16 +63,16 @@ class MigratorForm extends FormBase
       'error_message' => t('The process has encountered an error.')
     ];
 
-    $pagesCount = 21;
+    $pagesCount = 2;
 
-    for ($i = 0; $i <= 21; $i++) {
+    for ($i = 0; $i <= $pagesCount; $i++) {
       try {
         $response = $this->client->request('GET', $this->url,
           [
             'auth' => ['admin', 'mypass@jir5'],
             'query' => ['parameters[type]' => 'employer', 'parameters[status]' => 1, 'pagesize' => 100, 'page' => $i]
           ]);
-        $batch['operations'][] = [['\Drupal\jix_migrator\Form\MigratorForm', 'process'], [$response->getBody()->getContents()]];
+        $batch['operations'][] = [['\Drupal\jix_migrator\Form\EmployersMigratorForm', 'process'], [$response->getBody()->getContents()]];
       } catch (GuzzleException $e) {
         Drupal::logger($this->channel)->error('Guzzle exception: ' . $e->getMessage());
       }
@@ -83,7 +84,7 @@ class MigratorForm extends FormBase
     $form_state->setRebuild(TRUE);
   }
 
-  public static function process($item, &$contect)
+  public static function process($item, &$context)
   {
     $processed = 0;
     $termUrl = "https://www.jobinrwanda.com/jirapi/taxonomy_term/";
@@ -122,7 +123,7 @@ class MigratorForm extends FormBase
           try {
             $termResponse = $client->request('GET', $termUrl . $tid['tid'], ['auth' => ['admin', 'mypass@jir5']]);
             $remoteTerm = Json::decode($termResponse->getBody());
-            array_push($tnames, $remoteTerm['name']);
+            $tnames[] = $remoteTerm['name'];
           } catch (GuzzleException $e) {
             Drupal::logger($channel)->error('Guzzle exception: ' . $e->getMessage());
           }
@@ -137,10 +138,10 @@ class MigratorForm extends FormBase
       $employerWebsite = [];
       if (!empty($employer['field_employer_website'])) {
         $link = $employer['field_employer_website']['und'][0]['url'];
-        if (substr($link, 0, 4) === "http") {
+        if (str_starts_with($link, "http")) {
           $employerWebsite = $link;
         } else {
-          $employerWebsite = 'http://' . $link;
+          $employerWebsite = 'https://' . $link;
         }
       }
 

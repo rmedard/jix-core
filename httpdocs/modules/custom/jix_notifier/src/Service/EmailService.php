@@ -15,8 +15,8 @@ class EmailService
 {
 
   private string $channel;
-  private $mailManager;
-  private $twigService;
+  private mixed $mailManager;
+  private mixed $twigService;
 
   /**
    * EmailService constructor.

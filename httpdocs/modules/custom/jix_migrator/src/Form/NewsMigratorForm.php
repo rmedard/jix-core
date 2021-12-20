@@ -13,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
 use Drupal\file\FileInterface;
 use Drupal\node\Entity\Node;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**
@@ -23,9 +24,9 @@ use GuzzleHttp\Exception\GuzzleException;
 class NewsMigratorForm extends FormBase
 {
 
-  private $channel;
-  private $url;
-  private $client;
+  private string $channel;
+  private string $url;
+  private Client $client;
 
   public function __construct()
   {
@@ -34,12 +35,12 @@ class NewsMigratorForm extends FormBase
     $this->client = Drupal::httpClient();
   }
 
-  public function getFormId()
+  public function getFormId(): string
   {
     return 'batch_news_migrator_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state)
+  public function buildForm(array $form, FormStateInterface $form_state): array
   {
     $form['actions'] = array(
       '#type' => 'actions',
@@ -83,7 +84,7 @@ class NewsMigratorForm extends FormBase
     $form_state->setRebuild(TRUE);
   }
 
-  public static function process($item, &$contect)
+  public static function process($item, &$context)
   {
     $processed = 0;
     $client = Drupal::httpClient();

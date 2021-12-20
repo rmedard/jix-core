@@ -10,9 +10,11 @@ use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\jix_interface\Form\PostingPlansPageSettingsForm;
 use Drupal\node\NodeInterface;
+use JetBrains\PhpStorm\ArrayShape;
 
 class PagesController extends ControllerBase
 {
+  #[ArrayShape(['#theme' => "string", '#plans' => "array|\Drupal\Core\Entity\EntityInterface[]", '#header_text' => "array|mixed|null", '#footer_text' => "array|mixed|null"])]
   public function postingPlansPage(): array
   {
     $pricing_plans = [];

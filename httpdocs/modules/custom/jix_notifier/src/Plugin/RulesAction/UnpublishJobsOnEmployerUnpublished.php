@@ -30,14 +30,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class UnpublishJobsOnEmployerUnpublished extends RulesActionBase implements ContainerFactoryPluginInterface
 {
-  private $channel;
+  private string $channel;
 
   /**
    * The entity type manager service.
    *
    * @var EntityTypeManagerInterface
    */
-  protected $entityTypeManager;
+  protected EntityTypeManagerInterface $entityTypeManager;
 
   /**
    * UnpublishJobsOnEmployerUnpublished constructor.

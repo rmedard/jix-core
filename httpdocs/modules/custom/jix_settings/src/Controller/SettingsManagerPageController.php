@@ -5,6 +5,7 @@ namespace Drupal\jix_settings\Controller;
 
 
 use Drupal\Core\Controller\ControllerBase;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class SettingsManagerPageController
@@ -12,6 +13,7 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class SettingsManagerPageController extends ControllerBase
 {
+    #[ArrayShape(['#theme' => "string"])]
     public function content(): array
     {
       return [

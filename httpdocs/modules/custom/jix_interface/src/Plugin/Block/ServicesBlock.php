@@ -9,6 +9,7 @@ use Drupal\Core\Block\Annotation\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Cache\Cache;
 use Drupal\jix_settings\Form\SitesAndServicesForm;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * Class ServicesBlock
@@ -22,6 +23,7 @@ use Drupal\jix_settings\Form\SitesAndServicesForm;
 class ServicesBlock extends BlockBase
 {
 
+  #[ArrayShape(['#theme' => "string", '#services' => "array|string[]"])]
   public function build(): array
   {
     $servicesStr = strval(Drupal::configFactory()->get(SitesAndServicesForm::SETTINGS)->get('our_services'));
