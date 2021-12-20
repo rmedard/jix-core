@@ -98,7 +98,7 @@ function jix_core_theme_preprocess_node(&$variables)
  */
 function jix_core_theme_preprocess_container(&$variables)
 {
-  if (array_key_exists('data-drupal-selector', $variables['attributes'])) {
+  if (is_array($variables['attributes']) && array_key_exists('data-drupal-selector', $variables['attributes'])) {
     $selector = $variables['attributes']['data-drupal-selector'];
     if ($selector === 'edit-actions') {
       if (in_array($variables['element']['#type'], ['actions', 'webform_actions'])) {
