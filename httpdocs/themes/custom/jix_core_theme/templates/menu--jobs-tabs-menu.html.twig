@@ -30,9 +30,9 @@ We call a macro which calls itself to render the full tree.
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('nav') }}>
+      <ul{{ attributes.addClass('nav', 'nav-tabs', 'nav-fill', 'border-primary', 'border-2') }}>
     {% else %}
-      <ul class="menu">
+      <ul{{ attributes.addClass('menu', 'nav') }}>
     {% endif %}
     {% for item in items %}
       {% set current_count = menu_values[item.url.routeName] %}
@@ -47,6 +47,9 @@ We call a macro which calls itself to render the full tree.
           {% set link_classes = [
             'nav-link', 'px-2',
             item.in_active_trail ? 'active',
+            item.in_active_trail ? 'bg-primary',
+            item.in_active_trail ? 'border-primary',
+            item.in_active_trail ? 'text-white' : 'text-primary',
             item.url.getOption('attributes').class ? item.url.getOption('attributes').class | join(''),
             'nav-link-' ~ item.url.toString() | clean_class,
           ] %}
@@ -59,7 +62,7 @@ We call a macro which calls itself to render the full tree.
           <a{{ custom_link_attribute.addClass(link_classes) }} href="{{ item.url }}">{{ item.title }}
             <span{{ custom_badge_attribute.addClass(badge_classes) }}>{{ current_count }}</span></a>
           {% if item.below %}
-            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
           {% endif %}
         </li>
       {% endif %}
