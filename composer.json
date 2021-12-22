@@ -56,7 +56,7 @@
         "drupal/recaptcha": "^3.0",
         "drupal/restui": "^1.19",
         "drupal/rules": "3.x-dev@dev",
-        "drupal/simple_oauth": "^5.0",
+        "drupal/simple_oauth": "^5.1@beta",
         "drupal/simplenews": "^3.0@beta",
         "drupal/smart_ip": "^4.0",
         "drupal/swiftmailer": "^2.2",
