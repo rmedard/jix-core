@@ -63,7 +63,7 @@ class EmployersMigratorForm extends FormBase
       'error_message' => t('The process has encountered an error.')
     ];
 
-    $pagesCount = 2;
+    $pagesCount = 115;
 
     for ($i = 0; $i <= $pagesCount; $i++) {
       try {

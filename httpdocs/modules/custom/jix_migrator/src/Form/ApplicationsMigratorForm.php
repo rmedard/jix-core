@@ -108,27 +108,29 @@ class ApplicationsMigratorForm extends FormBase
       $other_files_file = file_save_data($other_files_data, 'public://webform/default_job_application_form/' . $other_files_filename, FileSystemInterface::EXISTS_REPLACE);
     }
 
+    $study = isset($item[8]) ? self::getTerm('category', $item[8]) : '';
+    $degree = isset($item[10]) ? self::getTerm('education_level', $item[10]) : '';
     $values = [
       'webform_id' => 'default_job_application_form',
       'data' => [
-        'field_application_sync' => $item[14],
+        'field_application_sync' => trim($item[14]),
         'job_application_cover' => [
           'format' => 'basic_html',
           'value' => $item[3]
         ],
-        'job_application_cv_resume_file' => $cv_file->id(),
+        'job_application_cv_resume_file' => $cv_file !== false ? $cv_file->id() : [],
         'job_application_cv_resume_title' => $item[4],
         'job_application_dob' => '',
-        'job_application_email' => $item[6],
+        'job_application_email' => trim($item[6]),
         'job_application_experience' => self::getCareerExp(intval($item[7]))->id(),
-        'job_application_field_study' => isset($item[8]) ? self::getTerm('category', $item[8])->id() : '',
+        'job_application_field_study' => $study instanceof TermInterface ? $study->id() : '',
         'job_application_firstname' => $item[9],
-        'job_application_highest_degree' => isset($item[10]) ? self::getTerm('education_level', $item[10])->id() : '',
+        'job_application_highest_degree' => $degree instanceof TermInterface ? $degree->id() : '',
         'job_application_job' => $job_id === 0 ? '' : $job_id,
         'job_application_lastname' => $item[12],
-        'job_application_nationality' => $item[13],
+        'job_application_nationality' => trim($item[13]),
         'job_application_other_files' => empty($other_files_file) ? '' : $other_files_file->id(),
-        'job_application_sex' => $item[15],
+        'job_application_sex' => trim($item[15]),
         'job_application_spoken_languages' => [
           'chinese' => array_key_exists('chinese', $languages) ? $languages['chinese'] : 'none',
           'english' => array_key_exists('english', $languages) ? $languages['english'] : 'none',

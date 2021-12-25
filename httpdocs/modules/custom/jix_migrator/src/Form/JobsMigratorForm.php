@@ -123,7 +123,7 @@ class JobsMigratorForm extends FormBase
           try {
             $termResponse = $client->request('GET', $termUrl . $tid['tid'], ['auth' => ['admin', 'mypass@jir5']]);
             $remoteTerm = Json::decode($termResponse->getBody());
-            array_push($tNames, $remoteTerm['name']);
+            $tNames[] = $remoteTerm['name'];
           } catch (GuzzleException $e) {
             Drupal::logger($channel)->error('Guzzle exception: ' . $e->getMessage());
           }
