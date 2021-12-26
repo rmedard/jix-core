@@ -251,6 +251,12 @@ div#block-managedad {
   padding: 0;
   border: none;
 
+  &.block-webform {
+    padding: 0.6rem;
+    border: 1px solid $primary-shade;
+    border-radius: 0.25rem;
+  }
+
   .content {
     font-size: 0.9rem;
   }
