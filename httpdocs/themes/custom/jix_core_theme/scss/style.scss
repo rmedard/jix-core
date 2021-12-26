@@ -10,9 +10,11 @@ Description: Bootstrap 4 with Sass
 
 html {
   height: 100%;
+
   body {
     background: $white;
     height: 100vh;
+
     div.dialog-off-canvas-main-canvas {
       height: 100vh;
     }
@@ -33,15 +35,19 @@ a {
 
 .site-footer {
   background: $footer-bg-color-light !important;
+
   div.block {
     width: 100%;
+
     .card.footer-block {
       background-color: $footer-block-color;
+
       .card-header {
         color: white;
         border: none;
         text-align: center;
       }
+
       .card-body {
         background-color: white;
         padding: 0.5rem;
@@ -50,6 +56,7 @@ a {
       }
     }
   }
+
   .jix-footer-bottom {
     background-color: $footer-bg-color;
   }
@@ -59,6 +66,7 @@ a {
   li a {
     color: $primary-shade;
   }
+
   li.active {
     background: opacify(rgba(#000000, 0.1), 0.2);
     border-radius: 0.35rem;
@@ -81,6 +89,7 @@ a {
 
 .card.sidebar-block {
   background-color: $brand-primary;
+
   .card-header {
     color: white;
     border: none;
@@ -89,6 +98,7 @@ a {
     font-weight: bold;
     padding: 0.5rem;
   }
+
   .card-body {
     background-color: white;
     padding: 0.5rem;
@@ -139,6 +149,7 @@ div.content {
 
   nav#navbar-top {
     padding: 0;
+
     img {
       height: 2.25rem;
     }
@@ -156,6 +167,7 @@ div.content {
 @media(min-width: 768px) { /* Big screens */
   nav#block-jobstabsmenu {
     border-bottom: 2px solid $secondary-shade;
+
     ul > li > a {
       border-radius: 4px 4px 0 0;
     }
@@ -176,6 +188,7 @@ ul[block='block-jix-core-theme-main-menu'] {
   li > a {
     color: $white;
   }
+
   li > a.is-active {
     color: $gray-400;
   }
@@ -234,8 +247,13 @@ div#block-managedad {
   border: none;
 }
 
-.sidebar .block .content {
-  font-size: 0.9rem;
+.sidebar .block {
+  padding: 0;
+  border: none;
+
+  .content {
+    font-size: 0.9rem;
+  }
 }
 
 .alert-success {
