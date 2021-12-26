@@ -205,8 +205,11 @@ function jix_core_theme_form_views_exposed_form_alter(&$form, FormStateInterface
  */
 function jix_core_theme_preprocess_form_element(&$variables)
 {
-  if ($variables['element']['#name'] === 'filter_titles_field' or $variables['element']['#name'] === 'field_job_category_target_id') {
-    $variables['attributes']['class'][] = 'input-group-sm';
+  if (array_key_exists('#name', $variables['element'])) {
+    $elementName = $variables['element']['#name'];
+    if ($elementName === 'filter_titles_field' or $elementName === 'field_job_category_target_id') {
+      $variables['attributes']['class'][] = 'input-group-sm';
+    }
   }
 }
 
