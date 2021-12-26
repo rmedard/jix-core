@@ -139,14 +139,22 @@
                     </a>
                   {% endif %}
                 </div>
-                <div class="col-4 d-flex justify-content-around">
-                  <a href="{{ content.field_employer_facebook.uri }}" target="_blank" class="disabled"><i
-                      class="fab fa-facebook"></i></a>
-                  <a href="{{ content.field_employer_twitter.uri }}" target="_blank"><i
-                      class="fab fa-twitter"></i></a>
-                  <a href="{{ content.field_employer_linkedin.uri }}" target="_blank"><i
-                      class="fab fa-linkedin"></i></a>
-                </div>
+                {% if content.field_employer_facebook or content.field_employer_twitter or content.field_employer_linkedin %}
+                  <div class="col-4 d-flex justify-content-around">
+                    {% if content.field_employer_facebook %}
+                      <a href="{{ content.field_employer_facebook.uri }}" target="_blank"><i
+                                class="fab fa-facebook"></i></a>
+                    {% endif %}
+                    {% if content.field_employer_twitter %}
+                      <a href="{{ content.field_employer_twitter.uri }}" target="_blank"><i
+                                class="fab fa-twitter"></i></a>
+                    {% endif %}
+                    {% if content.field_employer_linkedin %}
+                    <a href="{{ content.field_employer_linkedin.uri }}" target="_blank"><i
+                              class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>
