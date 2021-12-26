@@ -194,7 +194,8 @@ ul[block='block-jix-core-theme-main-menu'] {
   }
 }
 
-nav#block-jobstabsmenu {
+nav.menu--jobs-tabs-menu {
+  font-size: 0.96rem;
   .nav-pills .nav-link.active {
     background-color: $secondary-shade;
   }

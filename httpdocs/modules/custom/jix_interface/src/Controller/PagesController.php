@@ -23,7 +23,7 @@ class PagesController extends ControllerBase
       $query = $storage->getQuery()->range(0, 4)
         ->condition('type', 'pricing_plan')
         ->condition('status', NodeInterface::PUBLISHED)
-        ->sort('field_pricing_plan_order_number', 'ASC');
+        ->sort('field_pricing_plan_order_number');
       $planIds = $query->execute();
       if (!empty($planIds)) {
         $pricing_plans = $storage->loadMultiple(array_map('intval', array_values($planIds)));
