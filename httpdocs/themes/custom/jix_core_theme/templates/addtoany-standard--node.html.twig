@@ -22,30 +22,13 @@
       <div class="card-body p-2 bg-light">
         <div class="row">
           <div class="{{ apply_btn is empty ? 'col' : 'col-8' }}">
-            {% if button_setting != 'none' %}
-              {% set universal_button %}
-                <a class="a2a_dd addtoany_share"
-                   href="https://www.addtoany.com/share#url={{ link_url|url_encode }}&amp;title={{ link_title|url_encode }}">
-                  {% if button_image %}
-                    <img src="{{ button_image }}" alt="{{ 'Share'|t }}">
-                  {% endif %}
-                </a>
-              {% endset %}
-            {% endif %}
-
             <span class="a2a_kit a2a_kit_size_{{ buttons_size }} addtoany_list" data-a2a-url="{{ link_url }}"
                   data-a2a-title="{{ link_title }}">
-              {% if universal_button_placement == 'before' %}
-                {{ universal_button }}
-              {% endif %}
-
-              {% if addtoany_html %}
-                {{ addtoany_html|raw }}
-              {% endif %}
-
-              {% if universal_button_placement == 'after' %}
-                {{ universal_button }}
-              {% endif %}
+              <a class="a2a_button_facebook"></a>
+              <a class="a2a_button_twitter"></a>
+              <a class="a2a_button_whatsapp"></a>
+              <a class="a2a_button_linkedin"></a>
+              <a class="a2a_button_email"></a>
             </span>
           </div>
           {% if apply_btn is not empty %}
