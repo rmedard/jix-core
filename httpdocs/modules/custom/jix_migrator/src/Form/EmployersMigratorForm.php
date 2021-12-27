@@ -26,7 +26,7 @@ class EmployersMigratorForm extends FormBase
 
   private $channel;
   private $url;
-  private Client $client;
+  private $client;
 
   public function __construct()
   {

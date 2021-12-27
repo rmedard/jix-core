@@ -31,8 +31,6 @@ use Exception;
 class ApplicationsMigratorForm extends FormBase
 {
 
-  private int $counter;
-
   public function __construct()
   {
   }
