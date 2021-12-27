@@ -29,6 +29,10 @@ a {
   color: $accent-shade;
 }
 
+button, a.btn {
+  color: white !important;
+}
+
 .bg-inverse {
   background: $primary-shade !important;
 }
