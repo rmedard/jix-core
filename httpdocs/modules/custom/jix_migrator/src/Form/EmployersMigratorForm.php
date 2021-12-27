@@ -24,8 +24,8 @@ use GuzzleHttp\Exception\GuzzleException;
 class EmployersMigratorForm extends FormBase
 {
 
-  private string $channel;
-  private string $url;
+  private $channel;
+  private $url;
   private Client $client;
 
   public function __construct()
