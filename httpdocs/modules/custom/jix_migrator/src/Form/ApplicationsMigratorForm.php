@@ -11,9 +11,11 @@ use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityBase;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
 use Drupal\webform\Entity\WebformSubmission;
@@ -29,12 +31,10 @@ use Exception;
 class ApplicationsMigratorForm extends FormBase
 {
 
-  private string $channel;
   private int $counter;
 
   public function __construct()
   {
-    $this->channel = 'jix_migrator';
   }
 
   public function getFormId(): string
@@ -65,11 +65,11 @@ class ApplicationsMigratorForm extends FormBase
       'error_message' => t('The process has encountered an error.')
     ];
 
-    if (($handle = fopen("public://applications.csv", "r")) !== FALSE) {
+    if (($handle = fopen("public://exports-jobs-dates.csv", "r")) !== FALSE) {
       $rowsCount = 0;
-      while (($row_data = fgetcsv($handle, 0, "|", '"')) !== FALSE) {
+      while (($row_data = fgetcsv($handle, 0, ",", '"')) !== FALSE) {
         ++$rowsCount;
-        $batch['operations'][] = [['\Drupal\jix_migrator\Form\ApplicationsMigratorForm', 'process'], [$row_data]];
+        $batch['operations'][] = [['\Drupal\jix_migrator\Form\ApplicationsMigratorForm', 'updatePublishedAt'], [$row_data]];
       }
       batch_set($batch);
       $form_state->setRebuild(TRUE);
@@ -77,6 +77,31 @@ class ApplicationsMigratorForm extends FormBase
       Drupal::messenger()->addMessage('Imported ' . $rowsCount . ' applications!');
     }
 
+  }
+
+  public static function updatePublishedAt($item, &$context) {
+    $channel = 'jix_migrator';
+    $old_nid = $item[0];
+    if (isset($old_nid)) {
+      try {
+        $job_id = Drupal::entityTypeManager()
+          ->getStorage('node')->getQuery()
+          ->condition('field_job_old_nid', intval($old_nid))
+          ->execute();
+        $job_id = reset($job_id);
+        if (isset($job_id) && intval($job_id) !== 0) {
+          $job = Node::load(intval($job_id));
+          $job->set('published_at', DateTime::createFromFormat('m/d/Y - H:i', $item[1])->getTimestamp());
+          $job->save();
+        }
+      } catch (InvalidPluginDefinitionException|PluginNotFoundException|EntityStorageException $e) {
+        Drupal::logger($channel)->error($e->getMessage());
+      }
+    }
+
+    $context['results'][] = $item;
+    $context['message'] = t('Updated @count jobs', array('@count' => count($context['results'])));
+    Drupal::logger($channel)->debug($context['message']);
   }
 
   public static function process($item, &$context)
