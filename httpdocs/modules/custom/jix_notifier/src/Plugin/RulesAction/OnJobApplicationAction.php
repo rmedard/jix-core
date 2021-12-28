@@ -61,10 +61,10 @@ class OnJobApplicationAction extends RulesActionBase
   private function sendToCvSearch(WebformSubmission $jobApplication, string $cvSearchUrl)
   {
     $job = null;
-    $jobId = $jobApplication->getElementData('job_application_job');
+    $jobId = intval($jobApplication->getElementData('job_application_job'));
     $jobCategory = '';
-    if (!is_null($jobId) and count($jobId) > 0) {
-      $job = Node::load(intval($jobApplication->getElementData('job_application_job')));
+    if ($jobId > 0) {
+      $job = Node::load($jobId);
       $categories = (array)$job->get('field_job_category')->referencedEntities();
       foreach ($categories as $index => $category) {
         if ($category instanceof TermInterface) {
