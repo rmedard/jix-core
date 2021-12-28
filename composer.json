@@ -59,6 +59,7 @@
         "drupal/simple_oauth": "^5.1@beta",
         "drupal/simplenews": "^3.0@beta",
         "drupal/smart_ip": "^4.0",
+        "drupal/sophron": "^1.2",
         "drupal/swiftmailer": "^2.2",
         "drupal/telephone_validation": "^2.3",
         "drupal/token": "^1.7",
