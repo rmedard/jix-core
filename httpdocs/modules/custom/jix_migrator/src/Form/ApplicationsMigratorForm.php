@@ -63,11 +63,11 @@ class ApplicationsMigratorForm extends FormBase
       'error_message' => t('The process has encountered an error.')
     ];
 
-    if (($handle = fopen("public://exports-jobs-dates.csv", "r")) !== FALSE) {
+    if (($handle = fopen("public://expired-applications.csv", "r")) !== FALSE) {
       $rowsCount = 0;
       while (($row_data = fgetcsv($handle, 0, ",", '"')) !== FALSE) {
         ++$rowsCount;
-        $batch['operations'][] = [['\Drupal\jix_migrator\Form\ApplicationsMigratorForm', 'updatePublishedAt'], [$row_data]];
+        $batch['operations'][] = [['\Drupal\jix_migrator\Form\ApplicationsMigratorForm', 'process'], [$row_data]];
       }
       batch_set($batch);
       $form_state->setRebuild(TRUE);

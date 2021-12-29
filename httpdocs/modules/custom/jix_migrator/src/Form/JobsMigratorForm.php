@@ -30,7 +30,8 @@ class JobsMigratorForm extends FormBase
   public function __construct()
   {
     $this->channel = 'jix_migrator';
-    $this->url = 'https://www.jobinrwanda.com/jirapi/node.json';
+//    $this->url = 'https://www.jobinrwanda.com/jirapi/node.json';
+    $this->url = 'https://recovery.jobinrwanda.com/jirapi/node/';
     $this->client = Drupal::httpClient();
   }
 
@@ -62,20 +63,41 @@ class JobsMigratorForm extends FormBase
       'error_message' => t('The process has encountered an error.')
     ];
 
-    $pagesCount = 2;
+    $pagesCount = 1;
+//
+//    for ($i = 0; $i < $pagesCount; $i++) {
+//      try {
+//        $response = $this->client->request('GET', $this->url,
+//          [
+//            'auth' => ['admin', 'mypass@jir5'],
+//            'query' => ['parameters[type]' => 'job', 'parameters[status]' => 1, 'pagesize' => 100, 'page' => $i]
+//          ]);
+//        $batch['operations'][] = [['\Drupal\jix_migrator\Form\JobsMigratorForm', 'process'], [$response->getBody()->getContents()]];
+//      } catch (GuzzleException $e) {
+//        Drupal::logger($this->channel)->error('Guzzle exception: ' . $e->getMessage());
+//      }
+//    }
 
-    for ($i = 0; $i < $pagesCount; $i++) {
+    $jobIds = [
+      "39256", "39233", "39227", "39226", "39225", "39224", "39223", "39222", "39221", "39220", "39219",
+      "39218", "39205", "39204", "39194", "39173", "39172", "39167", "39166", "39138", "39097", "39096",
+      "39095", "39074", "39073", "39072", "39071", "39070", "39052", "39051", "39050", "38989", "38988", "38987",
+      "38983", "38981", "38980", "38979", "38968", "38951", "38848", "38783", "38768", "38763", "38754", "38752",
+      "38724", "38660", "38620", "38614", "38608", "38607", "38594", "38553"
+    ];
+    $jobs = [];
+    foreach ($jobIds as $jobId) {
       try {
-        $response = $this->client->request('GET', $this->url,
+        $response = $this->client->request('GET', $this->url . intval($jobId),
           [
-            'auth' => ['admin', 'mypass@jir5'],
-            'query' => ['parameters[type]' => 'job', 'parameters[status]' => 1, 'pagesize' => 100, 'page' => $i]
+            'auth' => ['admin', 'mypass@jir5']
           ]);
-        $batch['operations'][] = [['\Drupal\jix_migrator\Form\JobsMigratorForm', 'process'], [$response->getBody()->getContents()]];
+        $jobs[] = $response->getBody()->getContents();
       } catch (GuzzleException $e) {
         Drupal::logger($this->channel)->error('Guzzle exception: ' . $e->getMessage());
       }
     }
+    $batch['operations'][] = [['\Drupal\jix_migrator\Form\JobsMigratorForm', 'process'], [$jobs]];
 
     batch_set($batch);
     Drupal::messenger()->addMessage('Imported ' . $pagesCount . ' pages!');
@@ -86,21 +108,21 @@ class JobsMigratorForm extends FormBase
   public static function process($item, &$context)
   {
     $processed = 0;
-    $termUrl = "https://www.jobinrwanda.com/jirapi/taxonomy_term/";
+    $termUrl = "https://recovery.jobinrwanda.com/jirapi/taxonomy_term/";
     $client = Drupal::httpClient();
     $channel = 'jix_migrator';
-    $nodes = Json::decode($item);
+    $nodes = $item;
     Drupal::logger($channel)->info('Fetched Nodes: ' . count($nodes));
     foreach ($nodes as $node) {
-      $jobData = $client->request('GET', $node['uri'], ['auth' => ['admin', 'mypass@jir5']]);
-
-      $job = Json::decode($jobData->getBody());
+//      $jobData = $client->request('GET', $node['uri'], ['auth' => ['admin', 'mypass@jir5']]);
+//      $job = Json::decode($jobData->getBody());
+      $job = Json::decode($node);
 
       $attachmentFile = [];
       if (!empty($job['field_attachment'])) {
         $localUri = $job['field_attachment']['und'][0]['uri'];
         $filename = preg_replace("/\s+/", "", $job['field_attachment']['und'][0]['filename']);
-        $data = file_get_contents(str_replace(' ', '%20', 'https://www.jobinrwanda.com/sites/default/files/job details files' . substr($localUri, strrpos($localUri, '/'))));
+        $data = file_get_contents(str_replace(' ', '%20', 'https://recovery.jobinrwanda.com/sites/default/files/job details files' . substr($localUri, strrpos($localUri, '/'))));
         $file = file_save_data($data, 'public://job_description_files/' .
           $filename, FileSystemInterface::EXISTS_REPLACE);
         $attachmentFile = File::create([
@@ -281,7 +303,7 @@ class JobsMigratorForm extends FormBase
           'field_job_old_nid' => $job['nid'],
           'title' => $job['title'],
           'uid' => 1,
-          'status' => 1,
+          'status' => 0,
           'field_job_additional_email' => empty($job['field_additional_email_where_to']) ? [] : $job['field_additional_email_where_to']['und'][0]['email'],
           'field_job_offer_type' => lcfirst($job['field_offer_type']['und'][0]['value']),
           'field_job_application_deadline' => str_replace(' ', 'T', $job['field_deadline_for_application']['und'][0]['value']),
