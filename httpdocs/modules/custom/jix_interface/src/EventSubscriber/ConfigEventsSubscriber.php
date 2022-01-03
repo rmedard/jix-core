@@ -42,7 +42,7 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
   {
     return [
       ConfigEvents::SAVE => 'onConfigSave',
-      KernelEvents::RESPONSE => 'onRequest'
+//      KernelEvents::RESPONSE => 'onRequest'
     ];
   }
 
@@ -53,16 +53,16 @@ class ConfigEventsSubscriber implements EventSubscriberInterface
     }
   }
 
-  public function onRequest(ResponseEvent $requestEvent) {
-    if (!RequestHelper::isCleanUrl($requestEvent->getRequest())) {
-      Drupal::logger('jix_interface')->warning('Invalid Url with /index.php detected.');
-      $cleanRequestUri = $this->cleanPath($requestEvent->getRequest()->getRequestUri());
-      Drupal::logger('jix_interface')->warning('Clean Url: ' . $cleanRequestUri . ' | Type: ' . $requestEvent->getRequestType());
-      $response = new TrustedRedirectResponse($cleanRequestUri, 302);
-      $response->headers->set('X-Drupal-Route-Normalizer', 1);
-      $requestEvent->setResponse($response);
-    }
-  }
+//  public function onRequest(ResponseEvent $requestEvent) {
+//    if (!RequestHelper::isCleanUrl($requestEvent->getRequest())) {
+//      Drupal::logger('jix_interface')->warning('Invalid Url with /index.php detected.');
+//      $cleanRequestUri = $this->cleanPath($requestEvent->getRequest()->getRequestUri());
+//      Drupal::logger('jix_interface')->warning('Clean Url: ' . $cleanRequestUri . ' | Type: ' . $requestEvent->getRequestType());
+//      $response = new TrustedRedirectResponse($cleanRequestUri, 302);
+//      $response->headers->set('X-Drupal-Route-Normalizer', 1);
+//      $requestEvent->setResponse($response);
+//    }
+//  }
 
   private function cleanPath($pathStr): string {
     if (str_starts_with($pathStr, '/index.php')) {
