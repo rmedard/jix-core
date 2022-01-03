@@ -77,8 +77,24 @@ class WebsiteSettingsForm extends ConfigFormBase
       '#title' => $this->t('Site phone'),
       '#default_value' => $config->get('site_phone')
     ];
+    $form['stats_url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Statistics data URL'),
+      '#default_value' => $config->get('stats_url')
+    ];
 
     return parent::buildForm($form, $form_state);
+  }
+
+  public function validateForm(array &$form, FormStateInterface $form_state)
+  {
+    if (!$form_state->isValueEmpty('stats_url')) {
+      $isValid = filter_var($form_state->getValue('stats_url'), FILTER_VALIDATE_URL);
+      if ($isValid === false) {
+        $form_state->setErrorByName('stats_url', t('This must be a valid URL starting with \'http\' or \'https\''));
+      }
+    }
+    parent::validateForm($form, $form_state);
   }
 
   /**
@@ -92,6 +108,7 @@ class WebsiteSettingsForm extends ConfigFormBase
       ->set('site_address_line_1', $form_state->getValue('site_address_line_1'))
       ->set('site_address_line_2', $form_state->getValue('site_address_line_2'))
       ->set('site_phone', $form_state->getValue('site_phone'))
+      ->set('stats_url', $form_state->getValue('stats_url'))
       ->save();
     parent::submitForm($form, $form_state);
   }
