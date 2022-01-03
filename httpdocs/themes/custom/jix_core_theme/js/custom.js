@@ -18,6 +18,16 @@
         $(context).find('nav#block-jobstabsmenu > ul').addClass('border border-light rounded p-2');
       }
 
+      if (settings.site?.stats_url) {
+        fetchStatistics().then((data) => {
+          const stats = JSON.parse(data);
+          const jobsCount = Number(stats.totalJobs).toLocaleString();
+          const applicationsCount = Number(stats.totalApplications).toLocaleString();
+          $(context).find('#jobs-count > span').html(jobsCount);
+          $(context).find('#applications-count > span').html(applicationsCount);
+        })
+      }
+
       if(settings.path.isFront) {
         $(context).find('nav#block-jix-core-theme-main-menu > ul.nav > li:first-child').addClass('active');
         $(context).find('nav#block-jix-core-theme-main-menu > ul.nav > li:first-child > a').addClass('active');
@@ -73,4 +83,20 @@
     }
   };
 
+  async function fetchStatistics(args) {
+    let result;
+
+    try {
+      result = await $.ajax({
+        url: 'https://search.jobinrwanda.com/api/stats',
+        type: 'GET',
+        data: args
+      });
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 })(jQuery, Drupal);
+

@@ -19,16 +19,7 @@ class StatisticsService
     if ($entityType === 'job') {
       $statsUrl = Drupal::config('jix_settings.website.info')->get('stats_url');
       if (!empty($statsUrl)) {
-        try {
-          $response = Drupal::httpClient()->get($statsUrl);
-          if ($response instanceof ResponseInterface) {
-            $result = Json::decode($response->getBody());
-            return number_format(intval($result['totalJobs']));
-          }
-        } catch (RequestException $e) {
-          Drupal::logger('jix_interface')->error('Request to stats URL failed. ' . $e->getMessage());
-          return '0';
-        }
+        return '0'; //Awaits JS to update
       }
     }
 
@@ -49,17 +40,7 @@ class StatisticsService
   public function countJobSubmissions(): string
   {
     $statsUrl = Drupal::config('jix_settings.website.info')->get('stats_url');
-    if (!empty($statsUrl)) {
-      try {
-        $response = Drupal::httpClient()->get($statsUrl);
-        if ($response instanceof ResponseInterface) {
-          $result = Json::decode($response->getBody());
-          return number_format(intval($result['totalApplications']));
-        }
-      } catch (RequestException $e) {
-        Drupal::logger('jix_interface')->error('Request to stats URL failed. ' . $e->getMessage());
-      }
-    } else {
+    if (empty($statsUrl)) { // Else, waits for JS to update
       try {
         $storage = Drupal::entityTypeManager()->getStorage('webform_submission');
         $submissions_count = $storage->getQuery()
