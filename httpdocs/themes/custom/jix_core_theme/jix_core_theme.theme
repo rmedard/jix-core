@@ -452,6 +452,7 @@ function jix_core_theme_preprocess_addtoany_standard(&$variables)
 function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets)
 {
   $settings['site']['target_country'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_target_country');
+  $settings['site']['stats_url'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('stats_url');
 }
 
 /**
