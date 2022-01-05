@@ -34,8 +34,8 @@
       }
 
       $(context).find('table').removeClass().addClass('table table-hover table-bordered');
-      $(context).find('th').removeClass();
-      $(context).find('td').removeClass();
+      $(context).find('th').removeAttr('style class');
+      $(context).find('td').removeAttr('style class');
 
       $(context).find('a#edit-delete').addClass('btn btn-danger btn-sm');
 
