@@ -34,7 +34,7 @@
       }
 
       $(context).find('table').removeClass().addClass('table table-hover table-bordered');
-      $(context).find('table p').addClass('margin-0');
+      $(context).find('table p').addClass('m-0');
       $(context).find('th').removeAttr('style class');
       $(context).find('td').removeAttr('style class');
 
