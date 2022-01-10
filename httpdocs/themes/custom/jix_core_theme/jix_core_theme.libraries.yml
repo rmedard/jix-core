@@ -1,7 +1,6 @@
 global-styling:
   version: 1.x
   js:
-    js/barrio.js: {}
     node_modules/readmore-js/readmore.min.js: { minified: true }
     js/global.js: {}
     js/custom.js: {}
@@ -16,8 +15,3 @@ global-styling:
     - webform/webform.element.select2
     - webform/webform.element.telephone
     - jquery_ui_effects/fade
-
-bootstrap:
-  js:
-    js/popper.min.js: { minified: true }
-    js/bootstrap.min.js: { minified: true }
