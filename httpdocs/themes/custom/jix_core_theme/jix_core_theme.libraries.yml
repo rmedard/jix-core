@@ -19,4 +19,4 @@ global-styling:
 
 bootstrap:
   js:
-    js/bootstrap.js: { minified: true }
+    js/bootstrap.min.js: { minified: true }
