@@ -29,6 +29,7 @@ const paths = {
   },
   js: {
     bootstrap: './node_modules/bootstrap/dist/js/bootstrap.min.js',
+    bootstrapmap: './node_modules/bootstrap/dist/js/bootstrap.min.js.map',
     jquery: './node_modules/jquery/dist/jquery.min.js',
     popper: './node_modules/@popperjs/core/dist/umd/popper.min.js',
     poppermap: './node_modules/@popperjs/core/dist/umd/popper.min.js.map',
@@ -70,7 +71,7 @@ function styles () {
 
 // Move the javascript files into our js folder
 function js () {
-  return gulp.src([paths.js.bootstrap, paths.js.jquery, paths.js.popper, paths.js.poppermap, paths.js.barrio])
+  return gulp.src([paths.js.bootstrap, paths.js.bootstrapmap, paths.js.jquery, paths.js.popper, paths.js.poppermap, paths.js.barrio])
     .pipe(gulp.dest(paths.js.dest))
     .pipe(browserSync.stream())
 }
