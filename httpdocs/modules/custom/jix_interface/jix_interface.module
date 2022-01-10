@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
+use Drupal\webform\WebformSubmissionInterface;
 
 
 /**
@@ -113,9 +114,27 @@ function jix_interface_node_presave(EntityInterface $entity)
   if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
     if ($entity->isNew()) {
       $locationObj = Drupal::service('smart_ip.smart_ip_location');
-      $location = $locationObj->get('city') . ', ' . $locationObj->get('country') . '(' . $locationObj->get('countryCode') . ')';
+      $location = $locationObj->get('city') . ', ' . $locationObj->get('country') . ' (' . $locationObj->get('countryCode') . ')';
       $entity->set('field_job_creator_location', $location);
     }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function jix_interface_webform_submission_presave(EntityInterface $entity)
+{
+  if ($entity->bundle() === 'default_job_application_form' && $entity instanceof WebformSubmissionInterface) {
+    $locationObj = Drupal::service('smart_ip.smart_ip_location');
+    $location = t('@city, @country (@code)',
+      [
+        '@city' => $locationObj->get('city'),
+        '@country' => $locationObj->get('country'),
+        '@code' => $locationObj->get('countryCode')
+      ]
+    );
+    $entity->setElementData('job_application_candidate_location', $location);
   }
 }
 
