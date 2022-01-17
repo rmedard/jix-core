@@ -1,3 +1,5 @@
 services:
   jix_notifier.email_service:
     class: Drupal\jix_notifier\Service\EmailService
+  jix_notifier.job_applications_service:
+    class: Drupal\jix_notifier\Service\JobApplicationsService

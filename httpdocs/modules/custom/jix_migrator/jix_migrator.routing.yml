@@ -26,3 +26,10 @@ jix_migrator.applicationsmigratorbatch:
     _form: '\Drupal\jix_migrator\Form\ApplicationsMigratorForm'
   requirements:
     _permission: 'access content'
+jix_migrator.applicationssyncbatch:
+  path: '/admin/batch-sync-applications'
+  defaults:
+    _title: 'Synchronise applications'
+    _form: '\Drupal\jix_migrator\Form\SyncApplicationsToCvSearchForm'
+  requirements:
+    _permission: 'access content'
