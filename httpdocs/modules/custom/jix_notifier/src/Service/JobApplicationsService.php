@@ -49,7 +49,10 @@ class JobApplicationsService
     if ($cvFileId > 0) {
       $fileUrlGenerator = Drupal::service('file_url_generator');
       if ($fileUrlGenerator instanceof FileUrlGeneratorInterface) {
-        $cvFileUrl = $fileUrlGenerator->generateAbsoluteString(File::load($cvFileId)->getFileUri());
+        $cvFile = File::load($cvFileId);
+        if (!is_null($cvFile)) {
+          $cvFileUrl = $fileUrlGenerator->generateAbsoluteString($cvFile->getFileUri());
+        }
       }
     }
 
