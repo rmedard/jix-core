@@ -53,7 +53,7 @@ class SyncApplicationsToCvSearchForm extends FormBase
         ->fields('wsd', array('sid'))
         ->condition('wsd.webform_id', 'default_job_application_form')
         ->condition('wsd.name', 'field_application_sync')
-        ->condition('wsd.value', 'No')
+//        ->condition('wsd.value', 'No')
         ->execute()
         ->fetchAll(PDO::FETCH_COLUMN);
 
@@ -76,6 +76,7 @@ class SyncApplicationsToCvSearchForm extends FormBase
       $data = $applicationsService->getCvSearchJsonData($item);
       try {
         $response = Drupal::httpClient()->post(self::cvSearchUrl(), ['json' => $data]);
+        Drupal::logger($channel)->debug(Drupal\Component\Serialization\Json::encode(['request' => ['json' => $data], 'response' => $response]));
         if ($response->getStatusCode() == 200) {
           try {
             $item->setElementData('field_application_sync', 'Yes');
