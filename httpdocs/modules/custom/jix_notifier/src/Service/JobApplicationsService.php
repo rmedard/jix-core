@@ -21,12 +21,14 @@ class JobApplicationsService
     $jobCategory = '';
     if (is_numeric($jobId)) {
       $job = Node::load($jobId);
-      $jobCategoryField = $job->get('field_job_category');
-      if ($jobCategoryField instanceof EntityReferenceFieldItemListInterface) {
-        $categories = $jobCategoryField->referencedEntities();
-        foreach ($categories as $category) {
-          if ($category instanceof TermInterface) {
-            $jobCategory .= $category->getName() . ', ';
+      if (!is_null($job)) {
+        $jobCategoryField = $job->get('field_job_category');
+        if ($jobCategoryField instanceof EntityReferenceFieldItemListInterface) {
+          $categories = $jobCategoryField->referencedEntities();
+          foreach ($categories as $category) {
+            if ($category instanceof TermInterface) {
+              $jobCategory .= $category->getName() . ', ';
+            }
           }
         }
       }
