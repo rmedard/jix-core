@@ -53,7 +53,7 @@ class SyncApplicationsToCvSearchForm extends FormBase
         ->fields('wsd', array('sid'))
         ->condition('wsd.webform_id', 'default_job_application_form')
         ->condition('wsd.name', 'field_application_sync')
-//        ->condition('wsd.value', 'No')
+        ->condition('wsd.value', 'No')
         ->execute()
         ->fetchAll(PDO::FETCH_COLUMN);
 
