@@ -89,8 +89,7 @@ class EmailService
         $templatePath = '/templates/jix-notifier-new-job-published.html.twig';
         break;
     }
-    return $this->twigService
-      ->loadTemplate(drupal_get_path('module', $this->channel) . $templatePath)
-      ->render($variables);
+    $modulePath = Drupal::service('extension.list.module')->getPath($this->channel);
+    return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);
   }
 }

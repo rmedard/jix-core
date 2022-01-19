@@ -42,7 +42,9 @@
         <dt>{{ job.field_job_contact_name.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
         <dt>{{ job.field_job_contact_phone.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
         <dt>{{ job.field_job_contact_email.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
-        <dt>{{ job.field_job_employer.entity.field_employer_tin_number..fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
+        {% if job.field_job_employer.entity.field_employer_tin_number is not empty %}
+          <dt>{{ job.field_job_employer.entity.field_employer_tin_number.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
+        {% endif %}
       </dl>
       <p>{{ 'The job offer needs validation before it appears to the public.' | t }}</p>
       <br>
