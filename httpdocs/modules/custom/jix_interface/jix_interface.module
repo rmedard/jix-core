@@ -130,11 +130,13 @@ function jix_interface_node_presave(EntityInterface $entity)
 function jix_interface_webform_submission_presave(EntityInterface $entity)
 {
   if ($entity->bundle() === 'default_job_application_form' && $entity instanceof WebformSubmissionInterface) {
-    $locationObj = Drupal::service('smart_ip.smart_ip_location');
-    if ($locationObj instanceof SmartIpLocationInterface) {
-      $locationData = $locationObj->getData(false);
-      $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
-      $entity->setElementData('job_application_candidate_location', $location);
+    if ($entity->isNew()) {
+      $locationObj = Drupal::service('smart_ip.smart_ip_location');
+      if ($locationObj instanceof SmartIpLocationInterface) {
+        $locationData = $locationObj->getData(false);
+        $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
+        $entity->setElementData('job_application_candidate_location', $location);
+      }
     }
   }
 }
