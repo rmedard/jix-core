@@ -5,8 +5,10 @@ namespace Drupal\jix_notifier\Plugin\RulesAction;
 
 
 use Drupal;
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
+use Drupal\jix_notifier\Form\NotifierGeneralSettingsForm;
 use Drupal\rules\Core\Annotation\RulesAction;
 use Drupal\rules\Core\RulesActionBase;
 use Drupal\webform\Entity\WebformSubmission;
@@ -44,9 +46,13 @@ class OnJobApplicationAction extends RulesActionBase
   protected function doExecute(EntityInterface $entity)
   {
     if ($entity instanceof WebformSubmission) {
-      $cvSearchUrl = Drupal::config('jix_notifier.general.settings')->get('cv_search_url');
-      if (isset($cvSearchUrl) && $cvSearchUrl !== '') {
-        $this->sendToCvSearch($entity, $cvSearchUrl);
+      $cvSearchUrl = trim(Drupal::config(NotifierGeneralSettingsForm::SETTINGS)->get('cv_search_url'));
+      if (!empty($cvSearchUrl)) {
+        if (UrlHelper::isValid($cvSearchUrl)) {
+          $this->sendToCvSearch($entity, $cvSearchUrl);
+        } else {
+          Drupal::logger($this->channel)->error('Invalid CV Search Url: ' . $cvSearchUrl);
+        }
       }
     }
   }

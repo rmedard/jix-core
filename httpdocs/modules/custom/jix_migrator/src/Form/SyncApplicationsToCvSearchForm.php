@@ -6,6 +6,7 @@ use Drupal;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\jix_notifier\Form\NotifierGeneralSettingsForm;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionInterface;
 use GuzzleHttp\Exception\ClientException;
@@ -16,7 +17,7 @@ class SyncApplicationsToCvSearchForm extends FormBase
 
   private static function cvSearchUrl()
   {
-    return Drupal::config('jix_notifier.general.settings')->get('cv_search_url');
+    return Drupal::config(NotifierGeneralSettingsForm::SETTINGS)->get('cv_search_url');
   }
 
   public function getFormId(): string
