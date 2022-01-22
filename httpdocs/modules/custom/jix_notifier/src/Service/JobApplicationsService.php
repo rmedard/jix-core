@@ -3,18 +3,54 @@
 namespace Drupal\jix_notifier\Service;
 
 use Drupal;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\file\Entity\File;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\TermInterface;
+use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionInterface;
+use GuzzleHttp\Exception\ClientException;
 
 class JobApplicationsService
 {
 
-  public function getCvSearchJsonData(WebformSubmissionInterface $submission): array
+  private string $channel;
+
+  public function __construct()
+  {
+    $this->channel = 'jix_notifier';
+  }
+
+  public function sendToCvSearch(WebformSubmission $jobApplication, string $cvSearchUrl)
+  {
+    $data = $this->getCvSearchJsonData($jobApplication);
+    try {
+      $response = Drupal::httpClient()->post($cvSearchUrl, ['json' => $data]);
+      if ($response->getStatusCode() == 200) {
+        try {
+          $jobApplication->setElementData('field_application_sync', 'Yes');
+          $jobApplication->save();
+          Drupal::logger($this->channel)->info('Job application {'. $jobApplication->id() .'} sent to CV Search');
+        } catch (EntityStorageException $e) {
+          Drupal::logger($this->channel)->error('Saving application failed: ' . $e->getMessage());
+        }
+      } else {
+        Drupal::logger($this->channel)->error(t('Synchronizing application @id failed with error code @code: @message',
+          [
+            '@id' => $jobApplication->id(),
+            '@code' => $response->getStatusCode(),
+            '@message' => $response->getReasonPhrase()
+          ]));
+      }
+    } catch (ClientException $exception) {
+      Drupal::logger($this->channel)->error('Cv Search Client Exception: ' . $exception->getMessage());
+    }
+  }
+
+  private function getCvSearchJsonData(WebformSubmissionInterface $submission): array
   {
     $jobId = $submission->getElementData('job_application_job');
     $job = null;

@@ -121,14 +121,17 @@ class ApplicationsMigratorForm extends FormBase
     $cv_filename = $random_string . '_' . $now . '_cv_file' . $extension;
 
     $cv_data = file_get_contents($item[2]);
-    $cv_file = file_save_data($cv_data, 'public://webform/default_job_application_form/' . $cv_filename, FileSystemInterface::EXISTS_REPLACE);
+    $fileRepository = Drupal::service('file.repository');
+    $cv_file = $fileRepository->writeData($cv_data, 'public://webform/default_job_application_form/' . $cv_filename);
+//    $cv_file = file_save_data($cv_data, 'public://webform/default_job_application_form/' . $cv_filename, FileSystemInterface::EXISTS_REPLACE);
     $languages = self::getLanguages($item[17]);
 
     $other_files_file = '';
     if (isset($item[1])) {
       $other_files_filename = '';
       $other_files_data = file_get_contents($item[2]);
-      $other_files_file = file_save_data($other_files_data, 'public://webform/default_job_application_form/' . $other_files_filename, FileSystemInterface::EXISTS_REPLACE);
+//      $other_files_file = file_save_data($other_files_data, 'public://webform/default_job_application_form/' . $other_files_filename, FileSystemInterface::EXISTS_REPLACE);
+      $other_files_file = $fileRepository->writeData($other_files_data, 'public://webform/default_job_application_form/' . $other_files_filename);
     }
 
     $study = isset($item[8]) ? self::getTerm('category', $item[8]) : '';

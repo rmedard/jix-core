@@ -3,13 +3,11 @@
 namespace Drupal\jix_migrator\Form;
 
 use Drupal;
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\jix_notifier\Form\NotifierGeneralSettingsForm;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionInterface;
-use GuzzleHttp\Exception\ClientException;
 use PDO;
 
 class SyncApplicationsToCvSearchForm extends FormBase
@@ -71,32 +69,9 @@ class SyncApplicationsToCvSearchForm extends FormBase
 
   public static function sync($item, &$context)
   {
-    $channel = 'jix_migrator';
     if ($item instanceof WebformSubmissionInterface) {
       $applicationsService = Drupal::service('jix_notifier.job_applications_service');
-      $data = $applicationsService->getCvSearchJsonData($item);
-      try {
-        $response = Drupal::httpClient()->post(self::cvSearchUrl(), ['json' => $data]);
-        Drupal::logger($channel)->debug(Drupal\Component\Serialization\Json::encode(['request' => ['json' => $data], 'response' => $response]));
-        if ($response->getStatusCode() == 200) {
-          try {
-            $item->setElementData('field_application_sync', 'Yes');
-            $item->save();
-          } catch (EntityStorageException $e) {
-            Drupal::logger($channel)->error('Saving application failed: ' . $e->getMessage());
-          }
-        } else {
-          Drupal::logger($channel)->error(t('Synchronizing application @id failed with error code @code: @message',
-            [
-              '@id' => $item->id(),
-              '@code' => $response->getStatusCode(),
-              '@message' => $response->getReasonPhrase()
-            ]));
-        }
-      } catch (ClientException $e) {
-        Drupal::logger($channel)->error('Cv Search Client Exception: ' . $e->getMessage());
-      }
-
+      $applicationsService->sendToCvSearch($item, self::cvSearchUrl());
       $context['results'][] = $item;
       $context['message'] = t('Synchronised @count applications', array('@count' => count($context['results'])));
     }
