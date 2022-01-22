@@ -15,6 +15,7 @@ use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
 
 class JobApplicationsService
 {
@@ -49,7 +50,7 @@ class JobApplicationsService
       }
     } catch (ClientException $exception) {
       Drupal::logger($this->channel)->error('Cv Search Client Exception: ' . $exception->getMessage());
-    } catch (RequestException $exception) {
+    } catch (RequestException | ServerException $exception) {
       Drupal::logger($this->channel)->error('Cv Search Request Exception: ' . $exception->getMessage() . ' | Request body: ' . Json::encode($data));
     }
   }
