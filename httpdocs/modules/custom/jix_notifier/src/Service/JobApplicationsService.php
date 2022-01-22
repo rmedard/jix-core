@@ -3,6 +3,7 @@
 namespace Drupal\jix_notifier\Service;
 
 use Drupal;
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
@@ -13,6 +14,7 @@ use Drupal\taxonomy\TermInterface;
 use Drupal\webform\Entity\WebformSubmission;
 use Drupal\webform\WebformSubmissionInterface;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 
 class JobApplicationsService
 {
@@ -47,6 +49,8 @@ class JobApplicationsService
       }
     } catch (ClientException $exception) {
       Drupal::logger($this->channel)->error('Cv Search Client Exception: ' . $exception->getMessage());
+    } catch (RequestException $exception) {
+      Drupal::logger($this->channel)->error('Cv Search Request Exception: ' . $exception->getMessage() . ' | Request body: ' . Json::encode($data));
     }
   }
 
