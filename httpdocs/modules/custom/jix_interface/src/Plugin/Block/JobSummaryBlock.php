@@ -38,7 +38,8 @@ class JobSummaryBlock extends BlockBase
           '#theme' => 'jix_job_summary',
           '#job' => $job,
           '#viewsCount' => $viewsCount,
-          '#lang' => Drupal::languageManager()->getCurrentLanguage()->getId()
+          '#lang' => Drupal::languageManager()->getCurrentLanguage()->getId(),
+          '#timezone' => Drupal::config('system.date')->get('timezone')['default']
         ];
       }
     }

@@ -34,8 +34,8 @@
           :</b> {{ job.field_job_contract_type.getSettings('allowed_values')['allowed_values'][job.field_job_contract_type.value] }}
       </li>
       <li class="list-group-item py-1 px-0 border-0">
-        {% set day = job.field_job_application_deadline.value|date("l")|t %}
-        {% set datetime = job.field_job_application_deadline.value|date("d/m/Y H:i") %}
+        {% set day = job.field_job_application_deadline.value|date("l", timezone)|t %}
+        {% set datetime = job.field_job_application_deadline.value|date("d/m/Y H:i", timezone) %}
         <b>{{ 'Deadline'|t }}:</b> {{ day }}, {{ datetime }}
       </li>
       <li class="list-group-item pt-1 pb-1 px-0 border-0">
