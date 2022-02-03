@@ -45,7 +45,7 @@ We call a macro which calls itself to render the full tree.
         ] %}
         <li{{ item.attributes.addClass(classes) }}>
           {% set link_classes = [
-            'nav-link', 'px-2',
+            'nav-link', 'px-1',
             item.in_active_trail ? 'active',
             item.in_active_trail ? 'bg-primary',
             item.in_active_trail ? 'border-primary',
