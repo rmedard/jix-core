@@ -177,6 +177,11 @@ function jix_interface_field_widget_form_alter(&$element, FormStateInterface $fo
     // Add after build to remove the help wrapper and text.
     $element['#after_build'][] = 'jix_interface_after_build';
   }
+
+  if ($field_definition->getName() === 'field_testimonial_message') {
+    $element['#allowed_formats'] = ['basic_html'];
+    $element['#after_build'][] = 'jix_interface_after_build';
+  }
 }
 
 function jix_interface_after_build(array $element, FormStateInterface $form_state): array

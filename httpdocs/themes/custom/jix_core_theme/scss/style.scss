@@ -168,16 +168,6 @@ div.content {
   }
 }
 
-@media(min-width: 768px) { /* Big screens */
-  nav#block-jobstabsmenu {
-    border-bottom: 2px solid $secondary-shade;
-
-    ul > li > a {
-      border-radius: 4px 4px 0 0;
-    }
-  }
-}
-
 form#views-exposed-form-jobs-display-page-search-result-page {
   div.form-row > div, fieldset {
     margin-bottom: 0;
