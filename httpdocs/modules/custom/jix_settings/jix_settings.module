@@ -40,11 +40,12 @@ function jix_settings_theme($existing, $type, $theme, $path): array
  */
 function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
 {
-  if ($view->storage->id() === 'job_applications' && $view->current_display === 'page_job_applications_management') {
+  if ($view->storage->id() === 'job_applications' &&
+      ($view->current_display === 'page_job_applications_management' || $view->current_display === 'data_export_applications')) {
     if ($query instanceof Sql) {
       foreach ($query->where as &$condition_group) {
         foreach ($condition_group['conditions'] as &$condition) {
-          if (strpos($condition['field'], 'webform_submission.created') !== FALSE) {
+          if (str_contains($condition['field'], 'webform_submission.created')) {
             adjustDayHoursInterval($condition);
             break;
           }
@@ -57,7 +58,7 @@ function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $q
     if ($query instanceof Sql) {
       foreach ($query->where as &$condition_group) {
         foreach ($condition_group['conditions'] as &$condition) {
-          if (strpos($condition['field'], 'node_field_data.created') !== FALSE) {
+          if (str_contains($condition['field'], 'node_field_data.created')) {
             adjustDayHoursInterval($condition);
             break;
           }
