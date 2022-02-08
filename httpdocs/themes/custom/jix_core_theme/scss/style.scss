@@ -18,6 +18,10 @@ html {
     div.dialog-off-canvas-main-canvas {
       height: 100vh;
     }
+
+    img.jix-logo {
+      max-height: 90px;
+    }
   }
 }
 
@@ -190,9 +194,6 @@ ul[block='block-jix-core-theme-main-menu'] {
 
 nav.menu--jobs-tabs-menu {
   font-size: 0.96rem;
-  .nav-pills .nav-link.active {
-    background-color: $secondary-shade;
-  }
 }
 
 .jix-pricing-price {
