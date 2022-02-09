@@ -32,7 +32,6 @@
         "drupal/country": "1.x-dev@dev",
         "drupal/date_popup": "^1.1",
         "drupal/delete_all": "^2.0",
-        "drupal/devel": "^4.0",
         "drupal/editor_advanced_link": "^1.8",
         "drupal/field_group": "^3.1",
         "drupal/field_permissions": "^1.1",
@@ -40,7 +39,7 @@
         "drupal/fivestar": "^1.0@alpha",
         "drupal/fontawesome": "^2.17",
         "drupal/geotimezone": "^3.0",
-        "drupal/google_analytics": "^3.1",
+        "drupal/google_analytics": "^4.0",
         "drupal/honeypot": "^2.0",
         "drupal/imagemagick": "^3.2",
         "drupal/jquery_ui_accordion": "^1.1",
@@ -79,6 +78,7 @@
     },
     "require-dev": {
         "drupal/core-dev": "^9",
+        "drupal/devel": "^4.1",
         "drupal/devel_entity_updates": "^3.0"
     },
     "conflict": {
