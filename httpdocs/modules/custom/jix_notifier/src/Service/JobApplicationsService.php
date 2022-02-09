@@ -104,6 +104,7 @@ class JobApplicationsService
         $cvFile = File::load($cvFileId);
         if ($cvFile instanceof FileInterface) {
           $cvFileUrl = $fileUrlGenerator->generateAbsoluteString($cvFile->getFileUri());
+          $cvFileUrl = $this->cleanupFileUrl($cvFileUrl, $submission->id());
         }
       }
     }
@@ -114,6 +115,7 @@ class JobApplicationsService
     $coverLetter = $submission->getElementData('job_application_cover');
     $coverLetter = empty($coverLetter) ? '' : strip_tags($coverLetter['value']);
     return [
+      'AppId' => $submission->id(),
       'DateReceived' => date('Y-m-d H:m:s', $submission->getCompletedTime()),
       'FirstName' => $submission->getElementData('job_application_firstname'),
       'LastName' => $submission->getElementData('job_application_lastname'),
@@ -129,8 +131,19 @@ class JobApplicationsService
       'Languages' => substr_replace(trim($languages), '', -1),
       'Experience' => is_numeric($experienceId) ? Term::load($experienceId)->getName() : '',
       'Sex' => $submission->getElementData('job_application_sex'),
-      'cvUrl' => $cvFileUrl
+      'cvUrl' => $this->cleanupFileUrl($cvFileUrl, $submission->id())
     ];
   }
 
+  /** Remove this method when https://www.drupal.org/project/webform/issues/3175525 is resolved
+   * @param $url
+   * @param $submissionId
+   * @return string
+   */
+  private function cleanupFileUrl($url, $submissionId): string {
+    if (str_contains($url, '_sid_')) {
+      return str_replace('_sid_', strval($submissionId), $url);
+    }
+    return $url;
+  }
 }
