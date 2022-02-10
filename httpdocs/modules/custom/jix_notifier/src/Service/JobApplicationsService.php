@@ -47,7 +47,7 @@ class JobApplicationsService
             try {
               $jobApplication->setElementData('field_application_sync', 'Yes');
               $jobApplication->save();
-              Drupal::logger($this->channel)->info('Job application {'. $jobApplication->id() .'} sent to CV Search');
+              Drupal::logger($this->channel)->info('Job application {'. $jobApplication->id() .'} sent to CV Search | Body: ' . Json::encode($data));
             } catch (EntityStorageException $e) {
               Drupal::logger($this->channel)->error('Saving application failed: ' . $e->getMessage());
             }
