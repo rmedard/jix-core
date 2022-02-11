@@ -18,15 +18,15 @@ use JetBrains\PhpStorm\Pure;
  * @package Drupal\jix_notifier\Plugin\RulesAction
  *
  * @RulesAction(
- *     id = "rules_action_new_job_application",
- *     label = @Translation("New Job Application Action"),
+ *     id = "rules_action_send_job_application_cv_cearch",
+ *     label = @Translation("Send Job Application to CV Search Action"),
  *     category = @Translation("Jix Custom Actions"),
  *     context_definitions = {
  *       "entity" = @ContextDefinition("entity:webform_submission", label = @Translation("Submission object"), description = @Translation("Submitted data"))
  *     }
  * )
  */
-class OnJobApplicationAction extends RulesActionBase
+class SendJobApplicationToCVSearchAction extends RulesActionBase
 {
 
   private string $channel;
