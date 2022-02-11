@@ -70,7 +70,8 @@ class JobApplicationsService
 
   private function getCvSearchJsonData(WebformSubmissionInterface $submission): array
   {
-    $jobId = $submission->getElementData('job_application_job');
+    $data = $submission->getData();
+    $jobId = $data['job_application_job'];
     $job = null;
     $jobCategory = '';
     if (is_numeric($jobId)) {
@@ -89,7 +90,7 @@ class JobApplicationsService
     }
 
     $languages = '';
-    $languageField = $submission->getElementData('job_application_spoken_languages');
+    $languageField = $data['job_application_spoken_languages'];
     if (is_array($languageField)) {
       foreach ($languageField as $key => $language) {
         $languages .= ucfirst($key) . ':' . ucfirst($language) . ', ';
@@ -97,7 +98,7 @@ class JobApplicationsService
     }
 
     $cvFileUrl = '';
-    $cvFileId = $submission->getElementData('job_application_cv_resume_file');
+    $cvFileId = $data['job_application_cv_resume_file'];
     if (is_numeric($cvFileId)) {
       $fileUrlGenerator = Drupal::service('file_url_generator');
       if ($fileUrlGenerator instanceof FileUrlGeneratorInterface) {
@@ -109,28 +110,28 @@ class JobApplicationsService
       }
     }
 
-    $experienceId = $submission->getElementData('job_application_experience');
-    $diplomaId = $submission->getElementData('job_application_highest_degree');
-    $studyId = $submission->getElementData('job_application_field_study');
-    $coverLetter = $submission->getElementData('job_application_cover');
+    $experienceId = $data['job_application_experience'];
+    $diplomaId = $data['job_application_highest_degree'];
+    $studyId = $data['job_application_field_study'];
+    $coverLetter = $data['job_application_cover'];
     $coverLetter = empty($coverLetter) ? '' : strip_tags($coverLetter['value']);
     return [
       'AppId' => $submission->id(),
       'DateReceived' => date('Y-m-d H:m:s', $submission->getCompletedTime()),
-      'FirstName' => $submission->getElementData('job_application_firstname'),
-      'LastName' => $submission->getElementData('job_application_lastname'),
-      'Email' => $submission->getElementData('job_application_email'),
-      'Tel' => $submission->getElementData('job_application_telephone'),
+      'FirstName' => $data['job_application_firstname'],
+      'LastName' => $data['job_application_lastname'],
+      'Email' => $data['job_application_email'],
+      'Tel' => $data['job_application_telephone'],
       'JobId' => $jobId,
       'JobTitle' => $job instanceof NodeInterface ? $job->getTitle() : '',
       'JobCategory' => substr_replace(trim($jobCategory), '', -1),
       'CoverNote' => $coverLetter,
-      'Nationality' => $submission->getElementData('job_application_nationality'),
+      'Nationality' => $data['job_application_nationality'],
       'Diploma' => is_numeric($diplomaId) ? Term::load($diplomaId)->getName() : '',
       'Study' => is_numeric($studyId) ? Term::load($studyId)->getName() : '',
       'Languages' => substr_replace(trim($languages), '', -1),
       'Experience' => is_numeric($experienceId) ? Term::load($experienceId)->getName() : '',
-      'Sex' => $submission->getElementData('job_application_sex'),
+      'Sex' => $data['job_application_sex'],
       'cvUrl' => $this->cleanupFileUrl($cvFileUrl, $submission->id())
     ];
   }
