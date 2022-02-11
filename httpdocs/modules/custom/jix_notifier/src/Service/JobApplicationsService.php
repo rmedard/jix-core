@@ -99,10 +99,10 @@ class JobApplicationsService
 
     $cvFileUrl = '';
     $cvFileId = $data['job_application_cv_resume_file'];
-    if (is_numeric($cvFileId)) {
+    if (!empty($cvFileId)) {
       $fileUrlGenerator = Drupal::service('file_url_generator');
       if ($fileUrlGenerator instanceof FileUrlGeneratorInterface) {
-        $cvFile = File::load($cvFileId);
+        $cvFile = File::load(intval($cvFileId));
         if ($cvFile instanceof FileInterface) {
           $cvFileUrl = $fileUrlGenerator->generateAbsoluteString($cvFile->getFileUri());
           $cvFileUrl = $this->cleanupFileUrl($cvFileUrl, $submission->id());
@@ -116,7 +116,7 @@ class JobApplicationsService
     $coverLetter = $data['job_application_cover'];
     $coverLetter = empty($coverLetter) ? '' : strip_tags($coverLetter['value']);
     return [
-      'AppId' => $submission->id(),
+      'AppId' => intval($submission->id()),
       'DateReceived' => date('Y-m-d H:m:s', $submission->getCompletedTime()),
       'FirstName' => $data['job_application_firstname'],
       'LastName' => $data['job_application_lastname'],
