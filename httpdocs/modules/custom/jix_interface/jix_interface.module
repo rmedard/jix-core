@@ -4,9 +4,12 @@
  * A description of what your module does.
  */
 
+use Drupal\Component\Utility\Random;
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\file\Entity\File;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
 use Drupal\smart_ip\SmartIpLocationInterface;
@@ -135,8 +138,30 @@ function jix_interface_webform_submission_presave(EntityInterface $entity)
       $locationObj = Drupal::service('smart_ip.smart_ip_location');
       if ($locationObj instanceof SmartIpLocationInterface) {
         $locationData = $locationObj->getData(false);
-        $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
+        $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')'; //[random:hash:md5]_[current-date:concatenated_date_time]_cv_file
         $entity->setElementData('job_application_candidate_location', $location);
+
+        $data = $entity->getData();
+
+        $cvFileId = $data['job_application_cv_resume_file'];
+        if (!empty($cvFileId)) {
+          $cvFile = File::load(intval($cvFileId));
+          $hash = md5((new Random())->string(20));
+          $today = date('YmdHis', (new DrupalDateTime())->getTimestamp());
+          $extension = pathinfo($cvFile->getFileUri())['extension'];
+          $cvFile->setFilename($hash . '_' . $today . '_cv_file.' . $extension);
+        }
+
+        $otherFileIds = $data['job_application_other_files'];
+        if (!empty($otherFileIds)) {
+          foreach ($otherFileIds as $otherFileId) {
+            $otherFile = File::load(intval($otherFileId));
+            $hash = md5((new Random())->string(20));
+            $today = date('YmdHis', (new DrupalDateTime())->getTimestamp());
+            $extension = pathinfo($otherFile->getFileUri())['extension'];
+            $otherFile->setFilename($hash . '_' . $today . '_additional_file.' . $extension);
+          }
+        }
       }
     }
   }
