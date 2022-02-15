@@ -45,7 +45,11 @@ class OnJobApplicationSaved extends EmailWebformHandler
         }
         $message['to_mail'] = $recipients;
         $message['reply_to'] = $values['job_application_email'];
-        $message['subject'] = $this->t('A new job application for @title', ['@title' => $job->getTitle()]);
+        $message['subject'] = $this->t('A new job application for @title (Ref: @jobId/@applicationId)', [
+          '@title' => $job->getTitle(),
+          '@jobId' => $jobId,
+          '@applicationId' => $webform_submission->id()
+        ]);
       }
     }
     return parent::sendMessage($webform_submission, $message);
