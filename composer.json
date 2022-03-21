@@ -49,6 +49,7 @@
         "drupal/jquery_ui_touch_punch": "^1.0",
         "drupal/jsonapi_extras": "^3.17",
         "drupal/memcache": "^2.3",
+        "drupal/metatag": "^1.19",
         "drupal/mimemail": "^1.0@alpha",
         "drupal/module_filter": "^3.2",
         "drupal/pathauto": "^1.8",
