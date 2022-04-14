@@ -32,6 +32,12 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
       '#default_value' => $config->get('general_newsletter_url'),
       '#description' => t('Enter a valid and absolute URL. No query parameters.')
     ];
+    $form['general_newsletter_id'] = [
+      '#type' => 'textfield',
+      '#title' => t('Newsletter Id'),
+      '#default_value' => empty($config->get('general_newsletter_id')) ? "13" : $config->get('general_newsletter_id'),
+      '#description' => t('Enter a valid news letter id')
+    ];
     $form['cv_search_url'] = [
       '#type' => 'textfield',
       '#title' => t('CV search url'),
@@ -63,8 +69,10 @@ class NotifierGeneralSettingsForm extends ConfigFormBase
 
   public function submitForm(array &$form, FormStateInterface $form_state)
   {
+    $id = trim($form_state->getValue('general_newsletter_id'));
     $this->configFactory->getEditable(static::SETTINGS)
       ->set('general_newsletter_url', $form_state->getValue('general_newsletter_url'))
+      ->set('general_newsletter_id', empty($id) ? "13" : $id)
       ->set('cv_search_url', $form_state->getValue('cv_search_url'))
       ->save();
     parent::submitForm($form, $form_state);
