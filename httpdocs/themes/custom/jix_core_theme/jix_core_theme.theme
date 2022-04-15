@@ -110,27 +110,33 @@ function jix_core_theme_preprocess_node(&$variables)
 function jix_core_theme_preprocess_container(&$variables)
 {
   if (is_array($variables['attributes']) && array_key_exists('data-drupal-selector', $variables['attributes'])) {
-    $classes = $variables['attributes']['class'];
-    $selector = $variables['attributes']['data-drupal-selector'];
-    if ($selector === 'edit-actions') {
-      $type = $variables['element']['#type'];
-      if (is_array($type) && in_array($type, ['actions', 'webform_actions'])) {
-        $classes[] = 'd-block';
+
+    /**
+     * Define classes
+     */
+    if (array_key_exists('class', $variables['attributes'])) {
+      $classes = $variables['attributes']['class'];
+      $selector = $variables['attributes']['data-drupal-selector'];
+      if ($selector === 'edit-actions') {
+        $type = $variables['element']['#type'];
+        if (is_array($type) && in_array($type, ['actions', 'webform_actions'])) {
+          $classes[] = 'd-block';
+        }
       }
-    }
 
-    if ($selector === 'edit-field-employer-sector-wrapper') {
-      $classes[] = 'col-md-7';
-    }
+      if ($selector === 'edit-field-employer-sector-wrapper') {
+        $classes[] = 'col-md-7';
+      }
 
-    $growable = [
-      'edit-field-job-offer-type-wrapper',
-      'edit-field-job-contract-type-wrapper',
-      'edit-field-job-category-wrapper'
-    ];
+      $growable = [
+        'edit-field-job-offer-type-wrapper',
+        'edit-field-job-contract-type-wrapper',
+        'edit-field-job-category-wrapper'
+      ];
 
-    if (in_array($selector, $growable)) {
-      $classes[] = 'flex-grow-1';
+      if (in_array($selector, $growable)) {
+        $classes[] = 'flex-grow-1';
+      }
     }
   }
 }
