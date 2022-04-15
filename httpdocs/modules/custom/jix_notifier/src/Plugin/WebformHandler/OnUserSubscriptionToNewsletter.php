@@ -26,7 +26,7 @@ use GuzzleHttp\Exception\ServerException;
  *   submission = \Drupal\webform\Plugin\WebformHandlerInterface::SUBMISSION_REQUIRED,
  * )
  */
-class OnUserRegistrationToNewsletter extends RemotePostWebformHandler
+class OnUserSubscriptionToNewsletter extends RemotePostWebformHandler
 {
 
   /**
@@ -34,7 +34,7 @@ class OnUserRegistrationToNewsletter extends RemotePostWebformHandler
    * @param bool $update
    * @return void
    */
-  public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE)
+  public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE): void
   {
     if ($webform_submission->getState() === WebformSubmissionInterface::STATE_COMPLETED) {
       $config = Drupal::config(NotifierGeneralSettingsForm::SETTINGS);
@@ -51,15 +51,15 @@ class OnUserRegistrationToNewsletter extends RemotePostWebformHandler
             Drupal::logger("jix_notifier")->error('Invalid job submission: | Error Messages: ' . Json::encode($messages));
           } else {
             $data = $webform_submission->getData();
+            $body = [
+              'name' => $data['gen_news_noms'],
+              'email' => $data['gen_news_email'],
+              'newsletterId' => trim($config->get('general_newsletter_id'))
+            ];
             try {
-              $body = [
-                'name' => $data['gen_news_noms'],
-                'email' => $data['gen_news_email'],
-                'newsletterId' => trim($config->get('general_newsletter_id'))
-              ];
               $response = Drupal::httpClient()->post($newsletterUrl, $body);
               if ($response->getStatusCode() == 200) {
-                $logger->info('User registration {'. $data['gen_news_email'] .'} sent to Newsletter Engine | Body: <pre><code>' . print_r($data, TRUE) . '</code></pre>');
+                $logger->info('User registration {'. $data['gen_news_email'] .'} sent to Newsletter Engine | Body: <pre><code>' . print_r($body, TRUE) . '</code></pre>');
               } else {
                 $logger->error(t('Synchronizing user @email failed with error code @code: @message',
                   [
@@ -69,9 +69,9 @@ class OnUserRegistrationToNewsletter extends RemotePostWebformHandler
                   ]));
               }
             } catch (ClientException $exception) {
-              $logger->error('Newsletter Engine Client Exception: ' . $exception->getMessage());
+              $logger->error('Newsletter Engine Client Exception: ' . $exception->getMessage() . ' | Body: <pre><code>' . print_r($body, TRUE) . '</code></pre>');
             } catch (RequestException | ServerException $exception) {
-              $logger->error('Newsletter Engine Request Exception: ' . $exception->getMessage() . ' | Request body: ' . Json::encode($data));
+              $logger->error('Newsletter Engine Request Exception: ' . $exception->getMessage() . ' | Request body: ' . Json::encode($body));
             }
           }
         } else {
