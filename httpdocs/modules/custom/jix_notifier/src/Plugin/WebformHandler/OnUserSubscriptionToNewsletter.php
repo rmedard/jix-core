@@ -57,7 +57,7 @@ class OnUserSubscriptionToNewsletter extends RemotePostWebformHandler
               'newsletterId' => trim($config->get('general_newsletter_id'))
             ];
             try {
-              $response = Drupal::httpClient()->post($newsletterUrl, $body);
+              $response = Drupal::httpClient()->post($newsletterUrl, ['json' => $body]);
               if ($response->getStatusCode() == 200) {
                 $logger->info('User registration {'. $data['gen_news_email'] .'} sent to Newsletter Engine | Body: <pre><code>' . print_r($body, TRUE) . '</code></pre>');
               } else {
