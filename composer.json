@@ -62,6 +62,7 @@
         "drupal/smart_ip": "^4.0",
         "drupal/sophron": "^1.2",
         "drupal/swiftmailer": "^2.2",
+        "drupal/tawk_to": "^3.0",
         "drupal/telephone_validation": "^2.3",
         "drupal/token": "^1.7",
         "drupal/twig_field_value": "^2.0",
