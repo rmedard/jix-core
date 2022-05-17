@@ -60,7 +60,7 @@ We call a macro which calls itself to render the full tree.
             item.in_active_trail ? 'bg-light text-dark' : 'bg-dark'
           ] %}
           <a{{ custom_link_attribute.addClass(link_classes) }} href="{{ item.url }}">{{ item.title }}
-            <span{{ custom_badge_attribute.addClass(badge_classes) }} data-nosnippet>{{ current_count }}</span></a>
+            <span{{ custom_badge_attribute.addClass(badge_classes) }}>{{ current_count }}</span></a>
           {% if item.below %}
             {{ menus.menu_links(item.below, attributes.removeClass('nav'), menu_level + 1) }}
           {% endif %}

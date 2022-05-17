@@ -337,7 +337,7 @@ function jix_core_theme_preprocess_menu(&$variables)
  * @param FormStateInterface $form_state
  * @param $form_id
  */
-function jix_core_theme_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id)
+function jix_core_theme_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id): void
 {
   unset($form['meta']);
   unset($form['menu']);
@@ -369,7 +369,7 @@ function jix_core_theme_theme($existing, $type, $theme, $path): array
  * @param $variables
  * @throws Exception
  */
-function jix_core_theme_preprocess_file_link(&$variables)
+function jix_core_theme_preprocess_file_link(&$variables): void
 {
   $route_name = Drupal::routeMatch()->getRouteName();
   if ($route_name == 'entity.node.canonical') {
@@ -383,7 +383,7 @@ function jix_core_theme_preprocess_file_link(&$variables)
 /**
  * Implements hook_preprocess_HOOK().
  */
-function jix_core_theme_preprocess_region(&$variables)
+function jix_core_theme_preprocess_region(&$variables): void
 {
   $footer_regions = ['footer_first', 'footer_second', 'footer_third', 'footer_fourth', 'top_header_form'];
   if (in_array($variables['region'], $footer_regions)) {
@@ -395,7 +395,7 @@ function jix_core_theme_preprocess_region(&$variables)
  * Implements hook_preprocess_HOOK().
  * @param $variables
  */
-function jix_core_theme_preprocess_field(&$variables)
+function jix_core_theme_preprocess_field(&$variables): void
 {
   $banner_block = $variables['element']['#object'];
   if ($banner_block instanceof BlockContentInterface and $banner_block->bundle() == 'banner_block') {
@@ -432,7 +432,7 @@ function jix_core_theme_preprocess_field(&$variables)
  * Implements hook_preprocess_HOOK().
  * @param $variables
  */
-function jix_core_theme_preprocess_addtoany_standard(&$variables)
+function jix_core_theme_preprocess_addtoany_standard(&$variables): void
 {
   $route_name = Drupal::routeMatch()->getRouteName();
   if ($route_name == 'entity.node.canonical') {
@@ -468,7 +468,7 @@ function jix_core_theme_preprocess_addtoany_standard(&$variables)
  * @param array $settings
  * @param AttachedAssetsInterface $assets
  */
-function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets)
+function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterface $assets): void
 {
   $settings['site']['target_country'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('site_target_country');
   $settings['site']['stats_url'] = Drupal::config(WebsiteSettingsForm::SETTINGS)->get('stats_url');
@@ -477,7 +477,7 @@ function jix_core_theme_js_settings_alter(array &$settings, AttachedAssetsInterf
 /**
  * Implements hook_preprocess_HOOK().
  */
-function jix_core_theme_preprocess_views_view_unformatted(&$variables)
+function jix_core_theme_preprocess_views_view_unformatted(&$variables): void
 {
   $view = $variables['view'];
   if ($view instanceof ViewExecutable && $view->current_display === 'page_search_result') {

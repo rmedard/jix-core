@@ -32,7 +32,7 @@ class EmailService
   /**
    * @param EmailData $emailData
    */
-  public function send(EmailData $emailData)
+  public function send(EmailData $emailData): void
   {
     if ($this->mailManager instanceof MailManagerInterface) {
       $to = '';

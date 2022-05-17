@@ -10,6 +10,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\file\Entity\File;
+use Drupal\jix_notifier\Utils\EmailData;
+use Drupal\jix_notifier\Utils\NotificationType;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
 use Drupal\smart_ip\SmartIpLocationInterface;
@@ -114,7 +116,7 @@ function jix_interface_theme($existing, $type, $theme, $path): array
  * Implements hook_ENTITY_TYPE_presave().
  * @param EntityInterface $entity
  */
-function jix_interface_node_presave(EntityInterface $entity)
+function jix_interface_node_presave(EntityInterface $entity): void
 {
   if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
     if ($entity->isNew()) {
@@ -123,6 +125,12 @@ function jix_interface_node_presave(EntityInterface $entity)
         $locationData = $locationObj->getData(false);
         $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
         $entity->set('field_job_creator_location', $location);
+
+        /**
+         * Send notification email on job create
+         */
+        $emailService = Drupal::service('jix_notifier.email_service');
+        $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
       }
     }
   }
@@ -131,7 +139,7 @@ function jix_interface_node_presave(EntityInterface $entity)
 /**
  * Implements hook_ENTITY_TYPE_presave().
  */
-function jix_interface_webform_submission_presave(EntityInterface $entity)
+function jix_interface_webform_submission_presave(EntityInterface $entity): void
 {
   if ($entity->bundle() === 'default_job_application_form' && $entity instanceof WebformSubmissionInterface) {
     if ($entity->isNew()) {
@@ -178,7 +186,7 @@ function jix_interface_webform_submission_presave(EntityInterface $entity)
  * Implements hook_ENTITY_TYPE_create().
  * @param EntityInterface $entity
  */
-function jix_interface_node_create(EntityInterface $entity)
+function jix_interface_node_create(EntityInterface $entity): void
 {
   if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
     $postingPlan = Drupal::request()->get('posting_plan');
@@ -194,7 +202,7 @@ function jix_interface_node_create(EntityInterface $entity)
  * @param FormStateInterface $form_state
  * @param $context
  */
-function jix_interface_field_widget_form_alter(&$element, FormStateInterface $form_state, $context)
+function jix_interface_field_widget_form_alter(&$element, FormStateInterface $form_state, $context): void
 {
   $field_definition = $context['items']->getFieldDefinition();
 
@@ -228,7 +236,7 @@ function jix_interface_after_build(array $element, FormStateInterface $form_stat
 /**
  * Implements hook_views_data_alter().
  */
-function jix_interface_views_data_alter(array &$data)
+function jix_interface_views_data_alter(array &$data): void
 {
   $data['node']['job_submissions_count_views_field'] = [
     'title' => t('Job submissions count'),

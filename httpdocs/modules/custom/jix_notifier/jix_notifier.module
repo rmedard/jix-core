@@ -6,12 +6,9 @@
 
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
-use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
-use Drupal\jix_notifier\Form\NotifierGeneralSettingsForm;
 use Drupal\node\NodeInterface;
 
 /**
@@ -35,7 +32,7 @@ function jix_notifier_theme($existing, $type, $theme, $path): array
  * @param $message
  * @param $params
  */
-function jix_notifier_mail($key, &$message, $params)
+function jix_notifier_mail($key, &$message, $params): void
 {
   $message['from'] = Drupal::config('system.site')
       ->get('name') . ' <' . Drupal::config('system.site')->get('mail') . '>';
@@ -49,12 +46,13 @@ function jix_notifier_mail($key, &$message, $params)
 /**
  * Implements hook_cron().
  */
-function jix_notifier_cron()
+function jix_notifier_cron(): void
 {
   unpublishExpiredJobs();
 }
 
-function unpublishExpiredJobs() {
+function unpublishExpiredJobs(): void
+{
   $channel = 'jix_notifier';
   Drupal::logger($channel)->info("UnPublishing expired jobs started!!");
   try {
@@ -84,20 +82,3 @@ function unpublishExpiredJobs() {
     Drupal::logger($channel)->error("Unpublishing node failed: " . $e->getMessage());
   }
 }
-
-/**
- * Implements hook_ENTITY_TYPE_insert().
- */
-//function jix_notifier_webform_submission_insert(EntityInterface $entity)
-//{
-//  /**
-//   * Send submission to CV Search
-//   */
-//  $cvSearchUrl = trim(Drupal::config(NotifierGeneralSettingsForm::SETTINGS)->get('cv_search_url'));
-//  if (!empty($cvSearchUrl)) {
-//    if (UrlHelper::isValid($cvSearchUrl)) {
-//      $applicationsService = Drupal::service('jix_notifier.job_applications_service');
-//      $applicationsService->sendToCvSearch($entity, $cvSearchUrl);
-//    }
-//  }
-//}
