@@ -10,8 +10,6 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\file\Entity\File;
-use Drupal\jix_notifier\Utils\EmailData;
-use Drupal\jix_notifier\Utils\NotificationType;
 use Drupal\jix_settings\Form\WebsiteSettingsForm;
 use Drupal\node\NodeInterface;
 use Drupal\smart_ip\SmartIpLocationInterface;
@@ -125,12 +123,6 @@ function jix_interface_node_presave(EntityInterface $entity): void
         $locationData = $locationObj->getData(false);
         $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
         $entity->set('field_job_creator_location', $location);
-
-        /**
-         * Send notification email on job create
-         */
-        $emailService = Drupal::service('jix_notifier.email_service');
-        $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
       }
     }
   }

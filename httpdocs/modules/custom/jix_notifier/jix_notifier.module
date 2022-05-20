@@ -7,8 +7,11 @@
 use Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\jix_notifier\Utils\EmailData;
+use Drupal\jix_notifier\Utils\NotificationType;
 use Drupal\node\NodeInterface;
 
 /**
@@ -80,5 +83,19 @@ function unpublishExpiredJobs(): void
     Drupal::logger($channel)->error("Plugin not found exception: " . $e->getMessage());
   } catch (EntityStorageException $e) {
     Drupal::logger($channel)->error("Unpublishing node failed: " . $e->getMessage());
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function jix_notifier_node_insert(EntityInterface $entity): void
+{
+  if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
+    /**
+     * Send notification email on job create
+     */
+    $emailService = Drupal::service('jix_notifier.email_service');
+    $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
   }
 }
