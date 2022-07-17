@@ -96,7 +96,8 @@ function jix_interface_theme($existing, $type, $theme, $path): array
         'facebook' => '',
         'twitter' => '',
         'instagram' => '',
-        'youtube' => ''
+        'youtube' => '',
+        'linkedin' => ''
       ]
     ],
     'jix_similar_jobs' => [

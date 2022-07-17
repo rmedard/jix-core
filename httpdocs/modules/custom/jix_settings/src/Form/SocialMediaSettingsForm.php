@@ -49,6 +49,12 @@ class SocialMediaSettingsForm extends ConfigFormBase
       '#default_value' => $config->get('youtube_page'),
       '#description' => $this->t('The full URL to the target youtube page')
     ];
+    $form['linkedin_page'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Linkedin page'),
+      '#default_value' => $config->get('linkedin_page'),
+      '#description' => $this->t('The full URL to the target linkedin page')
+    ];
     return parent::buildForm($form, $form_state);
   }
 
@@ -78,6 +84,12 @@ class SocialMediaSettingsForm extends ConfigFormBase
         $form_state->setErrorByName('youtube_page', t('This must be a valid URL starting with http or https'));
       }
     }
+    if (!$form_state->isValueEmpty('linkedin_page')) {
+      $isValid = filter_var($form_state->getValue('linkedin_page'), FILTER_VALIDATE_URL);
+      if ($isValid === false) {
+        $form_state->setErrorByName('linkedin_page', t('This must be a valid URL starting with http or https'));
+      }
+    }
     parent::validateForm($form, $form_state);
   }
 
@@ -88,6 +100,7 @@ class SocialMediaSettingsForm extends ConfigFormBase
       ->set('twitter_page', $form_state->getValue('twitter_page'))
       ->set('instagram_page', $form_state->getValue('instagram_page'))
       ->set('youtube_page', $form_state->getValue('youtube_page'))
+      ->set('linkedin_page', $form_state->getValue('linkedin_page'))
       ->save();
     parent::submitForm($form, $form_state);
   }

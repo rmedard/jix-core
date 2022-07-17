@@ -22,19 +22,20 @@ use JetBrains\PhpStorm\ArrayShape;
 class SocialMediaButtonsBlock extends BlockBase
 {
 
-  #[ArrayShape(['#theme' => "string", '#facebook' => "string", '#twitter' => "string", '#instagram' => "string", '#youtube' => "string"])]
-  public function build(): array
+  #[ArrayShape(['#theme' => "string", '#facebook' => "string", '#twitter' => "string", '#instagram' => "string", '#youtube' => "string", '#linkedin' => "string"])] public function build(): array
   {
     $facebook = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('facebook_page');
     $instagram = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('instagram_page');
     $twitter = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('twitter_page');
     $youtube = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('youtube_page');
+    $linkedin = Drupal::config(SocialMediaSettingsForm::SETTINGS)->get('linkedin_page');
     return [
       '#theme' => 'jix_social_media_buttons',
       '#facebook' => trim($facebook),
       '#twitter' => trim($twitter),
       '#instagram' => trim($instagram),
-      '#youtube' => trim($youtube)
+      '#youtube' => trim($youtube),
+      '#linkedin' => trim($linkedin)
     ];
   }
 }
