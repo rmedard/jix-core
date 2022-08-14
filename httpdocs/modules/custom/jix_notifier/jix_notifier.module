@@ -95,6 +95,11 @@ function jix_notifier_node_insert(EntityInterface $entity): void
     /**
      * Send notification email on job create
      */
+
+    /** Make sure alias is created before sending email **/
+    $alias = Drupal::service('pathauto.generator')->createEntityAlias($entity, 'insert');
+    Drupal::logger('jix_notifier')->info('Alias created: ' . $alias['alias']);
+
     $emailService = Drupal::service('jix_notifier.email_service');
     $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
   }
