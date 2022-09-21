@@ -38,7 +38,7 @@ function jix_settings_theme($existing, $type, $theme, $path): array
 /**
  * Implements hook_views_query_alter().
  */
-function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $query)
+function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $query): void
 {
   if ($view->storage->id() === 'job_applications' &&
       ($view->current_display === 'page_job_applications_management' || $view->current_display === 'data_export_applications')) {
@@ -68,7 +68,8 @@ function jix_settings_views_query_alter(ViewExecutable $view, QueryPluginBase $q
   }
 }
 
-function adjustDayHoursInterval(array &$condition) {
+function adjustDayHoursInterval(array &$condition): void
+{
   $formula_parts = explode(' ', $condition['field']);
   $from = DrupalDateTime::createFromTimestamp(intval($formula_parts[2]));
   $to = DrupalDateTime::createFromTimestamp(intval($formula_parts[4]));
@@ -80,7 +81,7 @@ function adjustDayHoursInterval(array &$condition) {
 /**
  * Implements hook_entity_base_field_info_alter().
  */
-function jix_settings_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type)
+function jix_settings_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type): void
 {
   if ($entity_type->id() == 'node') {
     $fields['alias_url'] = BaseFieldDefinition::create('string')
@@ -95,7 +96,7 @@ function jix_settings_entity_base_field_info_alter(&$fields, EntityTypeInterface
 /**
  * Implements hook_entity_bundle_field_info_alter().
  */
-function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle)
+function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle): void
 {
   if ($entity_type->id() == 'node' && $bundle == 'job') {
     $fields['field_job_category__computed'] = BaseFieldDefinition::create('string')
