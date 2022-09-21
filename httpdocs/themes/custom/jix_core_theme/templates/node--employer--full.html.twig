@@ -70,6 +70,7 @@
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   'clearfix', 'mb-4'
 ] %}
+{% set isBlacklisted = node.field_employer_invoicing_policy.value == 'blacklisted' and logged_in ? true: false %}
 <article{{ attributes.addClass(classes) }}>
   <header>
     {{ title_prefix }}
@@ -92,9 +93,9 @@
     {% endif %}
   </header>
   <div{{ content_attributes.addClass('node__content', 'clearfix') }}>
-    <div class="card border-light shadow-sm bg-light">
+    <div class="card shadow-sm bg-light {{ isBlacklisted ? 'border-danger' : 'border-light' }}">
       <div class="row g-0">
-        <div class="col-md-4 text-center d-flex justify-content-center p-2">
+        <div class="col-md-4 text-center d-flex justify-content-center p-2 {{ isBlacklisted ? 'bg-danger' : '' }}">
           {% set logoUrl = attribute(content.field_employer_logo.0, '#markup') %}
           {% set companyName = attribute(label.0, '#context').value %}
           <img src="{{ logoUrl }}" alt="{{ companyName ~ ' logo' }}" class="img-fluid align-self-center rounded">
@@ -126,6 +127,9 @@
               <dt class="col-sm-4 mb-0">{{ 'Rate this employer'|t }}</dt>
               <dd class="col-sm-8 mb-0">{{ content.field_employer_rating }}</dd>
             </dl>
+            {% if isBlacklisted %}
+              <span class="badge bg-danger">Blacklisted</span>
+            {% endif %}
             <div class="card-footer border-0 p-1">
               <div class="row">
                 <div class="col-8 text-muted d-flex flex-row justify-content-start align-baseline">
