@@ -70,6 +70,7 @@
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   'clearfix', 'm-0', 'border-0', 'pb-2'
 ] %}
+{% set hasLocation = content.field_job_city|field_value is not null %}
 <article{{ attributes.addClass(classes) }}>
   {% set employer = attribute(content.field_job_employer.0, '#node') %}
   {% set employer_url = path('entity.node.canonical', {'node': employer.nid.value}) %}
@@ -88,7 +89,7 @@
           <div class="card-body p-2">
             <a href="{{ url }}"><h5 class="card-title">{{ label }}</h5></a>
             <p class="card-text">
-              <a href="{{ employer_url }}">{{ employer.title.value }}</a> | <i class="fas fa-map-marker-alt"></i> {{ content.field_job_city|field_value }} |
+              <a href="{{ employer_url }}">{{ employer.title.value }}</a> {% if hasLocation %} | <i class="fas fa-map-marker-alt"></i> {{ content.field_job_city|field_value }} {% endif %} |
               Published on {{ content.published_at|field_value }} |
               Deadline {{ content.field_job_application_deadline|field_value }}<br/>
               {% if content.field_job_desired_experience is not empty %}
