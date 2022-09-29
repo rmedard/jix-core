@@ -58,6 +58,7 @@ class JobEmployerBlock extends BlockBase
         $output[] = [
           '#theme' => 'jix_job_employer',
           '#employer' => $employer,
+          '#logged_in' => Drupal::currentUser()->isAuthenticated(),
           '#pageNodeBundle' => $nodeBundle
         ];
       }

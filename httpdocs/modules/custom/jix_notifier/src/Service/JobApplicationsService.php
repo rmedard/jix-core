@@ -29,7 +29,7 @@ class JobApplicationsService
     $this->channel = 'jix_notifier';
   }
 
-  public function sendToCvSearch(WebformSubmission $jobApplication, string $cvSearchUrl)
+  public function sendToCvSearch(WebformSubmission $jobApplication, string $cvSearchUrl): void
   {
     $validationEntity = $jobApplication->validate();
     if ($validationEntity->count() > 0) {

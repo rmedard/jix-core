@@ -61,6 +61,7 @@ function unpublishExpiredJobs(): void
   try {
     $storage = Drupal::entityTypeManager()->getStorage('node');
     $now = new DrupalDateTime('now');
+    $now->setTimezone(new DateTimeZone(DateTimeItemInterface::STORAGE_TIMEZONE));
     $query = $storage->getQuery()->condition('type', 'job')
       ->condition('status', NodeInterface::PUBLISHED)
       ->condition('field_job_application_deadline', $now->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT), '<');
@@ -71,7 +72,7 @@ function unpublishExpiredJobs(): void
         if ($expiredJob instanceof NodeInterface) {
           $expiredJob->setUnpublished();
           $expiredJob->save();
-          Drupal::logger($channel)->info(t('Expired job @id unpublished', ['@id' => $jobId]));
+          Drupal::logger($channel)->info(t('Expired job with id: @id unpublished', ['@id' => $jobId]));
         }
       }
     } else {
