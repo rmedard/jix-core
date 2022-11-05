@@ -74,7 +74,7 @@
         "drupal/votingapi_widgets": "^1.0@alpha",
         "drupal/webform": "^6.2@beta",
         "drupal/webform_views": "^5.0@alpha",
-        "drush/drush": "^10.3",
+        "drush/drush": "^11.2",
         "kint-php/kint": "^3.3",
         "phpseclib/phpseclib": "^3.0"
     },
