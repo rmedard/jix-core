@@ -4,7 +4,6 @@ namespace Drupal\jix_notifier\Service;
 
 use Drupal;
 use Drupal\Component\Serialization\Json;
-use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\file\Entity\File;
@@ -44,13 +43,9 @@ class JobApplicationsService
         try {
           $response = Drupal::httpClient()->post($cvSearchUrl, ['json' => $data]);
           if ($response->getStatusCode() == 200) {
-            try {
-              $jobApplication->setElementData('field_application_sync', 'Yes');
-              $jobApplication->save();
-              Drupal::logger($this->channel)->info('Job application {'. $jobApplication->id() .'} sent to CV Search | Body: <pre><code>' . print_r($data, TRUE) . '</code></pre>');
-            } catch (EntityStorageException $e) {
-              Drupal::logger($this->channel)->error('Saving application failed: ' . $e->getMessage());
-            }
+            $jobApplication->setElementData('field_application_sync', 'Yes');
+            $jobApplication->resave(); /** Very important: Avoid triggering handlers **/
+            Drupal::logger($this->channel)->info('Job application {'. $jobApplication->id() .'} sent to CV Search | Body: <pre><code>' . print_r($data, TRUE) . '</code></pre>');
           } else {
             Drupal::logger($this->channel)->error(t('Synchronizing application @id failed with error code @code: @message',
               [
