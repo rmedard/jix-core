@@ -261,7 +261,7 @@ function jix_core_theme_preprocess_block(&$variables): void
  * Implements hook_preprocess_HOOK().
  * @param $variables
  */
-function jix_core_theme_preprocess_menu(&$variables)
+function jix_core_theme_preprocess_menu(&$variables): void
 {
   if (array_key_exists('menu_name', $variables) and $variables['menu_name'] == 'jobs-tabs-menu') {
     $featured = Drupal::entityQuery('node')
@@ -493,4 +493,12 @@ function jix_core_theme_preprocess_views_view_unformatted(&$variables): void
     }
     $variables['rows'] = $reformatted_rows;
   }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function jix_core_theme_preprocess_title(&$variables): void
+{
+  kint($variables);
 }
