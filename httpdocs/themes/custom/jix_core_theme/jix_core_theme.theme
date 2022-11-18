@@ -500,5 +500,9 @@ function jix_core_theme_preprocess_views_view_unformatted(&$variables): void
  */
 function jix_core_theme_preprocess_page_title(&$variables): void
 {
-  kint($variables);
+  $node = Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface && $node->bundle() == 'employer') {
+    $nid = $node->id();
+    kint([$variables['title'], $nid]);
+  }
 }
