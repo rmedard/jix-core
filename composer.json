@@ -12,6 +12,19 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        "fontawesome": {
+            "type": "package",
+            "package": {
+                "name": "fontawesome/fontawesome",
+                "version": "6.1.1",
+                "type": "drupal-library",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/FortAwesome/Font-Awesome",
+                    "reference": "6.1.1"
+                }
+            }
         }
     },
     "require": {
