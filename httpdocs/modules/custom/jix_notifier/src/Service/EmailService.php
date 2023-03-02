@@ -39,11 +39,12 @@ class EmailService
       $params = [];
       $replyTo = '';
       $langCode = Drupal::languageManager()->getCurrentLanguage()->getId();
+      $systemEmail = Drupal::config('system.site')->get('mail');
       switch ($emailData->getNotificationType()) {
         case NotificationType::NEW_JOB_SAVED:
           $job = $emailData->getEntity();
-          $to = Drupal::config('system.site')->get('mail');
-          $replyTo = Drupal::config('system.site')->get('mail');
+          $to = $systemEmail;
+          $replyTo = $systemEmail;
           $params['cc'] = $job->get('field_job_contact_email')->value;
           $params['subject'] = t('A new job has been submitted', [], ['langcode' => $langCode]);
           break;
@@ -51,7 +52,13 @@ class EmailService
           $job = $emailData->getEntity();
           $to = $job->get('field_job_contact_email')->value;
           $params['subject'] = t('Your job has been validated and published.', [], ['langcode' => $langCode]);
-          $replyTo = Drupal::config('system.site')->get('mail');
+          $replyTo = $systemEmail;
+          break;
+        case NotificationType::CREDIT_THRESHOLD_REACHED:
+          $employer = $emailData->getEntity();
+          $to = $systemEmail;
+          $replyTo = $systemEmail;
+          $params['subject'] = t('Notification: Employer credit threshold reached', [], ['langcode' => $langCode]);
           break;
       }
 
@@ -87,6 +94,12 @@ class EmailService
           'recipient' => $emailPayload->get('field_job_contact_name')->value
         ];
         $templatePath = '/templates/jix-notifier-new-job-published.html.twig';
+        break;
+      case NotificationType::CREDIT_THRESHOLD_REACHED:
+        $variables = [
+          'employer' => $emailPayload,
+        ];
+        $templatePath = '/templates/jix-notifier-employer-credit-threshold-reached.html.twig';
         break;
     }
     $modulePath = Drupal::service('extension.list.module')->getPath($this->channel);

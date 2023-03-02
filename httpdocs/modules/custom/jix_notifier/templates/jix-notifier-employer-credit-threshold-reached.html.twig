@@ -1,0 +1,9 @@
+<div>
+  <p>{{ 'Dear admin,' | t }}</p>
+  <p>{{ 'An employer has reached his configured lowest threshold of credits.' | t }}</p>
+  <ul>
+    <li><b>Employer: </b><a href="{{ drupal_url('node/' ~ employer.id, {absolute: true}) }}">{{ employer.title.value }}</a></li>
+    <li><b>Credit threshold: </b>{{ employer.field_employer_credits.value }}</li>
+  </ul>
+  <p>{{ 'Best regards,' | t }} <br>{{ drupal_token('site:name') }}</p>
+</div>
