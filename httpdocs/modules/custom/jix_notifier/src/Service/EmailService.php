@@ -66,11 +66,11 @@ class EmailService
       $result = $this->mailManager->mail($this->channel, $emailData->getNotificationType(),
         $to, $langCode, $params, $replyTo, TRUE);
       if (intval($result['result']) != 1) {
-        $message = t('There was a problem sending notification email');
+        $message = t('There was a problem sending notification email. Type: <b>@type</b>', ['@type' => $emailData->getNotificationType()]);
         Drupal::logger($this->channel)
           ->error($message . ' Whole Error: ' . Json::encode($result));
       } else {
-        $message = t('An email notification has been sent successfully');
+        $message = t('An email notification of type <b>@type</b> has been sent successfully', ['@type' => $emailData->getNotificationType()]);
         Drupal::logger($this->channel)->notice($message);
       }
     }
@@ -102,6 +102,7 @@ class EmailService
         $templatePath = '/templates/jix-notifier-employer-credit-threshold-reached.html.twig';
         break;
     }
+    Drupal::logger('email_service')->info('Sending email of type: ' . $notificationType);
     $modulePath = Drupal::service('extension.list.module')->getPath($this->channel);
     return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);
   }
