@@ -7,3 +7,5 @@ services:
       - { name: event_subscriber }
   jix_interface.theming_service:
     class: Drupal\jix_interface\Service\ThemingService
+  jix_interface.employer_credits_service:
+    class: Drupal\jix_interface\Service\EmployerCreditsService
