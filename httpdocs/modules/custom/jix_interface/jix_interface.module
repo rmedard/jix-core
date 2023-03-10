@@ -126,6 +126,15 @@ function jix_interface_node_presave(EntityInterface $entity): void
         $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
         $entity->set('field_job_creator_location', $location);
       }
+    } else {
+      $originalJob = $entity->original;
+      if ($originalJob instanceof NodeInterface) {
+        $isJustValidated = !$originalJob->isPublished() and $entity->isPublished();
+        if ($isJustValidated) {
+          $employer = $entity->get('field_job_employer')->entity;
+          Drupal::service('jix_interface.employer_credits_service')->consumeCredit($employer);
+        }
+      }
     }
   }
 }
