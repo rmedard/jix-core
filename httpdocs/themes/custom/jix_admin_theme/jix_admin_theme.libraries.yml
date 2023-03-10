@@ -1,7 +1,0 @@
-admin-styles:
-  version: VERSION
-  css:
-    component:
-      css/admin_style.css: { }
-  dependencies:
-    - jquery_ui_effects/fade
