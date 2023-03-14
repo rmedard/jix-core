@@ -119,22 +119,27 @@ function jix_interface_theme($existing, $type, $theme, $path): array
 function jix_interface_node_presave(EntityInterface $entity): void
 {
   if ($entity instanceof NodeInterface and $entity->bundle() == 'job') {
+    $consumeCredit = false;
     if ($entity->isNew()) {
+      /** Set creator location **/
       $locationObj = Drupal::service('smart_ip.smart_ip_location');
       if ($locationObj instanceof SmartIpLocationInterface) {
         $locationData = $locationObj->getData(false);
         $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
         $entity->set('field_job_creator_location', $location);
       }
+      $consumeCredit = $entity->isPublished();
     } else {
       $originalJob = $entity->original;
       if ($originalJob instanceof NodeInterface) {
-        $isJustValidated = !$originalJob->isPublished() and $entity->isPublished();
-        if ($isJustValidated) {
-          $employer = $entity->get('field_job_employer')->entity;
-          Drupal::service('jix_interface.employer_credits_service')->consumeCredit($employer);
-        }
+        $consumeCredit = !$originalJob->isPublished() and $entity->isPublished();
       }
+    }
+
+    /** Compute credits **/
+    if ($consumeCredit) {
+      $employer = $entity->get('field_job_employer')->entity;
+      Drupal::service('jix_interface.employer_credits_service')->consumeCredit($employer);
     }
   }
 }
