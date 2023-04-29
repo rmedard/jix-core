@@ -255,17 +255,3 @@ function jix_interface_views_data_alter(array &$data): void
     ],
   ];
 }
-
-/**
- * Implements hook_link_alter().
- */
-function jix_interface_link_alter(&$variables): void {
-  $url = $variables['url'];
-  if ($url instanceof Url) {
-    if ($url->isExternal() and !$url->isRouted()) {
-      $attributes = $url->getOption('attributes');
-      $attributes['target'] = '_blank';
-      $url->setOption('attributes', $attributes);
-    }
-  }
-}
