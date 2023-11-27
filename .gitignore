@@ -38,10 +38,12 @@ httpdocs/.ht.router.php
 /tests
 .travis.yml
 LICENSE.md
-Makefile
 README.md
 docker-compose.yml
 docker-sync.yml
 docker.mk
 traefik.yml
 .docker-sync/
+
+.ddev/
+config/

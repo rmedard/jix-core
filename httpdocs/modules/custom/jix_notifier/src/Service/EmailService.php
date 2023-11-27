@@ -80,6 +80,8 @@ class EmailService
   {
     $templatePath = '';
     $variables = [];
+    $modulePath = Drupal::moduleHandler()->getModule($this->channel)->getPath();
+    $host = Drupal::request()->getSchemeAndHttpHost();
     switch ($notificationType) {
       case NotificationType::NEW_JOB_SAVED:
         $variables = [
@@ -102,8 +104,15 @@ class EmailService
         $templatePath = '/templates/jix-notifier-employer-credit-threshold-reached.html.twig';
         break;
     }
+    $variables['assets'] = [
+      'youtube_logo' => $host . '/' . $modulePath . '/templates/icons/youtube.png',
+      'facebook_logo' => $host . '/' . $modulePath . '/templates/icons/facebook.png',
+      'instagram_logo' => $host . '/' . $modulePath . '/templates/icons/instagram.png',
+      'twitter_logo' => $host . '/' . $modulePath . '/templates/icons/twitter.png',
+      'linkedin_logo' => $host . '/' . $modulePath . '/templates/icons/linkedin.png',
+      'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp.png'
+    ];
     Drupal::logger('email_service')->info('Sending email of type: ' . $notificationType);
-    $modulePath = Drupal::service('extension.list.module')->getPath($this->channel);
     return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);
   }
 }

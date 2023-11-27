@@ -1,28 +1,10 @@
 <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="x-ua-compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <title>Notification</title>
-   <style type="text/css">
-     dt {
-       font-weight: bold;
-     }
-
-     dl, dd {
-       font-size: .9rem;
-     }
-
-     dd {
-       margin-bottom: 1em;
-     }
-   </style>
- </head>
+  {% include '@jix_notifier/includes/header.html.twig' %}
   <body>
     <div>
       <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
-      <p>{{ 'A new job has been created, it is available here:' | t }}
-        <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
+      <p>{{ 'Your advert has been received and is waiting to be validated once the payment is received' | t }} <br>
+        {{ 'We will get back to you shortly with a quotation. Below is the summary of your advert information.' | t }}
       </p>
 
       <h4>{{ 'Job details' | t }}</h4>
@@ -46,9 +28,8 @@
           <dt>{{ job.field_job_employer.entity.field_employer_tin_number.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
         {% endif %}
       </dl>
-      <p>{{ 'The job offer needs validation before it appears to the public.' | t }}</p>
       <br>
-      <p>{{ 'Best regards,' | t }} <br>{{ drupal_token('site:name') }}</p>
+      {% include '@jix_notifier/includes/footer.html.twig' %}
     </div>
   </body>
 </html>

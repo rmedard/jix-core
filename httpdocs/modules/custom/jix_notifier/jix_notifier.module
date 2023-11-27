@@ -102,6 +102,13 @@ function jix_notifier_node_insert(EntityInterface $entity): void
     Drupal::logger('jix_notifier')->info('Alias created: ' . $alias['alias']);
 
     $emailService = Drupal::service('jix_notifier.email_service');
-    $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
+
+    if (Drupal::currentUser()->isAnonymous()) {
+      $emailService->send(new EmailData(NotificationType::NEW_JOB_SAVED, $entity));
+    } else {
+      if ($entity->isPublished()) {
+        $emailService->send(new EmailData(NotificationType::NEW_JOB_PUBLISHED, $entity));
+      }
+    }
   }
 }

@@ -1,0 +1,33 @@
+<div id="social-media-links">
+  <h5>Follow us on </h5>
+  {% if drupal_token('site:linkedin') is not empty %}
+    <a href="{{ drupal_token('site:linkedin') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.linkedin_logo }}" alt="LinkedIn Logo">
+    </a>
+  {% endif %}
+  {% if drupal_token('site:facebook') is not empty %}
+    <a href="{{ drupal_token('site:facebook') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.facebook_logo }}" alt="Facebook Logo">
+    </a>
+  {% endif %}
+  {% if drupal_token('site:twitter') is not empty %}
+    <a href="{{ drupal_token('site:twitter') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.twitter_logo }}" alt="Twitter Logo">
+    </a>
+  {% endif %}
+  {% if drupal_token('site:instagram') is not empty %}
+    <a href="{{ drupal_token('site:instagram') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.instagram_logo }}" alt="Instagram Logo">
+    </a>
+  {% endif %}
+  {% if drupal_token('site:youtube') is not empty %}
+    <a href="{{ drupal_token('site:youtube') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.youtube_logo }}" alt="Youtube Logo">
+    </a>
+  {% endif %}
+  {% if drupal_token('site:whatsapp_call') is not empty %}
+    <a href="{{ drupal_token('site:whatsapp_call') }}" target="_blank" style="text-decoration: none">
+      <img src="{{ assets.whatsapp_logo }}" alt="Whatsapp Logo">
+    </a>
+  {% endif %}
+</div>

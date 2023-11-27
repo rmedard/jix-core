@@ -7,6 +7,8 @@
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\jix_settings\Form\SocialMediaSettingsForm;
 use Drupal\jix_settings\Plugin\Field\AliasUrlComputedField;
 use Drupal\jix_settings\Plugin\Field\EmployerLogoUrlComputedField;
 use Drupal\jix_settings\Plugin\Field\JobAttachmentUrlComputedField;
@@ -150,4 +152,82 @@ function jix_settings_entity_bundle_field_info_alter(&$fields, EntityTypeInterfa
       ->setComputed(true)
       ->setClass(EmployerLogoUrlComputedField::class);
   }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function jix_settings_token_info(): array
+{
+  $info['tokens']['site']['phone'] = [
+    'name' => 'Phone Number',
+    'description' => t('The main phone number of the site'),
+  ];
+  $info['tokens']['site']['facebook'] = [
+    'name' => 'Facebook Account',
+    'description' => t('The main facebook account of the site'),
+  ];
+  $info['tokens']['site']['linkedin'] = [
+    'name' => 'Linkedin Account',
+    'description' => t('The main linkedin account of the site'),
+  ];
+  $info['tokens']['site']['twitter'] = [
+    'name' => 'Twitter Account',
+    'description' => t('The main twitter account of the site'),
+  ];
+  $info['tokens']['site']['youtube'] = [
+    'name' => 'Youtube Channel',
+    'description' => t('The main youtube channel of the site'),
+  ];
+  $info['tokens']['site']['instagram'] = [
+    'name' => 'Instagram Account',
+    'description' => t('The main instagram account of the site'),
+  ];
+  $info['tokens']['site']['whatsapp_call'] = [
+    'name' => 'Whatsapp Call Account',
+    'description' => t('The main whatsapp account for calls'),
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function jix_settings_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata): array
+{
+  $replacements = [];
+  $socialMediaConfig = Drupal::config(SocialMediaSettingsForm::SETTINGS);
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'phone':
+        $text = Drupal::config('system.site')->get('phone');
+        $replacements[$original] = $text;
+        break;
+      case 'facebook':
+        $text = $socialMediaConfig->get('facebook_page');
+        $replacements[$original] = $text;
+        break;
+      case 'linkedin':
+        $text = $socialMediaConfig->get('linkedin_page');
+        $replacements[$original] = $text;
+        break;
+      case 'twitter':
+        $text = $socialMediaConfig->get('twitter_page');
+        $replacements[$original] = $text;
+        break;
+      case 'youtube':
+        $text = $socialMediaConfig->get('youtube_page');
+        $replacements[$original] = $text;
+        break;
+      case 'instagram':
+        $text = $socialMediaConfig->get('instagram_page');
+        $replacements[$original] = $text;
+        break;
+      case 'whatsapp_call':
+        $text = $socialMediaConfig->get('whatsapp_call_link');
+        $replacements[$original] = $text;
+        break;
+    }
+  }
+  return $replacements;
 }

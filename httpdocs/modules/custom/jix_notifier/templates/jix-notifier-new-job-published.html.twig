@@ -1,8 +1,35 @@
-<div>
-  <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
-  <p>{{ 'Your job @title has been published. It is available here: ' | t({'@title': job.title.value}) }}
-    <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
-  </p>
+<html lang="en">
+  {% include '@jix_notifier/includes/header.html.twig' %}
+  <body>
+    <div>
+      <p>{{ 'Dear @recipient' | t({'@recipient': recipient}) }}</p>
+      <p>{{ 'Your advert has been published and is available here: ' | t }}
+        <a href="{{ drupal_url('node/' ~ job.id, {absolute: true}) }}">{{ drupal_url('node/' ~ job.id, {absolute: true}) }}</a>
+      </p>
 
-  <p>{{ 'Best regards,' | t }} <br>{{ drupal_token('site:name') }}</p>
-</div>
+      <h4>{{ 'Job details' | t }}</h4>
+      <dl>
+        <dt>{{ job.title.fieldDefinition.label }}</dt> <dd>{{ job.title.value }}</dd>
+        <dt>{{ job.field_job_posting_plan.fieldDefinition.label }}</dt> <dd>{{ job.field_job_posting_plan.value }}</dd>
+        <dt>{{ job.field_job_category.fieldDefinition.label }}</dt> <dd>
+          {% for category in job.field_job_category %}
+            {{ category.entity.name.value }}{% if not loop.last %},{% endif %}
+          {% endfor %}
+        </dd>
+      </dl>
+      <h4>{{ 'Invoicing details' | t }}</h4>
+      <dl>
+        <dt>{{ job.field_job_employer.entity.title.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.title.value }}</dd>
+        <dt>{{ job.field_job_employer.entity.field_employer_email.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_email.value }}</dd>
+        <dt>{{ job.field_job_contact_name.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_name.value }}</dd>
+        <dt>{{ job.field_job_contact_phone.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_phone.value }}</dd>
+        <dt>{{ job.field_job_contact_email.fieldDefinition.label }}</dt> <dd>{{ job.field_job_contact_email.value }}</dd>
+        {% if job.field_job_employer.entity.field_employer_tin_number is not empty %}
+          <dt>{{ job.field_job_employer.entity.field_employer_tin_number.fieldDefinition.label }}</dt> <dd>{{ job.field_job_employer.entity.field_employer_tin_number.value }}</dd>
+        {% endif %}
+      </dl>
+      <br>
+      {% include '@jix_notifier/includes/feedback-footer.html.twig' %}
+    </div>
+  </body>
+</html>

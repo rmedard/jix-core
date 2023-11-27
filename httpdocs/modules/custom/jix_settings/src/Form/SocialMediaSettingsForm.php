@@ -55,10 +55,16 @@ class SocialMediaSettingsForm extends ConfigFormBase
       '#default_value' => $config->get('linkedin_page'),
       '#description' => $this->t('The full URL to the target linkedin page')
     ];
+    $form['whatsapp_call_link'] = [
+      '#type' => 'url',
+      '#title' => $this->t('Whatsapp call link'),
+      '#default_value' => $config->get('whatsapp_call_link'),
+      '#description' => $this->t('The full link for whatsapp call')
+    ];
     return parent::buildForm($form, $form_state);
   }
 
-  public function validateForm(array &$form, FormStateInterface $form_state)
+  public function validateForm(array &$form, FormStateInterface $form_state): void
   {
     if (!$form_state->isValueEmpty('facebook_page')) {
       $isValid = filter_var($form_state->getValue('facebook_page'), FILTER_VALIDATE_URL);
@@ -93,7 +99,7 @@ class SocialMediaSettingsForm extends ConfigFormBase
     parent::validateForm($form, $form_state);
   }
 
-  public function submitForm(array &$form, FormStateInterface $form_state)
+  public function submitForm(array &$form, FormStateInterface $form_state): void
   {
     $this->configFactory->getEditable(static::SETTINGS)
       ->set('facebook_page', $form_state->getValue('facebook_page'))
@@ -101,6 +107,7 @@ class SocialMediaSettingsForm extends ConfigFormBase
       ->set('instagram_page', $form_state->getValue('instagram_page'))
       ->set('youtube_page', $form_state->getValue('youtube_page'))
       ->set('linkedin_page', $form_state->getValue('linkedin_page'))
+      ->set('whatsapp_call_link', $form_state->getValue('whatsapp_call_link'))
       ->save();
     parent::submitForm($form, $form_state);
   }
