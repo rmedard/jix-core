@@ -37,10 +37,14 @@ function jix_notifier_theme($existing, $type, $theme, $path): array
  */
 function jix_notifier_mail($key, &$message, $params): void
 {
-  $message['from'] = Drupal::config('system.site')
-      ->get('name') . ' <' . Drupal::config('system.site')->get('mail') . '>';
+  $siteName = Drupal::config('system.site')->get('name');
+  $siteMail = Drupal::config('system.site')->get('mail');
+  $message['from'] = $siteName . ' <' . $siteMail . '>';
   if (array_key_exists('cc', $params)) {
     $message['headers']['Cc'] = $params['cc'];
+  }
+  if (array_key_exists('bcc', $params)) {
+    $message['headers']['bcc'] = $params['bcc'];
   }
   $message['subject'] = $params['subject'];
   $message['body'][] = $params['message'];

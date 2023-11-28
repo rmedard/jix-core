@@ -46,12 +46,14 @@ class EmailService
           $to = $systemEmail;
           $replyTo = $systemEmail;
           $params['cc'] = $job->get('field_job_contact_email')->value;
+          $params['bcc'] = $systemEmail;
           $params['subject'] = t('A new job has been submitted', [], ['langcode' => $langCode]);
           break;
         case NotificationType::NEW_JOB_PUBLISHED:
           $job = $emailData->getEntity();
           $to = $job->get('field_job_contact_email')->value;
           $params['subject'] = t('Your job has been validated and published.', [], ['langcode' => $langCode]);
+          $params['bcc'] = $systemEmail;
           $replyTo = $systemEmail;
           break;
         case NotificationType::CREDIT_THRESHOLD_REACHED:
@@ -110,7 +112,10 @@ class EmailService
       'instagram_logo' => $host . '/' . $modulePath . '/templates/icons/instagram.png',
       'twitter_logo' => $host . '/' . $modulePath . '/templates/icons/twitter.png',
       'linkedin_logo' => $host . '/' . $modulePath . '/templates/icons/linkedin.png',
-      'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp.png'
+      'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp.png',
+      'jix_logo' => $host . '/' . $modulePath . '/templates/icons/jix.png',
+      'hir_logo' => $host . '/' . $modulePath . '/templates/icons/hir.png',
+      'sic_logo' => $host . '/' . $modulePath . '/templates/icons/sic.png',
     ];
     Drupal::logger('email_service')->info('Sending email of type: ' . $notificationType);
     return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);
