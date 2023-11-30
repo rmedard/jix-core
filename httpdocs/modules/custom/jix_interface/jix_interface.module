@@ -125,7 +125,11 @@ function jix_interface_node_presave(EntityInterface $entity): void
       $locationObj = Drupal::service('smart_ip.smart_ip_location');
       if ($locationObj instanceof SmartIpLocationInterface) {
         $locationData = $locationObj->getData(false);
-        $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
+        if(array_key_exists('city', $locationData)) {
+          $location = $locationData['city'] . ', ' . $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
+        } else {
+          $location = $locationData['country'] . ' (' . $locationData['countryCode'] . ')';
+        }
         $entity->set('field_job_creator_location', $location);
       }
       $consumeCredit = $entity->isPublished();

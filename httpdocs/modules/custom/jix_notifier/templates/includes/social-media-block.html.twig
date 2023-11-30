@@ -1,45 +1,49 @@
-<div id="social-media-links">
-  <h5>Follow us on </h5>
-  {% if drupal_token('site:linkedin') is not empty %}
-    <a href="{{ drupal_token('site:linkedin') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.linkedin_logo }}" alt="LinkedIn Logo">
-    </a>
-  {% endif %}
-  {% if drupal_token('site:facebook') is not empty %}
-    <a href="{{ drupal_token('site:facebook') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.facebook_logo }}" alt="Facebook Logo">
-    </a>
-  {% endif %}
-  {% if drupal_token('site:twitter') is not empty %}
-    <a href="{{ drupal_token('site:twitter') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.twitter_logo }}" alt="Twitter Logo">
-    </a>
-  {% endif %}
-  {% if drupal_token('site:instagram') is not empty %}
-    <a href="{{ drupal_token('site:instagram') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.instagram_logo }}" alt="Instagram Logo">
-    </a>
-  {% endif %}
-  {% if drupal_token('site:youtube') is not empty %}
-    <a href="{{ drupal_token('site:youtube') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.youtube_logo }}" alt="Youtube Logo">
-    </a>
-  {% endif %}
-  {% if drupal_token('site:whatsapp_call') is not empty %}
-    <a href="{{ drupal_token('site:whatsapp_call') }}" target="_blank" style="text-decoration: none">
-      <img src="{{ assets.whatsapp_logo }}" alt="Whatsapp Logo">
-    </a>
-  {% endif %}
-
-  <div id="logos" style="margin-top: 30px; padding: 10px 0; background-color: #eeeeee; border-radius: 10px">
-    <a href="https://jobinrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
+<div id="social-media-links-block" style="margin-top: 20px">
+  <div id="social-media-links" style="display: flex; justify-content: center; align-items: center">
+    <span style="font-weight: bold; margin-right: 10px">Follow us on</span>
+    {% if drupal_token('site:linkedin') is not empty %}
+      <a href="{{ drupal_token('site:linkedin') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.linkedin_logo }}" alt="LinkedIn Logo">
+      </a>
+    {% endif %}
+    {% if drupal_token('site:facebook') is not empty %}
+      <a href="{{ drupal_token('site:facebook') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.facebook_logo }}" alt="Facebook Logo">
+      </a>
+    {% endif %}
+    {% if drupal_token('site:twitter') is not empty %}
+      <a href="{{ drupal_token('site:twitter') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.twitter_logo }}" alt="Twitter Logo">
+      </a>
+    {% endif %}
+    {% if drupal_token('site:instagram') is not empty %}
+      <a href="{{ drupal_token('site:instagram') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.instagram_logo }}" alt="Instagram Logo">
+      </a>
+    {% endif %}
+    {% if drupal_token('site:youtube') is not empty %}
+      <a href="{{ drupal_token('site:youtube') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.youtube_logo }}" alt="Youtube Logo">
+      </a>
+    {% endif %}
+    {% if drupal_token('site:whatsapp_call') is not empty %}
+      <a href="{{ drupal_token('site:whatsapp_call') }}" target="_blank" style="text-decoration: none">
+        <img src="{{ assets.whatsapp_logo }}" alt="Whatsapp Logo">
+      </a>
+    {% endif %}
+    <span style="margin: 0 10px; font-weight: bold">|</span>
+    <a href="{{ drupal_url('page/about-us', {absolute: true}) }}" style="text-decoration: none; font-weight: bold">About us</a>
+  </div>
+  <div id="logos" style="margin-top: 10px; padding: 10px 0; background-color: #eeeeee; border-radius: 10px; display: flex; justify-content: center; align-items: center;">
+    <span style="font-weight: bold; margin-right: 10px">Follow us on</span>
+    <a href="https://www.hrms.rw" target="_blank" style="text-decoration: none; margin: 0 5px;">
       <img src="{{ assets.jix_logo }}" alt="JiX Logo" style="max-height: 30px">
-    </a>
-    <a href="https://houseinrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.hir_logo }}" alt="HiR Logo" style="max-height: 30px">
     </a>
     <a href="https://sicrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
       <img src="{{ assets.sic_logo }}" alt="SiC Logo" style="max-height: 30px">
+    </a>
+    <a href="https://www.houseinrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
+      <img src="{{ assets.hir_logo }}" alt="HiR Logo" style="max-height: 30px">
     </a>
   </div>
 </div>
