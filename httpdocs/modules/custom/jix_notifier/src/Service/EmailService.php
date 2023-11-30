@@ -107,15 +107,15 @@ class EmailService
         break;
     }
     $variables['assets'] = [
-      'youtube_logo' => $host . '/' . $modulePath . '/templates/icons/youtube.png',
-      'facebook_logo' => $host . '/' . $modulePath . '/templates/icons/facebook.png',
-      'instagram_logo' => $host . '/' . $modulePath . '/templates/icons/instagram.png',
-      'twitter_logo' => $host . '/' . $modulePath . '/templates/icons/twitter.png',
-      'linkedin_logo' => $host . '/' . $modulePath . '/templates/icons/linkedin.png',
-      'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp.png',
-      'jix_logo' => $host . '/' . $modulePath . '/templates/icons/jix.png',
-      'hir_logo' => $host . '/' . $modulePath . '/templates/icons/hir.png',
-      'sic_logo' => $host . '/' . $modulePath . '/templates/icons/sic.png',
+      'youtube_logo' => $host . '/' . $modulePath . '/templates/icons/youtube_logo.png',
+      'facebook_logo' => $host . '/' . $modulePath . '/templates/icons/facebook_logo.png',
+      'instagram_logo' => $host . '/' . $modulePath . '/templates/icons/instagram_logo.png',
+      'twitter_logo' => $host . '/' . $modulePath . '/templates/icons/twitter_logo.png',
+      'linkedin_logo' => $host . '/' . $modulePath . '/templates/icons/linkedin_logo.png',
+      'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp_logo.png',
+      'jix_logo' => $host . '/' . $modulePath . '/templates/icons/hrms_logo.png',
+      'hir_logo' => $host . '/' . $modulePath . '/templates/icons/hir_logo.png',
+      'sic_logo' => $host . '/' . $modulePath . '/templates/icons/sic_logo.png',
     ];
     Drupal::logger('email_service')->info('Sending email of type: ' . $notificationType);
     return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);
