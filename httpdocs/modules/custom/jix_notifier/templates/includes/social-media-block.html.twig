@@ -1,53 +1,61 @@
 <tr>
-  <td style="text-align:right; width:109px"><strong>Follow us on</strong></td>
-  <td>
-    {% if drupal_token('site:linkedin') is not empty %}
-      <a href="{{ drupal_token('site:linkedin') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.linkedin_logo }}" alt="LinkedIn Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-    {% if drupal_token('site:facebook') is not empty %}
-      <a href="{{ drupal_token('site:facebook') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.facebook_logo }}" alt="Facebook Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-    {% if drupal_token('site:twitter') is not empty %}
-      <a href="{{ drupal_token('site:twitter') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.twitter_logo }}" alt="Twitter Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-    {% if drupal_token('site:instagram') is not empty %}
-      <a href="{{ drupal_token('site:instagram') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.instagram_logo }}" alt="Instagram Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-    {% if drupal_token('site:youtube') is not empty %}
-      <a href="{{ drupal_token('site:youtube') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.youtube_logo }}" alt="Youtube Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-    {% if drupal_token('site:whatsapp_call') is not empty %}
-      <a href="{{ drupal_token('site:whatsapp_call') }}" target="_blank" style="text-decoration: none">
-        <img src="{{ assets.whatsapp_logo }}" alt="Whatsapp Logo" style="margin: 0 2px;">
-      </a>
-    {% endif %}
-  </td>
-  <td style="text-align: start">
-    <span style="margin: 0 10px; font-weight: bold">|</span>
-    <a href="{{ drupal_url('page/about-us', {absolute: true}) }}" style="text-decoration: none; font-weight: bold">About us</a>
+  <td style="text-align:right;"><strong>Follow us on</strong></td>
+  <td colspan="2">
+    <table>
+      <tr>
+        <td>
+          <div class="social-icons">
+            {% if drupal_token('site:linkedin') is not empty %}
+              <a href="{{ drupal_token('site:linkedin') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.linkedin_logo }}" alt="LinkedIn Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+            {% if drupal_token('site:facebook') is not empty %}
+              <a href="{{ drupal_token('site:facebook') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.facebook_logo }}" alt="Facebook Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+            {% if drupal_token('site:twitter') is not empty %}
+              <a href="{{ drupal_token('site:twitter') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.twitter_logo }}" alt="Twitter Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+            {% if drupal_token('site:instagram') is not empty %}
+              <a href="{{ drupal_token('site:instagram') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.instagram_logo }}" alt="Instagram Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+            {% if drupal_token('site:youtube') is not empty %}
+              <a href="{{ drupal_token('site:youtube') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.youtube_logo }}" alt="Youtube Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+            {% if drupal_token('site:whatsapp_call') is not empty %}
+              <a href="{{ drupal_token('site:whatsapp_call') }}" target="_blank" style="text-decoration: none">
+                <img src="{{ assets.whatsapp_logo }}" alt="Whatsapp Logo" style="margin: 0 2px;">
+              </a>
+            {% endif %}
+          </div>
+        </td>
+        <td style="text-align: start">
+          <span style="margin: 0 10px; font-weight: bold">|</span>
+          <a href="{{ drupal_url('page/about-us', {absolute: true}) }}" style="text-decoration: none; font-weight: bold">About us</a>
+        </td>
+      </tr>
+    </table>
   </td>
 </tr>
-<tr style="background-color: #eeeeee; height: 50px">
+<tr style="background-color: #eeeeee; height: 70px">
   <td style="text-align:right;"><strong>Visit our websites</strong></td>
   <td colspan="2" rowspan="1">
     <a href="https://www.hrms.rw" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.jix_logo }}" alt="JiX Logo" style="max-height: 30px">
+      <img src="{{ assets.hrms }}" alt="Hrms Logo" style="max-height: 50px">
     </a>
     <a href="https://sicrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.sic_logo }}" alt="SiC Logo" style="max-height: 30px">
+      <img src="{{ assets.sic }}" alt="SiC Logo" style="max-height: 50px">
     </a>
     <a href="https://www.houseinrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.hir_logo }}" alt="HiR Logo" style="max-height: 30px">
+      <img src="{{ assets.hir }}" alt="HiR Logo" style="max-height: 50px">
     </a>
   </td>
 </tr>

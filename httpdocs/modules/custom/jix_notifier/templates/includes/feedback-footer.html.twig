@@ -2,34 +2,42 @@
   <p>{{ 'Best regards,' | t }} <br>{{ drupal_token('site:name') }}</p>
 </div>
 
-<div style="padding: 10px; background-color: #f7f7f7; border-radius: 10px; text-align: center; width: 70%">
+<div style="padding: 10px; background-color: #f7f7f7; border-radius: 10px; text-align: center; width: 90%">
   <table cellpadding="1" cellspacing="1" style="width:100%; border: none">
     <tbody>
       <tr>
-        <td colspan="3" style="text-align:center"><strong>Tell us how we served you today</strong></td>
-      </tr>
-      <tr>
         <td colspan="3">
-          <div style="width: 135px; display: inline-block;">
-            <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=3' | t({'@jobId': job.id}) }}" target="_blank"
-               style="background-color:#44c767;
+          <table style="width: 100%">
+            <tr>
+              <th colspan="3">Tell us how we served you today</th>
+            </tr>
+            <tr>
+              <td style="width: 30%">
+                <div style="width: 100%; display: inline-block;">
+                  <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=3' | t({'@jobId': job.id}) }}" target="_blank"
+                     style="background-color:#44c767;
           border-radius:11px;border:1px solid #18ab29;display:block;cursor:pointer;color:#ffffff;
-          font-family:Arial,sans-serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #2f6627;">Excellent</a>
-          </div>
-
-          <div style="width: 135px; display: inline-block;">
-            <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=2' | t({'@jobId': job.id}) }}" target="_blank"
-               style="background-color:#ffc477;
+          font-family:Arial,sans-serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #2f6627; text-align: center;">Excellent</a>
+                </div>
+              </td>
+              <td style="width: 30%">
+                <div style="width: 100%; display: inline-block;">
+                  <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=2' | t({'@jobId': job.id}) }}" target="_blank"
+                     style="background-color:#ffc477;
           border-radius:11px;border:1px solid #eeb44f;display:block;cursor:pointer;color:#ffffff;
-          font-family:Arial,serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #cc9f52;">Fair</a>
-          </div>
-
-          <div style="width: 135px; display: inline-block;">
-            <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=1' | t({'@jobId': job.id}) }}" target="_blank"
-               style="background-color:#fc8d83;
+          font-family:Arial,serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #cc9f52; text-align: center;">Fair</a>
+                </div>
+              </td>
+              <td style="width: 30%">
+                <div style="width: 100%; display: inline-block;">
+                  <a href="{{ drupal_token('site:url') ~ '/form/service-review?event=@jobId&score=1' | t({'@jobId': job.id}) }}" target="_blank"
+                     style="background-color:#fc8d83;
           border-radius:11px;border:1px solid #d83526;display:block;cursor:pointer;color:#ffffff;
-          font-family:Arial,serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #b23e35;">Bad</a>
-          </div>
+          font-family:Arial,serif;font-size:smaller;padding:8px 31px;text-decoration:none;text-shadow:0 1px 0 #b23e35; text-align: center;">Bad</a>
+                </div>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
       <tr class="separator" style="height: 10px"></tr>
