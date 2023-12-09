@@ -113,9 +113,9 @@ class EmailService
       'twitter_logo' => $host . '/' . $modulePath . '/templates/icons/twitter_logo.png',
       'linkedin_logo' => $host . '/' . $modulePath . '/templates/icons/linkedin_logo.png',
       'whatsapp_logo' => $host . '/' . $modulePath . '/templates/icons/whatsapp_logo.png',
-      'hrms' => $host . '/' . $modulePath . '/templates/icons/hrms.png',
-      'hir' => $host . '/' . $modulePath . '/templates/icons/hir.png',
-      'sic' => $host . '/' . $modulePath . '/templates/icons/sic.png',
+      'hrms_thumbnail' => $host . '/' . $modulePath . '/templates/icons/hrms_thumbnail.png',
+      'hir_thumbnail' => $host . '/' . $modulePath . '/templates/icons/hir_thumbnail.png',
+      'sic_thumbnail' => $host . '/' . $modulePath . '/templates/icons/sic_thumbnail.png',
     ];
     Drupal::logger('email_service')->info('Sending email of type: ' . $notificationType);
     return $this->twigService->loadTemplate($modulePath . $templatePath)->render($variables);

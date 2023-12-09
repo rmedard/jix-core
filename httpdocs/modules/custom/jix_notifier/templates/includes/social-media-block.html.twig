@@ -1,8 +1,8 @@
 <tr>
-  <td style="text-align:right;"><strong>Follow us on</strong></td>
-  <td colspan="2">
-    <table>
+  <td colspan="3" style="text-align: center">
+    <table style="display: inline-block">
       <tr>
+        <td><strong>Follow us on</strong></td>
         <td>
           <div class="social-icons">
             {% if drupal_token('site:linkedin') is not empty %}
@@ -47,15 +47,15 @@
 </tr>
 <tr style="background-color: #eeeeee; height: 70px">
   <td style="text-align:right;"><strong>Visit our websites</strong></td>
-  <td colspan="2" rowspan="1">
+  <td>
     <a href="https://www.hrms.rw" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.hrms }}" alt="Hrms Logo" style="max-height: 50px">
+      <img src="{{ assets.hrms_thumbnail }}" alt="Hrms Logo" style="max-height: 50px">
     </a>
     <a href="https://sicrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.sic }}" alt="SiC Logo" style="max-height: 50px">
+      <img src="{{ assets.sic_thumbnail }}" alt="SiC Logo" style="max-height: 50px">
     </a>
     <a href="https://www.houseinrwanda.com" target="_blank" style="text-decoration: none; margin: 0 5px;">
-      <img src="{{ assets.hir }}" alt="HiR Logo" style="max-height: 50px">
+      <img src="{{ assets.hir_thumbnail }}" alt="HiR Logo" style="max-height: 50px">
     </a>
   </td>
 </tr>
