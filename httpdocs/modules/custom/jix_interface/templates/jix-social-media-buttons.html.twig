@@ -1,30 +1,30 @@
-{% if facebook is not empty %}
-  <a href="{{ facebook }}" target="_blank">
+{% if drupal_token('site:facebook') is not empty %}
+  <a href="{{ drupal_token('site:facebook') }}" target="_blank">
     <i class="fa-brands fa-facebook-square fa-2x mx-1" aria-hidden="true" style="color: #0B8AEF"></i>
   </a>
 {% endif %}
-{% if twitter is not empty %}
-  <a href="{{ twitter }}" target="_blank">
+{% if drupal_token('site:twitter') is not empty %}
+  <a href="{{ drupal_token('site:twitter') }}" target="_blank">
     <i class="fa-brands fa-twitter-square fa-2x mx-1" aria-hidden="true" style="color: #1A91DA"></i>
   </a>
 {% endif %}
-{% if instagram is not empty %}
-  <a href="{{ instagram }}" target="_blank">
+{% if drupal_token('site:instagram') is not empty %}
+  <a href="{{ drupal_token('site:instagram') }}" target="_blank">
     <i class="fa-brands fa-instagram fa-2x mx-1" aria-hidden="true" style="color: #D62977"></i>
   </a>
 {% endif %}
-{% if youtube is not empty %}
-  <a href="{{ youtube }}" target="_blank">
+{% if drupal_token('site:youtube') is not empty %}
+  <a href="{{ drupal_token('site:youtube') }}" target="_blank">
     <i class="fa-brands fa-youtube fa-2x mx-1" aria-hidden="true" style="color: #FF0100"></i>
   </a>
 {% endif %}
-{% if linkedin is not empty %}
-  <a href="{{ linkedin }}" target="_blank">
+{% if drupal_token('site:linkedin') is not empty %}
+  <a href="{{ drupal_token('site:linkedin') }}" target="_blank">
     <i class="fa-brands fa-linkedin fa-2x mx-1" aria-hidden="true" style="color: #0B65C2"></i>
   </a>
 {% endif %}
-{% if whatsapp is not empty %}
-  <a href="{{ whatsapp }}" target="_blank">
+{% if drupal_token('site:whatsapp') is not empty %}
+  <a href="{{ drupal_token('site:whatsapp') }}" target="_blank">
     <i class="fa-brands fa-whatsapp-square fa-2x mx-1" aria-hidden="true" style="color: #25D366"></i>
   </a>
 {% endif %}

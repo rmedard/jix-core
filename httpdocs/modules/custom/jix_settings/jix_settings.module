@@ -183,7 +183,7 @@ function jix_settings_token_info(): array
     'name' => 'Instagram Account',
     'description' => t('The main instagram account of the site'),
   ];
-  $info['tokens']['site']['whatsapp_call'] = [
+  $info['tokens']['site']['whatsapp'] = [
     'name' => 'Whatsapp Call Account',
     'description' => t('The main whatsapp account for calls'),
   ];
@@ -223,7 +223,7 @@ function jix_settings_tokens($type, $tokens, array $data, array $options, Bubble
         $text = $socialMediaConfig->get('instagram_page');
         $replacements[$original] = $text;
         break;
-      case 'whatsapp_call':
+      case 'whatsapp':
         $text = $socialMediaConfig->get('whatsapp_call_link');
         $replacements[$original] = $text;
         break;

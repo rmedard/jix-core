@@ -93,14 +93,7 @@ function jix_interface_theme($existing, $type, $theme, $path): array
       ]
     ],
     'jix_social_media_buttons' => [
-      'variables' => [
-        'facebook' => '',
-        'twitter' => '',
-        'instagram' => '',
-        'youtube' => '',
-        'linkedin' => '',
-        'whatsapp' => ''
-      ]
+      'variables' => []
     ],
     'jix_similar_jobs' => [
       'variables' => [
