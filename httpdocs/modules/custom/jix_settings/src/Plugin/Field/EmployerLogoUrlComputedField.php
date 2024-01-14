@@ -13,7 +13,7 @@ class EmployerLogoUrlComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $fileUri = '';
     $adaptor = $this->parent;

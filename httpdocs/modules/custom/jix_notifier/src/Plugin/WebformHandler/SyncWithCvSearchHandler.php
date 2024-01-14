@@ -27,7 +27,7 @@ class SyncWithCvSearchHandler extends RemotePostWebformHandler
   /**
    * @inheritdoc
    */
-  public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE)
+  public function postSave(WebformSubmissionInterface $webform_submission, $update = TRUE): void
   {
     $synced = $webform_submission->getData()['field_application_sync'];
     if ($webform_submission->getState() === WebformSubmissionInterface::STATE_COMPLETED && $synced !== 'Yes') {

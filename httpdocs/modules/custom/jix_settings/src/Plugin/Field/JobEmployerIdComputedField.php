@@ -11,7 +11,7 @@ class JobEmployerIdComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $employer_id = '';
     $adaptor = $this->parent;

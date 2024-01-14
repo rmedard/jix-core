@@ -12,7 +12,7 @@ class JobEducationLevelComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $education_level = '';
     $adaptor = $this->parent;

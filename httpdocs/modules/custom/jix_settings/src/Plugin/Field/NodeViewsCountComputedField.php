@@ -11,7 +11,7 @@ class NodeViewsCountComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $viewsCount = 0;
     $adaptor = $this->parent;

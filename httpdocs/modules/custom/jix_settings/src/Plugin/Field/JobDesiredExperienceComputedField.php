@@ -12,7 +12,7 @@ class JobDesiredExperienceComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $experience = '';
     $adaptor = $this->parent;

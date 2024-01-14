@@ -12,7 +12,7 @@ class JobCategoryComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $categories = '';
     $adaptor = $this->parent;

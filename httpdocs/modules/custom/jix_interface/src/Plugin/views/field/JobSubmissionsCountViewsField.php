@@ -24,7 +24,7 @@ class JobSubmissionsCountViewsField extends FieldPluginBase
 
   protected string $currentDisplay;
 
-  public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL)
+  public function init(ViewExecutable $view, DisplayPluginBase $display, array &$options = NULL): void
   {
     parent::init($view, $display, $options);
     $this->currentDisplay = $view->current_display;

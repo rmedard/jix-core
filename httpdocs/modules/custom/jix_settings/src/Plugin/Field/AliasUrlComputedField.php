@@ -11,7 +11,7 @@ class AliasUrlComputedField extends FieldItemList
 {
   use ComputedItemListTrait;
 
-  protected function computeValue()
+  protected function computeValue(): void
   {
     $alias = '';
     $adaptor = $this->parent;
