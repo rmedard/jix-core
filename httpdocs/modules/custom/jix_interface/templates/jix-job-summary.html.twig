@@ -37,7 +37,7 @@
         {% set deadline = attribute(drupal_field('field_job_application_deadline', 'node', job.nid.value, 'twig_view').0, '#markup')  %}
         <b>{{ 'Deadline'|t }}:</b> {{ deadline }}
       </li>
-      {% if intval(job.field_job_number_of_positions.value) > 0 %}
+      {% if job.field_job_number_of_positions.value > 0 %}
         <li class="list-group-item pt-1 pb-1 px-0 border-0">
           <b>{{ job.field_job_number_of_positions.fieldDefinition.label }}:</b> {{ job.field_job_number_of_positions.value }}
         </li>
