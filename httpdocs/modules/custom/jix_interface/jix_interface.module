@@ -244,7 +244,7 @@ function jix_interface_after_build(array $element, FormStateInterface $form_stat
  */
 function jix_interface_views_data_alter(array &$data): void
 {
-  $data['node']['job_submissions_count_views_field'] = [
+  $data['node_field_data']['job_submissions_count_views_field'] = [
     'title' => t('Job submissions count'),
     'field' => [
       'title' => t('Job submissions count'),
